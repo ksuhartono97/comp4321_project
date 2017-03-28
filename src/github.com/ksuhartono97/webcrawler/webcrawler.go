@@ -5,6 +5,7 @@ import (
 	"golang.org/x/net/html"
 	"net/http"
 	"strings"
+  "io/ioutil"
 )
 
 type UrlData struct {
@@ -12,6 +13,7 @@ type UrlData struct {
 	foundUrl  []string
   pageTitle string
   pageSize int
+  rawHTML string
 }
 
 var exploredPages = 0
@@ -28,8 +30,9 @@ func getHref(t html.Token) (ok bool, href string) {
 	return
 }
 
-// Extract all http** links from a given webpage
+// Extract all required info from a given webpage
 func crawl(url string, ch chan UrlData, chFinished chan bool) {
+  //Retrieve the webpage
 	resp, err := http.Get(url)
 
   defer func() {
@@ -47,15 +50,24 @@ func crawl(url string, ch chan UrlData, chFinished chan bool) {
 	b := resp.Body
 	defer b.Close() // close Body when the function returns
 
-  // htmlData, err1 := ioutil.ReadAll(resp.Body)
-  //
- // 	if err1 != nil {
- // 		fmt.Println(err1)
- // 		return
- // 	}
-  //
- // 	fmt.Println(string(htmlData))
+  //Open a secondary stream
 
+  res, err := http.Get(url)
+
+  c := res.Body
+  defer c.Close()
+
+  htmlData, err := ioutil.ReadAll(c)
+
+  if err != nil {
+    fmt.Println(err)
+    return
+  }
+
+  // Get page size in bytes
+  urlResult.pageSize = len(htmlData)
+  // Get raw HTML
+  urlResult.rawHTML = string(htmlData)
 
 	z := html.NewTokenizer(b)
 
@@ -128,16 +140,19 @@ func PrintLinks(links ...string) {
 		}
 	}
 
+  fmt.Println(foundUrls)
+
   fmt.Println("\n\nTotal explored ", exploredPages)
 
 	for _, url := range foundUrls {
 
     //Printing the results
 		fmt.Println("\nFound", len(url.foundUrl), "non unique urls:\n")
-		// for i := 0; i < len(url.foundUrl); i++ {
-		// 	fmt.Println(" > " + url.foundUrl[i])
-		// }
+		for i := 0; i < len(url.foundUrl); i++ {
+			fmt.Println(" > " + url.foundUrl[i])
+		}
     fmt.Println("Page Title: " + url.pageTitle)
+    fmt.Println("Page Size: ", url.pageSize)
 
 		// Calculate remaining URLs needed
 		diff := 30 - exploredPages
