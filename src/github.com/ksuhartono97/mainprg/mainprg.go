@@ -22,6 +22,6 @@ func main() {
   	defer db.Close()
     webcrawler.CrawlerInit()
     webcrawler.PrintLinks("http://www.cse.ust.hk/")
-    webcrawler.CrawlerInit()
-    webcrawler.PrintLinks("http://www.facebook.com")
+    // webcrawler.CrawlerInit()
+    // webcrawler.PrintLinks("http://www.facebook.com")
 }

@@ -7,6 +7,12 @@ import (
 	  "strings"
 )
 
+type UrlData struct {
+	sourceUrl string
+  foundUrl string
+}
+
+
 var exploredPages = 0;
 
 // Helper function to pull the href attribute from a Token
@@ -22,8 +28,8 @@ func getHref(t html.Token) (ok bool, href string) {
 }
 
 // Extract all http** links from a given webpage
-func crawl(url string, ch chan string, chFinished chan bool) {
-	resp, err := http.Get(url)
+func crawl(src string, ch chan UrlData, chFinished chan bool) {
+	resp, err := http.Get(src)
 
 	defer func() {
 		// Notify that we're done after this function
@@ -31,7 +37,7 @@ func crawl(url string, ch chan string, chFinished chan bool) {
 	}()
 
 	if err != nil {
-		fmt.Println("ERROR: Failed to crawl \"" + url + "\"")
+		fmt.Println("ERROR: Failed to crawl \"" + src + "\"")
 		return
 	}
 
@@ -65,7 +71,7 @@ func crawl(url string, ch chan string, chFinished chan bool) {
 			// Make sure the url begins in http**
 			hasProto := strings.Index(url, "http") == 0
 			if hasProto {
-				ch <- url
+				ch <-UrlData{src, url}
 			}
 		}
 	}
@@ -73,11 +79,11 @@ func crawl(url string, ch chan string, chFinished chan bool) {
 
 //Main search function
 func PrintLinks(links ...string) {
-	foundUrls := make(map[string]bool)
+	foundUrls := make(map[UrlData]bool)
   seedUrls := links
 
 	// Channels
-	chUrls := make(chan string)
+	chUrls := make(chan UrlData)
 	chFinished := make(chan bool)
 
 	// Kick off the crawl process (concurrently)
@@ -101,7 +107,7 @@ func PrintLinks(links ...string) {
 	fmt.Println("\nFound", len(foundUrls), "unique urls:\n")
 
 	for url, _ := range foundUrls {
-		fmt.Println(" - " + url)
+		fmt.Println(" - " + url.foundUrl + " ||| " + url.sourceUrl)
 	}
   fmt.Println("Total explored ", exploredPages)
 
@@ -119,7 +125,7 @@ func PrintLinks(links ...string) {
   idx := 0
   for url, _ := range foundUrls {
     if idx >= toBeCalled {break}
-     urlArray[idx] = url
+     urlArray[idx] = url.foundUrl
      idx++
   }
 
