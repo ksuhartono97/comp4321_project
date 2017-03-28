@@ -9,7 +9,7 @@ import (
 
 type UrlData struct {
 	sourceUrl string
-  foundUrl string
+  foundUrl []string
 }
 
 
@@ -31,8 +31,11 @@ func getHref(t html.Token) (ok bool, href string) {
 func crawl(src string, ch chan UrlData, chFinished chan bool) {
 	resp, err := http.Get(src)
 
+  urlResult := UrlData{sourceUrl: src}
+
 	defer func() {
 		// Notify that we're done after this function
+    ch<-urlResult
 		chFinished <- true
 	}()
 
@@ -71,7 +74,8 @@ func crawl(src string, ch chan UrlData, chFinished chan bool) {
 			// Make sure the url begins in http**
 			hasProto := strings.Index(url, "http") == 0
 			if hasProto {
-				ch <-UrlData{src, url}
+				// ch <-UrlData{src, url}
+        urlResult.foundUrl = append(urlResult.foundUrl, url)
 			}
 		}
 	}
@@ -79,7 +83,7 @@ func crawl(src string, ch chan UrlData, chFinished chan bool) {
 
 //Main search function
 func PrintLinks(links ...string) {
-	foundUrls := make(map[UrlData]bool)
+	foundUrls := make(map[string]UrlData)
   seedUrls := links
 
 	// Channels
@@ -95,7 +99,7 @@ func PrintLinks(links ...string) {
 	for c := 0; c < len(seedUrls); {
 		select {
 		case url := <-chUrls:
-			foundUrls[url] = true
+			foundUrls[url.sourceUrl] = url
 		case <-chFinished:
 			c++
       exploredPages++
@@ -104,36 +108,30 @@ func PrintLinks(links ...string) {
 
 	//Printing the results
 
-	fmt.Println("\nFound", len(foundUrls), "unique urls:\n")
+	for _, url := range foundUrls {
+    fmt.Println("\nFound", len(url.foundUrl), "non unique urls:\n")
+    for i:= 0; i < len(url.foundUrl); i++ {
+      fmt.Println(" - " + url.foundUrl[i])
+    }
+      fmt.Println("Total explored ", exploredPages)
 
-	for url, _ := range foundUrls {
-		fmt.Println(" - " + url.foundUrl + " ||| " + url.sourceUrl)
+      //Calculate remaining URLs needed
+      diff := 30 - exploredPages
+      remaining := diff - len(url.foundUrl)
+      var toBeCalled = 0
+      if remaining < 0 {
+        toBeCalled = len(url.foundUrl) + remaining
+      } else {
+        toBeCalled = len(url.foundUrl)
+      }
+
+      urlArray := url.foundUrl[:toBeCalled]
+
+      if toBeCalled > 0 {
+        PrintLinks(urlArray...)
+      }
 	}
-  fmt.Println("Total explored ", exploredPages)
-
-  //Calculate remaining URLs needed
-  diff := 30 - exploredPages
-  remaining := diff - len(foundUrls)
-  var toBeCalled = 0
-  if remaining < 0 {
-    toBeCalled = len(foundUrls) + remaining
-  } else {
-    toBeCalled = len(foundUrls)
-  }
-  //Filter out the urls from the bool in the map
-  urlArray := make([]string, toBeCalled)
-  idx := 0
-  for url, _ := range foundUrls {
-    if idx >= toBeCalled {break}
-     urlArray[idx] = url.foundUrl
-     idx++
-  }
-
-	close(chUrls)
-
-  if toBeCalled > 0 {
-    PrintLinks(urlArray...)
-  }
+  close(chUrls)
 }
 
 //To be called before each initial search
