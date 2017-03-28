@@ -29,20 +29,20 @@ func getHref(t html.Token) (ok bool, href string) {
 }
 
 // Extract all http** links from a given webpage
-func crawl(src string, ch chan UrlData, chFinished chan bool) {
-	resp, err := http.Get(src)
+func crawl(url string, ch chan UrlData, chFinished chan bool) {
+	resp, err := http.Get(url)
 
-	urlResult := UrlData{sourceUrl: src}
+  defer func() {
+    // Notify that we're done after this function
+    chFinished <- true
+  }()
 
   if err != nil {
-		fmt.Println("ERROR: Failed to crawl \"" + src + "\"")
+		fmt.Println("ERROR: Failed to crawl \"" + url + "\"")
 		return
 	}
 
-	defer func() {
-		// Notify that we're done after this function
-		chFinished <- true
-	}()
+  urlResult := UrlData{sourceUrl: url}
 
 	b := resp.Body
 	defer b.Close() // close Body when the function returns
@@ -55,9 +55,8 @@ func crawl(src string, ch chan UrlData, chFinished chan bool) {
 		switch {
 		case tt == html.ErrorToken:
 			// End of the document, we're done, increment explored pages and return result
-      exploredPages++
       ch <- urlResult
-
+      exploredPages++
 			return
 		case tt == html.StartTagToken:
 			t := z.Token()
@@ -125,12 +124,12 @@ func PrintLinks(links ...string) {
 
     //Printing the results
 		fmt.Println("\nFound", len(url.foundUrl), "non unique urls:\n")
-		for i := 0; i < len(url.foundUrl); i++ {
-			fmt.Println(" > " + url.foundUrl[i])
-		}
+		// for i := 0; i < len(url.foundUrl); i++ {
+		// 	fmt.Println(" > " + url.foundUrl[i])
+		// }
     fmt.Println("Page Title: " + url.pageTitle)
 
-		//Calculate remaining URLs needed
+		// Calculate remaining URLs needed
 		diff := 30 - exploredPages
 		remaining := diff - len(url.foundUrl)
 		var toBeCalled = 0
