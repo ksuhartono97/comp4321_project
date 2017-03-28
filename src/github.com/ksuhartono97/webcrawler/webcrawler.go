@@ -3,17 +3,19 @@ package webcrawler
 import (
 	"fmt"
 	"golang.org/x/net/html"
+	"io/ioutil"
 	"net/http"
 	"strings"
-  "io/ioutil"
+	"time"
 )
 
 type UrlData struct {
 	sourceUrl string
 	foundUrl  []string
-  pageTitle string
-  pageSize int
-  rawHTML string
+	pageTitle string
+	pageSize  int
+	rawHTML   string
+	lastModified string
 }
 
 var exploredPages = 0
@@ -31,43 +33,58 @@ func getHref(t html.Token) (ok bool, href string) {
 }
 
 // Extract all required info from a given webpage
-func crawl(url string, ch chan UrlData, chFinished chan bool) {
-  //Retrieve the webpage
-	resp, err := http.Get(url)
+func crawl(src string, ch chan UrlData, chFinished chan bool) {
+	//Retrieve the webpage
+	resp, err := http.Get(src)
 
-  defer func() {
-    // Notify that we're done after this function
-    chFinished <- true
-  }()
+	defer func() {
+		// Notify that we're done after this function
+		chFinished <- true
+	}()
 
-  if err != nil {
-		fmt.Println("ERROR: Failed to crawl \"" + url + "\"")
+	if err != nil {
+		fmt.Println("ERROR: Failed to crawl \"" + src + "\"")
 		return
 	}
 
-  urlResult := UrlData{sourceUrl: url}
+	urlResult := UrlData{sourceUrl: src}
 
 	b := resp.Body
 	defer b.Close() // close Body when the function returns
 
-  //Open a secondary stream
+	//Open a secondary stream
 
-  res, err := http.Get(url)
+	res, err := http.Get(src)
 
-  c := res.Body
-  defer c.Close()
+	c := res.Body
+	defer c.Close()
 
-  htmlData, err := ioutil.ReadAll(c)
+	htmlData, err := ioutil.ReadAll(c)
 
-  if err != nil {
-    fmt.Println(err)
-    return
-  }
+	if err != nil {
+		fmt.Println("Error cannot open")
+		return
+	}
 
-  // Get page size in bytes
-  urlResult.pageSize = len(htmlData)
-  // Get raw HTML
-  urlResult.rawHTML = string(htmlData)
+	// Get page size in bytes
+	urlResult.pageSize = len(htmlData)
+	// Get raw HTML
+	urlResult.rawHTML = string(htmlData)
+
+	response, err := http.Head(src)
+	if err != nil {
+		fmt.Println("Error while downloading head of", src)
+	} else {
+		for k, v := range response.Header {
+			if k == "Last-Modified" {
+				urlResult.lastModified = v[0]
+			}
+		}
+		if urlResult.lastModified == "" {
+			ti := time.Now().UTC().Format("Mon, 02 Jan 2006 15:04:05 GMT")
+			urlResult.lastModified = ti
+		}
+	}
 
 	z := html.NewTokenizer(b)
 
@@ -77,41 +94,43 @@ func crawl(url string, ch chan UrlData, chFinished chan bool) {
 		switch {
 		case tt == html.ErrorToken:
 			// End of the document, we're done, increment explored pages and return result
-      ch <- urlResult
-      exploredPages++
+			ch <- urlResult
+			exploredPages++
 			return
 		case tt == html.StartTagToken:
 			t := z.Token()
 
-			// Check if the token tags
-      if t.Data == "a" {
-        // Extract the href value, if there is one
-  			ok, url := getHref(t)
-  			if !ok {
-  				continue
-  			}
+			// Check the token tags
+			if t.Data == "a" {
+				// Extract the href value, if there is one
+				ok, url := getHref(t)
+				if !ok {
+					continue
+				}
 
-  			// Make sure the url begins in http**
-  			hasProto := strings.Index(url, "http") == 0
-  			if hasProto {
-  				urlResult.foundUrl = append(urlResult.foundUrl, url)
-  			}
-      } else if t.Data == "title" {
-        for {
-          t := z.Next()
-          if t == html.TextToken {
-            u := z.Token()
-            urlResult.pageTitle += u.Data
-          } else if t == html.EndTagToken {
-            u := z.Token()
-            if u.Data == "title" {
-              break
-            }
-          }
-        }
-      } else {
-        continue
-      }
+				// Make sure the url begins in http**
+				hasProto := strings.Index(url, "http") == 0
+				if hasProto {
+					urlResult.foundUrl = append(urlResult.foundUrl, url)
+				}
+			} else if t.Data == "title" {
+				for {
+					//Extract the title tag content
+					t := z.Next()
+					if t == html.TextToken {
+						u := z.Token()
+						urlResult.pageTitle += u.Data
+					} else if t == html.EndTagToken {
+						u := z.Token()
+						if u.Data == "title" {
+							//Finished, end extraction
+							break
+						}
+					}
+				}
+			} else {
+				continue
+			}
 		}
 	}
 }
@@ -140,19 +159,18 @@ func PrintLinks(links ...string) {
 		}
 	}
 
-  fmt.Println(foundUrls)
-
-  fmt.Println("\n\nTotal explored ", exploredPages)
+	fmt.Println("\n\nTotal explored ", exploredPages)
 
 	for _, url := range foundUrls {
 
-    //Printing the results
+		//Printing the results
 		fmt.Println("\nFound", len(url.foundUrl), "non unique urls:\n")
-		for i := 0; i < len(url.foundUrl); i++ {
-			fmt.Println(" > " + url.foundUrl[i])
-		}
-    fmt.Println("Page Title: " + url.pageTitle)
-    fmt.Println("Page Size: ", url.pageSize)
+		// for i := 0; i < len(url.foundUrl); i++ {
+		// 	fmt.Println(" > " + url.foundUrl[i])
+		// }
+		fmt.Println("Page Title: " + url.pageTitle)
+		fmt.Println("Page Size: ", url.pageSize)
+		fmt.Println("Last Modified: " + url.lastModified)
 
 		// Calculate remaining URLs needed
 		diff := 30 - exploredPages
