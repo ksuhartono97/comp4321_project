@@ -10,6 +10,8 @@ import (
 type UrlData struct {
 	sourceUrl string
 	foundUrl  []string
+  pageTitle string
+  pageSize int
 }
 
 var exploredPages = 0
@@ -32,16 +34,15 @@ func crawl(src string, ch chan UrlData, chFinished chan bool) {
 
 	urlResult := UrlData{sourceUrl: src}
 
-	defer func() {
-		// Notify that we're done after this function
-		ch <- urlResult
-		chFinished <- true
-	}()
-
-	if err != nil {
+  if err != nil {
 		fmt.Println("ERROR: Failed to crawl \"" + src + "\"")
 		return
 	}
+
+	defer func() {
+		// Notify that we're done after this function
+		chFinished <- true
+	}()
 
 	b := resp.Body
 	defer b.Close() // close Body when the function returns
@@ -53,29 +54,43 @@ func crawl(src string, ch chan UrlData, chFinished chan bool) {
 
 		switch {
 		case tt == html.ErrorToken:
-			// End of the document, we're done
+			// End of the document, we're done, increment explored pages and return result
+      exploredPages++
+      ch <- urlResult
+
 			return
 		case tt == html.StartTagToken:
 			t := z.Token()
 
-			// Check if the token is an <a> tag
-			isAnchor := t.Data == "a"
-			if !isAnchor {
-				continue
-			}
+			// Check if the token tags
+      if t.Data == "a" {
+        // Extract the href value, if there is one
+  			ok, url := getHref(t)
+  			if !ok {
+  				continue
+  			}
 
-			// Extract the href value, if there is one
-			ok, url := getHref(t)
-			if !ok {
-				continue
-			}
-
-			// Make sure the url begins in http**
-			hasProto := strings.Index(url, "http") == 0
-			if hasProto {
-				// ch <-UrlData{src, url}
-				urlResult.foundUrl = append(urlResult.foundUrl, url)
-			}
+  			// Make sure the url begins in http**
+  			hasProto := strings.Index(url, "http") == 0
+  			if hasProto {
+  				urlResult.foundUrl = append(urlResult.foundUrl, url)
+  			}
+      } else if t.Data == "title" {
+        for {
+          t := z.Next()
+          if t == html.TextToken {
+            u := z.Token()
+            urlResult.pageTitle += u.Data
+          } else if t == html.EndTagToken {
+            u := z.Token()
+            if u.Data == "title" {
+              break
+            }
+          }
+        }
+      } else {
+        continue
+      }
 		}
 	}
 }
@@ -101,20 +116,19 @@ func PrintLinks(links ...string) {
 			foundUrls[url.sourceUrl] = url
 		case <-chFinished:
 			c++
-			exploredPages++
 		}
 	}
 
-
+  fmt.Println("\n\nTotal explored ", exploredPages)
 
 	for _, url := range foundUrls {
-    
+
     //Printing the results
 		fmt.Println("\nFound", len(url.foundUrl), "non unique urls:\n")
 		for i := 0; i < len(url.foundUrl); i++ {
-			fmt.Println(" - " + url.foundUrl[i])
+			fmt.Println(" > " + url.foundUrl[i])
 		}
-		fmt.Println("Total explored ", exploredPages)
+    fmt.Println("Page Title: " + url.pageTitle)
 
 		//Calculate remaining URLs needed
 		diff := 30 - exploredPages
@@ -132,6 +146,7 @@ func PrintLinks(links ...string) {
 			PrintLinks(urlArray...)
 		}
 	}
+
 	close(chUrls)
 }
 
