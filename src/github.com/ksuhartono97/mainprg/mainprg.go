@@ -1,9 +1,5 @@
 package main
 
-// "fmt"
-//
-// "github.com/ksuhartono97/stringutil"
-
 import (
     "log"
 
