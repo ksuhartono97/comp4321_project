@@ -47,6 +47,16 @@ func crawl(url string, ch chan UrlData, chFinished chan bool) {
 	b := resp.Body
 	defer b.Close() // close Body when the function returns
 
+  // htmlData, err1 := ioutil.ReadAll(resp.Body)
+  //
+ // 	if err1 != nil {
+ // 		fmt.Println(err1)
+ // 		return
+ // 	}
+  //
+ // 	fmt.Println(string(htmlData))
+
+
 	z := html.NewTokenizer(b)
 
 	for {
