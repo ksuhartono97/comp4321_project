@@ -2,20 +2,19 @@ package indexer
 
 import (
 	"fmt"
-	"io"
-	"time"
+
+	"strings"
 
 	"../../silver-rush/database"
 	"golang.org/x/net/html"
 )
 
 //Feed a page to the indexer
-func Feed(docID uint64, reader io.ReadCloser, lastModify time.Time, size int, parent uint64, child []uint64) {
+func Feed(docID uint64, raw string, lastModify uint32, size int, parent uint64, child []uint64, title string) {
 	//Map of words and term frequency.
-	//TODO: Change string to word ID
 	wordMap := make(map[uint64]uint32)
 
-	doc, err := html.Parse(reader)
+	doc, err := html.Parse(strings.NewReader(raw))
 	if err != nil {
 		fmt.Println("Error in parsing")
 	}
@@ -33,10 +32,12 @@ func tokenize(text *string) []string {
 	//If I obtain the i for range, some indexes are skipped. No idea why.
 	i := 0
 	for _, c := range *text {
+		//Index english alphahets only
 		if (c < 'a' || c > 'z') && (c < 'A' || c > 'Z') {
 			if i == head {
 				head++
 			} else {
+				//Append a slice
 				tokens = append(tokens, (*text)[head:i])
 				head = i + 1
 			}
@@ -44,6 +45,7 @@ func tokenize(text *string) []string {
 		i++
 	}
 
+	//Deal with the last word
 	if head != i {
 		tokens = append(tokens, (*text)[head:i])
 	}
@@ -55,11 +57,13 @@ func iterateNode(node *html.Node, wordMap map[uint64]uint32) {
 	if node.Type == html.TextNode && node.Parent.Data != "script" {
 		list := tokenize(&(node.Data))
 		for _, s := range list {
+			//Collect word id usin the word
 			id, _ := database.GetIDWithWord(s)
 			wordMap[id]++
 		}
 	}
 	for child := node.FirstChild; child != nil; child = child.NextSibling {
+		//Recursively iterate through all nodes
 		iterateNode(child, wordMap)
 	}
 }

@@ -1,11 +1,7 @@
 package main
 
 import (
-	"fmt"
-	"net/http"
-	"time"
-
-	"./github.com/silver-rush/indexer"
+	//"./github.com/silver-rush/indexer"
 	"./github.com/silver-rush/database"
 	"./github.com/ksuhartono97/webcrawler"
 )
