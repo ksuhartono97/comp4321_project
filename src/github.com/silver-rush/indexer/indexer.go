@@ -31,21 +31,27 @@ var replacer = strings.NewReplacer("\n", " ", "\t", " ")
 
 func tokenize(text *string) []string {
 	*text = html.UnescapeString(*text)
-	*text = replacer.Replace(*text)
 	var tokens []string
 	head := 0
-	for i, c := range *text {
+
+	//If I obtain the i for range, some indexes are skipped. No idea why.
+	i := 0
+	for _, c := range *text {
 		if !unicode.IsLetter(c) {
 			if i == head {
-				//fmt.Printf("B1: %d %d %d\n", head, i, c)
 				head++
 			} else {
 				tokens = append(tokens, (*text)[head:i])
-				//fmt.Printf("B2: %d %d %d\n", head, i, c)
 				head = i + 1
 			}
 		}
+		i++
 	}
+
+	if head != i {
+		tokens = append(tokens, (*text)[head:i])
+	}
+
 	return tokens
 }
 
@@ -53,7 +59,7 @@ func iterateNode(node *html.Node, wordMap map[string]int) {
 	if node.Type == html.TextNode && node.Parent.Data != "script" {
 		list := tokenize(&(node.Data))
 		for _, s := range list {
-			fmt.Printf("%s\n", strings.Replace(s, "\xfffd", "", -1))
+			fmt.Printf("%s\n", s)
 		}
 	}
 	for child := node.FirstChild; child != nil; child = child.NextSibling {
