@@ -24,6 +24,11 @@ func OpenPostingDB() {
 			panic(fmt.Errorf("Create posting list bucket error: %s", err))
 		}
 
+		_, err = tx.CreateBucketIfNotExists([]byte("forward"))
+		if err != nil {
+			panic(fmt.Errorf("Create forward list bucket error: %s", err))
+		}
+
 		return nil
 	})
 }
@@ -60,17 +65,30 @@ func decodePosting(b []byte) *Posting {
 	return &p
 }
 
-//InsertIntoPostingList a record into the posting list of the given word ID
+//InsertIntoPostingList a record into the posting list of the given word ID, it will also update the forward list
 func InsertIntoPostingList(wordID uint64, docID uint64, p *Posting) {
 	postingDB.Batch(func(tx *bolt.Tx) error {
 		allPostingBucket := tx.Bucket([]byte("posting"))
-		listBucket, err := allPostingBucket.CreateBucketIfNotExists(encode64Bit(wordID))
+		postingBucket, err := allPostingBucket.CreateBucketIfNotExists(encode64Bit(wordID))
 		if err != nil {
 			fmt.Println("Create Posting bucket error.")
 			return err
 		}
 
-		err = listBucket.Put(encode64Bit(docID), encodePosting(p))
+		allForwardBucket := tx.Bucket([]byte("forward"))
+		forwardBucket, err := allForwardBucket.CreateBucketIfNotExists(encode64Bit(docID))
+		if err != nil {
+			fmt.Println("Create Forward bucket error.")
+			return err
+		}
+
+		err = postingBucket.Put(encode64Bit(docID), encodePosting(p))
+		if err != nil {
+			fmt.Println(err)
+			return err
+		}
+
+		err = forwardBucket.Put(encode64Bit(wordID), []byte{0})
 		if err != nil {
 			fmt.Println(err)
 			return err
@@ -95,4 +113,27 @@ func GetPosting(wordID uint64, docID uint64) *Posting {
 		return nil
 	})
 	return p
+}
+
+//GetTermsInDoc returns a slice of all terms in the document in the forward index
+func GetTermsInDoc(docID uint64) []uint64 {
+	var list []uint64
+
+	postingDB.View(func(tx *bolt.Tx) error {
+		bucket := tx.Bucket([]byte("forward"))
+
+		list := make([]uint64, bucket.Stats().KeyN)
+		i := 0
+
+		if err := bucket.ForEach(func(k, v []byte) error {
+			list[i] = decode64Bit(k)
+			i++
+			return nil
+		}); err != nil {
+			return err
+		}
+		return nil
+	})
+
+	return list
 }

@@ -85,7 +85,7 @@ func InsertDocInfo(docID uint64, d *DocInfo) {
 //GetDocInfo returns the information relevant to the document id, return nil if not found
 func GetDocInfo(docID uint64) *DocInfo {
 	var d *DocInfo
-	postingDB.View(func(tx *bolt.Tx) error {
+	docInfoDB.View(func(tx *bolt.Tx) error {
 		docInfoBucket := tx.Bucket([]byte("doc_info"))
 
 		returnByte := docInfoBucket.Get(encode64Bit(docID))
@@ -95,4 +95,26 @@ func GetDocInfo(docID uint64) *DocInfo {
 		return nil
 	})
 	return d
+}
+
+//GetAllDoc returns the slice of all document id
+func GetAllDoc() []uint64 {
+	var list []uint64
+
+	docInfoDB.View(func(tx *bolt.Tx) error {
+		bucket := tx.Bucket([]byte("doc_info"))
+		list := make([]uint64, bucket.Stats().KeyN)
+		i := 0
+
+		if err := bucket.ForEach(func(k, v []byte) error {
+			list[i] = decode64Bit(k)
+			i++
+			return nil
+		}); err != nil {
+			return err
+		}
+		return nil
+	})
+
+	return list
 }

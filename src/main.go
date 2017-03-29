@@ -1,15 +1,28 @@
 package main
 
 import (
-	//"./github.com/silver-rush/indexer"
+	//"./github.com/ksuhartono97/webcrawler"
+	"fmt"
+
 	"./github.com/silver-rush/database"
-	"./github.com/ksuhartono97/webcrawler"
 )
 
 func main() {
 	database.OpenAllDatabase()
 	defer database.CloseAllDatabase()
 
-    webcrawler.CrawlerInit()
-    webcrawler.PrintLinks("http://www.cse.ust.hk/")
+	docIDList := database.GetAllDoc()
+	fmt.Println(len(docIDList))
+
+	for _, docID := range docIDList {
+		fmt.Println(database.GetURLWithID(docID))
+		termList := database.GetTermsInDoc(docID)
+		for _, termID := range termList {
+			p := database.GetPosting(termID, docID)
+			fmt.Println(database.GetWordWithID(termID)+" ", p.TermFreq)
+		}
+	}
+
+	// webcrawler.CrawlerInit()
+	// webcrawler.PrintLinks("http://www.cse.ust.hk/")
 }
