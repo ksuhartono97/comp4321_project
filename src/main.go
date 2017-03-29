@@ -6,9 +6,13 @@ import (
 	"time"
 
 	"./github.com/silver-rush/indexer"
+	"./github.com/silver-rush/database"
 )
 
 func main() {
+	database.OpenAllDatabase()
+	defer database.CloseAllDatabase()
+
 	url := "http://www.cse.ust.hk/"
 	resp, err := http.Get(url)
 	if err != nil {
@@ -17,6 +21,6 @@ func main() {
 	}
 	defer resp.Body.Close()
 
-	slice := []int{0}
+	slice := []uint64{0}
 	indexer.Feed(0, resp.Body, time.Now(), 0, 0, slice)
 }
