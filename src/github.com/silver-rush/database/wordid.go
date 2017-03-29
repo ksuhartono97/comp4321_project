@@ -32,16 +32,36 @@ func OpenWordDB() {
 }
 
 //GetWordID returns a unique id for the word. If the record does not exist, it will create one.
-func GetWordID(s string) (id int, created bool) {
+func GetWordID(word string) (id uint64, created bool) {
 	id = 0
 	created = true
 
-	err := db.View(func(tx *bolt.Tx) error {
+	var returnByte []byte
+	db.View(func(tx *bolt.Tx) error {
+		bucket := tx.Bucket([]byte("word_to_id"))
+		returnByte = bucket.Get([]byte(word))
 		return nil
 	})
 
-	if err != nil {
-		panic(fmt.Errorf("Get word ID error: %s", err))
+	if returnByte == nil {
+		created = true
+
+		db.Batch(func(tx *bolt.Tx) error {
+			idToWordBuc := tx.Bucket([]byte("id_to_word"))
+			id, _ = idToWordBuc.NextSequence()
+
+			err := idToWordBuc.Put(UintToByte(id), []byte(word))
+			if err != nil {
+				return err
+			}
+
+			wordToIDBuc := tx.Bucket([]byte("word_to_id"))
+			err = wordToIDBuc.Put([]byte(word), UintToByte(id))
+
+			return err
+		})
+	} else {
+		id = ByteToUint(returnByte)
 	}
 
 	return

@@ -13,7 +13,7 @@ import (
 )
 
 //Feed a page to the indexer
-func Feed(docID int, reader io.ReadCloser, lastModify time.Time, size int, parent int, child []int) {
+func Feed(docID uint32, reader io.ReadCloser, lastModify time.Time, size int, parent uint32, child []uint32) {
 	//Map of words and term frequency.
 	//TODO: Change string to word ID
 	wordMap := make(map[string]int)
