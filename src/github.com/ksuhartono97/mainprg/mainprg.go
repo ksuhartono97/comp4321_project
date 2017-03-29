@@ -1,9 +1,5 @@
 package main
 
-// "fmt"
-//
-// "github.com/ksuhartono97/stringutil"
-
 import (
     "log"
 
@@ -22,6 +18,6 @@ func main() {
   	defer db.Close()
     webcrawler.CrawlerInit()
     webcrawler.PrintLinks("http://www.cse.ust.hk/")
-    webcrawler.CrawlerInit()
-    webcrawler.PrintLinks("http://www.facebook.com")
+    // webcrawler.CrawlerInit()
+    // webcrawler.PrintLinks("http://www.facebook.com")
 }
