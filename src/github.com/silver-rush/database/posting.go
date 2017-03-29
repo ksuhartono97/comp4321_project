@@ -3,6 +3,7 @@ package database
 import (
 	"encoding/binary"
 	"fmt"
+	"os"
 
 	"github.com/boltdb/bolt"
 )
@@ -12,7 +13,7 @@ var postingDB *bolt.DB
 //OpenPostingDB opens the posting list database
 func OpenPostingDB() {
 	var err error
-	postingDB, err = bolt.Open("posting_list.db", 0600, nil)
+	postingDB, err = bolt.Open("db"+string(os.PathSeparator)+"posting_list.db", 0600, nil)
 	if err != nil {
 		panic(fmt.Errorf("Open Posting List Database error: %s", err))
 	}
@@ -35,27 +36,27 @@ func ClosePostingDB() {
 //Posting is a data struct in the posting list
 type Posting struct {
 	//docID uint64
-	tf uint32
+	TermFreq uint32
 }
 
 //NewPosting make and initialize a posting
 func NewPosting() *Posting {
 	var p Posting
-	p.tf = 0
+	p.TermFreq = 0
 	return &p
 }
 
 func encodePosting(p *Posting) []byte {
-	b := make([]byte, 12)
+	b := make([]byte, 4)
 	//binary.LittleEndian.PutUint64(b, p.docID)
-	binary.LittleEndian.PutUint32(b[9:], p.tf)
+	binary.LittleEndian.PutUint32(b, p.TermFreq)
 	return b
 }
 
 func decodePosting(b []byte) *Posting {
 	var p Posting
 	//p.docID = binary.LittleEndian.Uint64(b[:9])
-	p.tf = binary.LittleEndian.Uint32(b[9:])
+	p.TermFreq = binary.LittleEndian.Uint32(b)
 	return &p
 }
 
@@ -69,7 +70,11 @@ func InsertIntoPostingList(wordID uint64, docID uint64, p *Posting) {
 			return err
 		}
 
-		listBucket.Put(encode64Bit(docID), encodePosting(p))
+		err = listBucket.Put(encode64Bit(docID), encodePosting(p))
+		if err != nil {
+			fmt.Println(err)
+			return err
+		}
 
 		return nil
 	})

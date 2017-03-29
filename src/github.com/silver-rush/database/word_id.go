@@ -2,6 +2,7 @@ package database
 
 import (
 	"fmt"
+	"os"
 
 	"github.com/boltdb/bolt"
 )
@@ -11,7 +12,7 @@ var wordDB *bolt.DB
 //OpenWordDB opens the word-id database
 func OpenWordDB() {
 	var err error
-	wordDB, err = bolt.Open("word_id.db", 0600, nil)
+	wordDB, err = bolt.Open("db"+string(os.PathSeparator)+"word_id.db", 0600, nil)
 	if err != nil {
 		panic(fmt.Errorf("Open word ID error: %s", err))
 	}

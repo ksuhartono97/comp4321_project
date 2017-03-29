@@ -99,6 +99,7 @@ func crawl(src string, ch chan UrlData, chFinished chan bool) {
 		case tt == html.ErrorToken:
 			// End of the document, we're done, increment explored pages and return result
 			ch <- urlResult
+			feedToIndexer(src, &urlResult)
 			exploredPages++
 			return
 		case tt == html.StartTagToken:
@@ -172,7 +173,7 @@ func feedToIndexer(url string, urlData *UrlData) {
 	}
 
 	wg.Wait()
-	indexer.Feed(thisID, urlData.rawHTML, uint32(t.Unix()), urlData.pageSize, parentID, childID, urlData.pageTitle)
+	indexer.Feed(thisID, urlData.rawHTML, uint32(t.Unix()), uint32(urlData.pageSize), parentID, childID, urlData.pageTitle)
 	fmt.Println("Feeding to the indxer: ", thisID)
 	fmt.Printf("\nTime: %v\nSize: %v\nParent: %v\nChild: %v\nTitle: %v\n", uint32(t.Unix()), urlData.pageSize, parentID, childID, urlData.pageTitle)
 }
@@ -213,8 +214,6 @@ func PrintLinks(links ...string) {
 		//fmt.Println("Page Title: " + url.pageTitle)
 		//fmt.Println("Page Size: ", url.pageSize)
 		//fmt.Println("Last Modified: " + url.lastModified)
-
-		feedToIndexer(seedUrls[0], &url)
 
 		// Calculate remaining URLs needed
 		diff := 30 - exploredPages

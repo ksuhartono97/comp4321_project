@@ -2,6 +2,7 @@ package indexer
 
 import (
 	"fmt"
+	"sync"
 
 	"strings"
 
@@ -10,7 +11,7 @@ import (
 )
 
 //Feed a page to the indexer
-func Feed(docID uint64, raw string, lastModify uint32, size int, parent uint64, child []uint64, title string) {
+func Feed(docID uint64, raw string, lastModify uint32, size uint32, parent uint64, child []uint64, title string) {
 	//Map of words and term frequency.
 	wordMap := make(map[uint64]uint32)
 
@@ -22,6 +23,31 @@ func Feed(docID uint64, raw string, lastModify uint32, size int, parent uint64, 
 	//Map is pass by reference, so we're cool
 	iterateNode(doc, wordMap)
 
+	var wg sync.WaitGroup
+	wg.Add(len(wordMap) + 1)
+	//Start goroutines to add words to the posting list
+	for wordID, tf := range wordMap {
+		go func(wordID uint64, tf uint32) {
+			defer wg.Done()
+			p := database.Posting{tf}
+			database.InsertIntoPostingList(wordID, docID, &p)
+		}(wordID, tf)
+	}
+
+	go func() {
+		defer wg.Done()
+		var d database.DocInfo
+		d.Size = size
+		d.Time = lastModify
+		d.ParentID = parent
+		d.ChildNum = uint32(len(child))
+		d.Child = child
+		d.Title = title
+		database.InsertDocInfo(docID, &d)
+	}()
+
+	wg.Wait()
+	fmt.Println("Done. ", docID)
 }
 
 func tokenize(text *string) []string {

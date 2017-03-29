@@ -1,9 +1,11 @@
 package database
 
 import "encoding/binary"
+import "os"
 
 //OpenAllDatabase will make a connection to open all databases
 func OpenAllDatabase() {
+	os.Mkdir("db", os.ModeDir)
 	OpenURLDB()
 	OpenWordDB()
 	OpenPostingDB()

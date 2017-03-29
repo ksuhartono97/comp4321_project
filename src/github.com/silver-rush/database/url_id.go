@@ -2,6 +2,7 @@ package database
 
 import (
 	"fmt"
+	"os"
 
 	"github.com/boltdb/bolt"
 )
@@ -11,7 +12,7 @@ var urlDB *bolt.DB
 //OpenURLDB opens the url-id database
 func OpenURLDB() {
 	var err error
-	urlDB, err = bolt.Open("url_id.db", 0600, nil)
+	urlDB, err = bolt.Open("db"+string(os.PathSeparator)+"url_id.db", 0600, nil)
 	if err != nil {
 		panic(fmt.Errorf("Open URL ID error: %s", err))
 	}

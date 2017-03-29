@@ -3,6 +3,7 @@ package database
 import (
 	"encoding/binary"
 	"fmt"
+	"os"
 
 	"github.com/boltdb/bolt"
 )
@@ -12,7 +13,7 @@ var docInfoDB *bolt.DB
 //OpenDocInfoDB opens the document information database
 func OpenDocInfoDB() {
 	var err error
-	docInfoDB, err = bolt.Open("doc_info.db", 0600, nil)
+	docInfoDB, err = bolt.Open("db"+string(os.PathSeparator)+"doc_info.db", 0600, nil)
 	if err != nil {
 		panic(fmt.Errorf("Open document information databse error: %s", err))
 	}
@@ -34,40 +35,40 @@ func CloseDocInfoDB() {
 
 //DocInfo is a struct containing all the document information
 type DocInfo struct {
-	size     uint32
-	time     uint32
-	parentID uint64
-	childNum uint32
-	child    []uint64
-	title    string
+	Size     uint32
+	Time     uint32
+	ParentID uint64
+	ChildNum uint32
+	Child    []uint64
+	Title    string
 }
 
 func encodeDocInfo(d *DocInfo) []byte {
-	b := make([]byte, 4+4+8+4+8*int(d.childNum)+4*len(d.title))
+	b := make([]byte, 4+4+8+4+8*int(d.ChildNum)+4*len(d.Title))
 
-	binary.LittleEndian.PutUint32(b[0:5], d.size)
-	binary.LittleEndian.PutUint32(b[5:9], d.time)
-	binary.LittleEndian.PutUint64(b[9:17], d.parentID)
-	binary.LittleEndian.PutUint32(b[17:21], d.childNum)
-	for i, id := range d.child {
-		binary.LittleEndian.PutUint64(b[21+i*8:21+(i+1)*8], id)
+	binary.LittleEndian.PutUint32(b[0:4], d.Size)
+	binary.LittleEndian.PutUint32(b[4:8], d.Time)
+	binary.LittleEndian.PutUint64(b[8:16], d.ParentID)
+	binary.LittleEndian.PutUint32(b[16:20], d.ChildNum)
+	for i, id := range d.Child {
+		binary.LittleEndian.PutUint64(b[20+i*8:20+(i+1)*8], id)
 	}
-	copy(b[21+d.childNum*8:], []byte(d.title))
+	copy(b[20+d.ChildNum*8:], []byte(d.Title))
 	return b
 }
 
 func decodeDocInfo(b []byte) *DocInfo {
 	var d DocInfo
 
-	d.size = binary.LittleEndian.Uint32(b[0:5])
-	d.time = binary.LittleEndian.Uint32(b[5:9])
-	d.parentID = binary.LittleEndian.Uint64(b[9:17])
-	d.childNum = binary.LittleEndian.Uint32(b[17:21])
+	d.Size = binary.LittleEndian.Uint32(b[0:4])
+	d.Time = binary.LittleEndian.Uint32(b[4:8])
+	d.ParentID = binary.LittleEndian.Uint64(b[8:16])
+	d.ChildNum = binary.LittleEndian.Uint32(b[16:20])
 	var i uint32
-	for i = 0; i < d.childNum; i++ {
-		d.child = append(d.child, binary.LittleEndian.Uint64(b[21+i*8:21+(i+1)*8]))
+	for i = 0; i < d.ChildNum; i++ {
+		d.Child = append(d.Child, binary.LittleEndian.Uint64(b[20+i*8:20+(i+1)*8]))
 	}
-	d.title = string(b[21+d.childNum*8:])
+	d.Title = string(b[20+d.ChildNum*8:])
 	return &d
 }
 
