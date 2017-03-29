@@ -2,19 +2,23 @@ package webcrawler
 
 import (
 	"fmt"
-	"golang.org/x/net/html"
 	"io/ioutil"
 	"net/http"
 	"strings"
+	"sync"
 	"time"
+
+	"../../silver-rush/database"
+	"../../silver-rush/indexer"
+	"golang.org/x/net/html"
 )
 
 type UrlData struct {
-	sourceUrl string
-	foundUrl  []string
-	pageTitle string
-	pageSize  int
-	rawHTML   string
+	sourceUrl    string
+	foundUrl     []string
+	pageTitle    string
+	pageSize     int
+	rawHTML      string
 	lastModified string
 }
 
@@ -135,6 +139,44 @@ func crawl(src string, ch chan UrlData, chFinished chan bool) {
 	}
 }
 
+func feedToIndexer(url string, urlData *UrlData) {
+	//Feeding to the indexer
+	layout := "Mon, 02 Jan 2006 15:04:05 MST"
+
+	t, err := time.Parse(layout, urlData.lastModified)
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	var wg sync.WaitGroup
+	wg.Add(len(urlData.foundUrl) + 2)
+	var parentID, thisID uint64
+	var childID []uint64
+
+	go func() {
+		defer wg.Done()
+		parentID, _ = database.GetURLID(urlData.sourceUrl)
+	}()
+
+	go func() {
+		defer wg.Done()
+		thisID, _ = database.GetURLID(url)
+	}()
+
+	for _, u := range urlData.foundUrl {
+		go func(url string) {
+			defer wg.Done()
+			id, _ := database.GetURLID(url)
+			childID = append(childID, id)
+		}(u)
+	}
+
+	wg.Wait()
+	indexer.Feed(thisID, urlData.rawHTML, uint32(t.Unix()), urlData.pageSize, parentID, childID, urlData.pageTitle)
+	fmt.Println("Feeding to the indxer: ", thisID)
+	fmt.Printf("\nTime: %v\nSize: %v\nParent: %v\nChild: %v\nTitle: %v\n", uint32(t.Unix()), urlData.pageSize, parentID, childID, urlData.pageTitle)
+}
+
 //Main search function
 func PrintLinks(links ...string) {
 	foundUrls := make(map[string]UrlData)
@@ -164,13 +206,15 @@ func PrintLinks(links ...string) {
 	for _, url := range foundUrls {
 
 		//Printing the results
-		fmt.Println("\nFound", len(url.foundUrl), "non unique urls:\n")
+		//fmt.Println("\nFound", len(url.foundUrl), "non unique urls:\n")
 		// for i := 0; i < len(url.foundUrl); i++ {
 		// 	fmt.Println(" > " + url.foundUrl[i])
 		// }
-		fmt.Println("Page Title: " + url.pageTitle)
-		fmt.Println("Page Size: ", url.pageSize)
-		fmt.Println("Last Modified: " + url.lastModified)
+		//fmt.Println("Page Title: " + url.pageTitle)
+		//fmt.Println("Page Size: ", url.pageSize)
+		//fmt.Println("Last Modified: " + url.lastModified)
+
+		feedToIndexer(seedUrls[0], &url)
 
 		// Calculate remaining URLs needed
 		diff := 30 - exploredPages
