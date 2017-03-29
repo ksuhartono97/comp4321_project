@@ -7,20 +7,13 @@ import (
 
 	"./github.com/silver-rush/indexer"
 	"./github.com/silver-rush/database"
+	"./github.com/ksuhartono97/webcrawler"
 )
 
 func main() {
 	database.OpenAllDatabase()
 	defer database.CloseAllDatabase()
 
-	url := "http://www.cse.ust.hk/"
-	resp, err := http.Get(url)
-	if err != nil {
-		fmt.Println(err)
-		return
-	}
-	defer resp.Body.Close()
-
-	slice := []uint64{0}
-	indexer.Feed(0, resp.Body, time.Now(), 0, 0, slice)
+    webcrawler.CrawlerInit()
+    webcrawler.PrintLinks("http://www.cse.ust.hk/")
 }
