@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"io/ioutil"
 	"net/http"
-	"strings"
+	"net/url"
 	"sync"
 	"time"
 
@@ -34,6 +34,19 @@ func getHref(t html.Token) (ok bool, href string) {
 		}
 	}
 	return
+}
+
+func fixURL(href, base string) string {
+	uri, err := url.Parse(href)
+	if err != nil {
+		return ""
+	}
+	baseURL, err := url.Parse(base)
+	if err != nil {
+		return ""
+	}
+	uri = baseURL.ResolveReference(uri)
+	return uri.String()
 }
 
 // Extract all required info from a given webpage
@@ -127,8 +140,11 @@ func crawl(src string, ch chan UrlData, chFinished chan bool) {
 				}
 
 				// Make sure the url begins in http**
-				hasProto := strings.Index(url, "http") == 0
-				if hasProto {
+				//hasProto := strings.Index(url, "http") == 0
+
+				//Fix the URL into a absolute and valid form
+				url = fixURL(url, src)
+				if len(url) > 0 {
 					urlResult.foundUrl = append(urlResult.foundUrl, url)
 				}
 			} else if t.Data == "title" {
@@ -180,7 +196,6 @@ func feedToIndexer(url string, urlData *UrlData) {
 
 	wg.Wait()
 	indexer.Feed(thisID, urlData.rawHTML, urlData.lastModified, int32(urlData.pageSize), parentID, childID, urlData.pageTitle)
-	fmt.Println("Feeding to the indxer: ", thisID)
 	fmt.Printf("\nTime: %v\nSize: %v\nParent: %v\nChild: %v\nTitle: %v\n", urlData.lastModified, urlData.pageSize, parentID, childID, urlData.pageTitle)
 }
 

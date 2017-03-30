@@ -74,6 +74,45 @@ func GetIDWithWord(word string) (id int64, created bool) {
 	return
 }
 
+//BatchGetIDWithWord returns a slice of unique ids for each word. If the record does not exist, it will create one.
+func BatchGetIDWithWord(word []string) (id []int64, created []bool) {
+	id = make([]int64, len(word))
+	created = make([]bool, len(word))
+
+	err := wordDB.Batch(func(tx *bolt.Tx) error {
+
+		for i, s := range word {
+			wordToIDBuc := tx.Bucket([]byte("word_to_id"))
+			returnByte := wordToIDBuc.Get([]byte(s))
+
+			if returnByte == nil {
+				created[i] = true
+				idToWordBuc := tx.Bucket([]byte("id_to_word"))
+				nextID, _ := idToWordBuc.NextSequence()
+				id[i] = int64(nextID)
+
+				err := idToWordBuc.Put(encode64Bit(id[i]), []byte(s))
+				if err != nil {
+					return err
+				}
+
+				err = wordToIDBuc.Put([]byte(s), encode64Bit(id[i]))
+				return err
+			}
+
+			id[i] = decode64Bit(returnByte)
+		}
+		return nil
+	})
+
+	if err != nil {
+		fmt.Println(err)
+		panic(err)
+	}
+
+	return
+}
+
 //GetWordWithID returns the id given the word, returns empty string if not found
 func GetWordWithID(id int64) (s string) {
 	var returnByte []byte

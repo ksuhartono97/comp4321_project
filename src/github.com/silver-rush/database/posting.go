@@ -40,8 +40,8 @@ func ClosePostingDB() {
 
 //Posting is a data struct in the posting list
 type Posting struct {
-	//docID uint64
-	TermFreq int32
+	TermFreq  int32
+	Positions []int32
 }
 
 //NewPosting make and initialize a posting
@@ -52,14 +52,20 @@ func NewPosting() *Posting {
 }
 
 func encodePosting(p *Posting) []byte {
-	b := make([]byte, 4)
+	b := make([]byte, 4+len(p.Positions)*4)
 	binary.LittleEndian.PutUint32(b, uint32(p.TermFreq))
+	for i, pos := range p.Positions {
+		binary.LittleEndian.PutUint32(b[4+i*4:4+(i+1)*4], uint32(pos))
+	}
 	return b
 }
 
 func decodePosting(b []byte) *Posting {
 	var p Posting
 	p.TermFreq = int32(binary.LittleEndian.Uint32(b))
+	for i := 4; i < len(b); i = i + 4 {
+		p.Positions = append(p.Positions, int32(binary.LittleEndian.Uint32(b[i:i+4])))
+	}
 	return &p
 }
 
