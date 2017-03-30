@@ -41,7 +41,7 @@ func ClosePostingDB() {
 //Posting is a data struct in the posting list
 type Posting struct {
 	//docID uint64
-	TermFreq uint32
+	TermFreq int32
 }
 
 //NewPosting make and initialize a posting
@@ -53,21 +53,19 @@ func NewPosting() *Posting {
 
 func encodePosting(p *Posting) []byte {
 	b := make([]byte, 4)
-	//binary.LittleEndian.PutUint64(b, p.docID)
-	binary.LittleEndian.PutUint32(b, p.TermFreq)
+	binary.LittleEndian.PutUint32(b, uint32(p.TermFreq))
 	return b
 }
 
 func decodePosting(b []byte) *Posting {
 	var p Posting
-	//p.docID = binary.LittleEndian.Uint64(b[:9])
-	p.TermFreq = binary.LittleEndian.Uint32(b)
+	p.TermFreq = int32(binary.LittleEndian.Uint32(b))
 	return &p
 }
 
 //InsertIntoPostingList a record into the posting list of the given word ID, it will also update the forward list
-func InsertIntoPostingList(wordID uint64, docID uint64, p *Posting) {
-	postingDB.Batch(func(tx *bolt.Tx) error {
+func InsertIntoPostingList(wordID int64, docID int64, p *Posting) {
+	err := postingDB.Batch(func(tx *bolt.Tx) error {
 		allPostingBucket := tx.Bucket([]byte("posting"))
 		postingBucket, err := allPostingBucket.CreateBucketIfNotExists(encode64Bit(wordID))
 		if err != nil {
@@ -96,10 +94,15 @@ func InsertIntoPostingList(wordID uint64, docID uint64, p *Posting) {
 
 		return nil
 	})
+
+	if err != nil {
+		fmt.Println(err)
+		panic(err)
+	}
 }
 
 //GetPosting returns a posting from the database with the given document ID and relevant information, return nil if not found
-func GetPosting(wordID uint64, docID uint64) *Posting {
+func GetPosting(wordID int64, docID int64) *Posting {
 	var p *Posting
 	postingDB.View(func(tx *bolt.Tx) error {
 		allPostingBucket := tx.Bucket([]byte("posting"))
@@ -116,16 +119,22 @@ func GetPosting(wordID uint64, docID uint64) *Posting {
 }
 
 //GetTermsInDoc returns a slice of all terms in the document in the forward index
-func GetTermsInDoc(docID uint64) []uint64 {
-	var list []uint64
+func GetTermsInDoc(docID int64) []int64 {
+	var list []int64
 
 	postingDB.View(func(tx *bolt.Tx) error {
-		bucket := tx.Bucket([]byte("forward"))
+		allForwardBucket := tx.Bucket([]byte("forward"))
+		forwardBucket := allForwardBucket.Bucket(encode64Bit(docID))
 
-		list := make([]uint64, bucket.Stats().KeyN)
+		if forwardBucket == nil {
+			//Bucket does not exist, return empty list as is
+			return nil
+		}
+
+		list = make([]int64, forwardBucket.Stats().KeyN)
 		i := 0
 
-		if err := bucket.ForEach(func(k, v []byte) error {
+		if err := forwardBucket.ForEach(func(k, v []byte) error {
 			list[i] = decode64Bit(k)
 			i++
 			return nil

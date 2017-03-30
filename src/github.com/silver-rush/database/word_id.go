@@ -38,43 +38,44 @@ func CloseWordDB() {
 }
 
 //GetIDWithWord returns a unique id for the word. If the record does not exist, it will create one.
-func GetIDWithWord(word string) (id uint64, created bool) {
+func GetIDWithWord(word string) (id int64, created bool) {
 	id = 0
 	created = false
 
-	var returnByte []byte
-	wordDB.View(func(tx *bolt.Tx) error {
-		bucket := tx.Bucket([]byte("word_to_id"))
-		returnByte = bucket.Get([]byte(word))
-		return nil
-	})
+	err := wordDB.Batch(func(tx *bolt.Tx) error {
 
-	if returnByte == nil {
-		created = true
+		wordToIDBuc := tx.Bucket([]byte("word_to_id"))
+		returnByte := wordToIDBuc.Get([]byte(word))
 
-		wordDB.Batch(func(tx *bolt.Tx) error {
+		if returnByte == nil {
+			created = true
 			idToWordBuc := tx.Bucket([]byte("id_to_word"))
-			id, _ = idToWordBuc.NextSequence()
+			nextID, _ := idToWordBuc.NextSequence()
+			id = int64(nextID)
 
 			err := idToWordBuc.Put(encode64Bit(id), []byte(word))
 			if err != nil {
 				return err
 			}
 
-			wordToIDBuc := tx.Bucket([]byte("word_to_id"))
 			err = wordToIDBuc.Put([]byte(word), encode64Bit(id))
-
 			return err
-		})
-	} else {
+		}
+
 		id = decode64Bit(returnByte)
+		return nil
+	})
+
+	if err != nil {
+		fmt.Println(err)
+		panic(err)
 	}
 
 	return
 }
 
 //GetWordWithID returns the id given the word, returns empty string if not found
-func GetWordWithID(id uint64) (s string) {
+func GetWordWithID(id int64) (s string) {
 	var returnByte []byte
 	wordDB.View(func(tx *bolt.Tx) error {
 		bucket := tx.Bucket([]byte("id_to_word"))

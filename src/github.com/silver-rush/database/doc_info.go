@@ -35,55 +35,61 @@ func CloseDocInfoDB() {
 
 //DocInfo is a struct containing all the document information
 type DocInfo struct {
-	Size     uint32
-	Time     uint32
-	ParentID uint64
-	ChildNum uint32
-	Child    []uint64
+	Size     int32
+	Time     int64
+	ParentID int64
+	ChildNum int32
+	Child    []int64
 	Title    string
 }
 
 func encodeDocInfo(d *DocInfo) []byte {
-	b := make([]byte, 4+4+8+4+8*int(d.ChildNum)+4*len(d.Title))
+	titleByte := []byte(d.Title)
+	b := make([]byte, 4+8+8+4+8*int(d.ChildNum)+len(titleByte))
 
-	binary.LittleEndian.PutUint32(b[0:4], d.Size)
-	binary.LittleEndian.PutUint32(b[4:8], d.Time)
-	binary.LittleEndian.PutUint64(b[8:16], d.ParentID)
-	binary.LittleEndian.PutUint32(b[16:20], d.ChildNum)
+	binary.LittleEndian.PutUint32(b[0:4], uint32(d.Size))
+	binary.LittleEndian.PutUint64(b[4:12], uint64(d.Time))
+	binary.LittleEndian.PutUint64(b[12:20], uint64(d.ParentID))
+	binary.LittleEndian.PutUint32(b[20:24], uint32(d.ChildNum))
 	for i, id := range d.Child {
-		binary.LittleEndian.PutUint64(b[20+i*8:20+(i+1)*8], id)
+		binary.LittleEndian.PutUint64(b[24+i*8:24+(i+1)*8], uint64(id))
 	}
-	copy(b[20+d.ChildNum*8:], []byte(d.Title))
+	copy(b[24+d.ChildNum*8:], titleByte)
 	return b
 }
 
 func decodeDocInfo(b []byte) *DocInfo {
 	var d DocInfo
 
-	d.Size = binary.LittleEndian.Uint32(b[0:4])
-	d.Time = binary.LittleEndian.Uint32(b[4:8])
-	d.ParentID = binary.LittleEndian.Uint64(b[8:16])
-	d.ChildNum = binary.LittleEndian.Uint32(b[16:20])
-	var i uint32
-	for i = 0; i < d.ChildNum; i++ {
-		d.Child = append(d.Child, binary.LittleEndian.Uint64(b[20+i*8:20+(i+1)*8]))
+	d.Size = int32(binary.LittleEndian.Uint32(b[0:4]))
+	d.Time = int64(binary.LittleEndian.Uint64(b[4:12]))
+	d.ParentID = int64(binary.LittleEndian.Uint64(b[12:20]))
+	d.ChildNum = int32(binary.LittleEndian.Uint32(b[20:24]))
+
+	for i := 0; i < int(d.ChildNum); i++ {
+		d.Child = append(d.Child, int64(binary.LittleEndian.Uint64(b[24+i*8:24+(i+1)*8])))
 	}
-	d.Title = string(b[20+d.ChildNum*8:])
+	d.Title = string(b[24+d.ChildNum*8:])
 	return &d
 }
 
 //InsertDocInfo a document info given the document id
-func InsertDocInfo(docID uint64, d *DocInfo) {
-	docInfoDB.Batch(func(tx *bolt.Tx) error {
+func InsertDocInfo(docID int64, d *DocInfo) {
+	err := docInfoDB.Batch(func(tx *bolt.Tx) error {
 		docInfoBucket := tx.Bucket([]byte("doc_info"))
 
 		docInfoBucket.Put(encode64Bit(docID), encodeDocInfo(d))
 		return nil
 	})
+
+	if err != nil {
+		fmt.Println(err)
+		panic(err)
+	}
 }
 
 //GetDocInfo returns the information relevant to the document id, return nil if not found
-func GetDocInfo(docID uint64) *DocInfo {
+func GetDocInfo(docID int64) *DocInfo {
 	var d *DocInfo
 	docInfoDB.View(func(tx *bolt.Tx) error {
 		docInfoBucket := tx.Bucket([]byte("doc_info"))
@@ -98,12 +104,12 @@ func GetDocInfo(docID uint64) *DocInfo {
 }
 
 //GetAllDoc returns the slice of all document id
-func GetAllDoc() []uint64 {
-	var list []uint64
+func GetAllDoc() []int64 {
+	var list []int64
 
-	docInfoDB.View(func(tx *bolt.Tx) error {
+	err := docInfoDB.View(func(tx *bolt.Tx) error {
 		bucket := tx.Bucket([]byte("doc_info"))
-		list := make([]uint64, bucket.Stats().KeyN)
+		list = make([]int64, bucket.Stats().KeyN)
 		i := 0
 
 		if err := bucket.ForEach(func(k, v []byte) error {
@@ -115,6 +121,11 @@ func GetAllDoc() []uint64 {
 		}
 		return nil
 	})
+
+	if err != nil {
+		fmt.Println(err)
+		panic(err)
+	}
 
 	return list
 }

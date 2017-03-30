@@ -19,7 +19,7 @@ type UrlData struct {
 	pageTitle    string
 	pageSize     int
 	rawHTML      string
-	lastModified string
+	lastModified int64
 }
 
 var exploredPages = 0
@@ -79,14 +79,27 @@ func crawl(src string, ch chan UrlData, chFinished chan bool) {
 	if err != nil {
 		fmt.Println("Error while downloading head of", src)
 	} else {
+		timeString := ""
 		for k, v := range response.Header {
 			if k == "Last-Modified" {
-				urlResult.lastModified = v[0]
+				timeString = v[0]
+				if err != nil {
+					fmt.Println(err)
+				}
 			}
 		}
-		if urlResult.lastModified == "" {
-			ti := time.Now().UTC().Format("Mon, 02 Jan 2006 15:04:05 GMT")
-			urlResult.lastModified = ti
+		if timeString == "" {
+			urlResult.lastModified = time.Now().UTC().Unix()
+		} else {
+			layout := "Mon, 02 Jan 2006 15:04:05 GMT"
+			t, err := time.Parse(layout, timeString)
+
+			if err != nil {
+				fmt.Println("Time Parsing error")
+				panic(err)
+			}
+
+			urlResult.lastModified = t.Unix()
 		}
 	}
 
@@ -142,17 +155,10 @@ func crawl(src string, ch chan UrlData, chFinished chan bool) {
 
 func feedToIndexer(url string, urlData *UrlData) {
 	//Feeding to the indexer
-	layout := "Mon, 02 Jan 2006 15:04:05 MST"
-
-	t, err := time.Parse(layout, urlData.lastModified)
-	if err != nil {
-		fmt.Println(err)
-	}
-
 	var wg sync.WaitGroup
 	wg.Add(len(urlData.foundUrl) + 2)
-	var parentID, thisID uint64
-	var childID []uint64
+	var parentID, thisID int64
+	var childID []int64
 
 	go func() {
 		defer wg.Done()
@@ -173,9 +179,9 @@ func feedToIndexer(url string, urlData *UrlData) {
 	}
 
 	wg.Wait()
-	indexer.Feed(thisID, urlData.rawHTML, uint32(t.Unix()), uint32(urlData.pageSize), parentID, childID, urlData.pageTitle)
+	indexer.Feed(thisID, urlData.rawHTML, urlData.lastModified, int32(urlData.pageSize), parentID, childID, urlData.pageTitle)
 	fmt.Println("Feeding to the indxer: ", thisID)
-	fmt.Printf("\nTime: %v\nSize: %v\nParent: %v\nChild: %v\nTitle: %v\n", uint32(t.Unix()), urlData.pageSize, parentID, childID, urlData.pageTitle)
+	fmt.Printf("\nTime: %v\nSize: %v\nParent: %v\nChild: %v\nTitle: %v\n", urlData.lastModified, urlData.pageSize, parentID, childID, urlData.pageTitle)
 }
 
 //Main search function

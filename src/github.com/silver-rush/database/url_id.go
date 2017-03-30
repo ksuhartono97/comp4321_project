@@ -38,43 +38,38 @@ func CloseURLDB() {
 }
 
 //GetURLID returns a unique id for the URL. If the record does not exist, it will create one.
-func GetURLID(url string) (id uint64, created bool) {
+func GetURLID(url string) (id int64, created bool) {
 	id = 0
-	created = true
+	created = false
 
-	var returnByte []byte
-	urlDB.View(func(tx *bolt.Tx) error {
-		bucket := tx.Bucket([]byte("url_to_id"))
-		returnByte = bucket.Get([]byte(url))
-		return nil
-	})
+	urlDB.Batch(func(tx *bolt.Tx) error {
+		urlToIDBuc := tx.Bucket([]byte("url_to_id"))
+		returnByte := urlToIDBuc.Get([]byte(url))
 
-	if returnByte == nil {
-		created = true
-
-		urlDB.Batch(func(tx *bolt.Tx) error {
+		if returnByte == nil {
+			created = true
 			idToURLBuc := tx.Bucket([]byte("id_to_url"))
-			id, _ = idToURLBuc.NextSequence()
+			nextID, _ := idToURLBuc.NextSequence()
+			id = int64(nextID)
 
 			err := idToURLBuc.Put(encode64Bit(id), []byte(url))
 			if err != nil {
 				return err
 			}
 
-			urlToIDBuc := tx.Bucket([]byte("url_to_id"))
 			err = urlToIDBuc.Put([]byte(url), encode64Bit(id))
-
 			return err
-		})
-	} else {
+		}
+
 		id = decode64Bit(returnByte)
-	}
+		return nil
+	})
 
 	return
 }
 
 //GetURLWithID returns the id given the URL, returns empty string if not found
-func GetURLWithID(id uint64) (s string) {
+func GetURLWithID(id int64) (s string) {
 	var returnByte []byte
 	urlDB.View(func(tx *bolt.Tx) error {
 		bucket := tx.Bucket([]byte("id_to_url"))

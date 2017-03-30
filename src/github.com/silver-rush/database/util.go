@@ -21,25 +21,25 @@ func CloseAllDatabase() {
 }
 
 //encode64Bit converts unsgined 64 bit to byte slice
-func encode64Bit(n uint64) []byte {
+func encode64Bit(n int64) []byte {
 	b := make([]byte, 8)
-	binary.LittleEndian.PutUint64(b, n)
+	binary.LittleEndian.PutUint64(b, uint64(n))
 	return b
 }
 
 //decode64Bit converts byte slice to unsgined 64 bit
-func decode64Bit(b []byte) uint64 {
-	return binary.LittleEndian.Uint64(b)
+func decode64Bit(b []byte) int64 {
+	return int64(binary.LittleEndian.Uint64(b))
 }
 
 //encode32Bit converts unsgined 32 bit to byte slice
-func encode32Bit(n uint32) []byte {
-	b := make([]byte, 8)
-	binary.LittleEndian.PutUint32(b, n)
+func encode32Bit(n int32) []byte {
+	b := make([]byte, 4)
+	binary.LittleEndian.PutUint32(b, uint32(n))
 	return b
 }
 
 //decode32Bit converts byte slice to unsgined 32 bit
-func decode32Bit(b []byte) uint32 {
-	return binary.LittleEndian.Uint32(b)
+func decode32Bit(b []byte) int32 {
+	return int32(binary.LittleEndian.Uint32(b))
 }
