@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/boltdb/bolt"
+	"../../../github.com/boltdb/bolt"
 )
 
 var wordDB *bolt.DB
@@ -90,6 +90,7 @@ func BatchGetIDWithWord(word []string) (id []int64, created []bool) {
 				idToWordBuc := tx.Bucket([]byte("id_to_word"))
 				nextID, _ := idToWordBuc.NextSequence()
 				id[i] = int64(nextID)
+				//fmt.Printf("%q %v\n", s, id[i])
 
 				err := idToWordBuc.Put(encode64Bit(id[i]), []byte(s))
 				if err != nil {
@@ -101,6 +102,7 @@ func BatchGetIDWithWord(word []string) (id []int64, created []bool) {
 			}
 
 			id[i] = decode64Bit(returnByte)
+			//fmt.Printf("%q %v\n", s, id[i])
 		}
 		return nil
 	})

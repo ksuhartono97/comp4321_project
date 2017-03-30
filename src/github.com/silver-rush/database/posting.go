@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/boltdb/bolt"
+	"../../../github.com/boltdb/bolt"
 )
 
 var postingDB *bolt.DB
@@ -42,13 +42,6 @@ func ClosePostingDB() {
 type Posting struct {
 	TermFreq  int32
 	Positions []int32
-}
-
-//NewPosting make and initialize a posting
-func NewPosting() *Posting {
-	var p Posting
-	p.TermFreq = 0
-	return &p
 }
 
 func encodePosting(p *Posting) []byte {
@@ -137,12 +130,12 @@ func GetTermsInDoc(docID int64) []int64 {
 			return nil
 		}
 
-		list = make([]int64, forwardBucket.Stats().KeyN)
-		i := 0
-
 		if err := forwardBucket.ForEach(func(k, v []byte) error {
-			list[i] = decode64Bit(k)
-			i++
+			//Skipping the zeroth index... which is weird for some reason?
+			id := decode64Bit(k)
+			if id != 0 {
+				list = append(list, id)
+			}
 			return nil
 		}); err != nil {
 			return err

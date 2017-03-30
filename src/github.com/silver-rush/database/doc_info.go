@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/boltdb/bolt"
+	"../../../github.com/boltdb/bolt"
 )
 
 var docInfoDB *bolt.DB

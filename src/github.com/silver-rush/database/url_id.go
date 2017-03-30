@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/boltdb/bolt"
+	"../../boltdb/bolt"
 )
 
 var urlDB *bolt.DB

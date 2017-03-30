@@ -5,12 +5,14 @@ import (
 	"io/ioutil"
 	"net/http"
 	"net/url"
+	"strings"
 	"sync"
 	"time"
 
+	"../../../golang.org/x/net/html"
+
 	"../../silver-rush/database"
 	"../../silver-rush/indexer"
-	"golang.org/x/net/html"
 )
 
 type UrlData struct {
@@ -140,12 +142,11 @@ func crawl(src string, srcID int64, ch chan UrlData, chFinished chan bool) {
 					continue
 				}
 
-				// Make sure the url begins in http**
-				//hasProto := strings.Index(url, "http") == 0
-
 				//Fix the URL into a absolute and valid form
 				url = fixURL(url, src)
-				if len(url) > 0 {
+				// Make sure the url begins in http**
+				hasProto := strings.Index(url, "http") == 0
+				if hasProto && len(url) > 0 {
 					urlResult.foundUrl = append(urlResult.foundUrl, url)
 				}
 			} else if t.Data == "title" {

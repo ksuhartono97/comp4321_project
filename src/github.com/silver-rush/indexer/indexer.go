@@ -6,8 +6,8 @@ import (
 
 	"strings"
 
+	"../../../golang.org/x/net/html"
 	"../../silver-rush/database"
-	"golang.org/x/net/html"
 )
 
 //Feed a page to the indexer
@@ -42,11 +42,23 @@ func Feed(docID int64, raw string, lastModify int64, size int32, parent int64, c
 	go func() {
 		defer wg.Done()
 		var d database.DocInfo
+
+		//TODO: To be removed
+		childMap := make(map[int64]bool)
+		var uniqueChild []int64
+		for _, id := range child {
+			if childMap[id] == false {
+				childMap[id] = true
+				uniqueChild = append(uniqueChild, id)
+			}
+		}
+
+		d.ChildNum = int32(len(uniqueChild))
+		d.Child = uniqueChild
+
 		d.Size = size
 		d.Time = lastModify
 		d.ParentID = parent
-		d.ChildNum = int32(len(child))
-		d.Child = child
 		d.Title = title
 		database.InsertDocInfo(docID, &d)
 	}()
@@ -100,14 +112,17 @@ func tokenize(text string) []string {
 func iterateNode(node *html.Node, wordMap map[int64]database.Posting, pos int32) {
 	if node.Type == html.TextNode && node.Parent.Data != "script" && node.Parent.Data != "style" {
 		wordList := tokenize(html.UnescapeString(node.Data))
-		//Collect word id usin the word
-		idList, _ := database.BatchGetIDWithWord(wordList)
-		for _, id := range idList {
-			p := wordMap[id]
-			p.TermFreq++
-			p.Positions = append(p.Positions, pos)
+		if len(wordList) != 0 {
+			//Collect word id using the word
+			idList, _ := database.BatchGetIDWithWord(wordList)
+			for _, id := range idList {
+				p := wordMap[id]
+				p.TermFreq++
+				p.Positions = append(p.Positions, pos)
+				wordMap[id] = p
 
-			pos++
+				pos++
+			}
 		}
 	}
 	for child := node.FirstChild; child != nil; child = child.NextSibling {
