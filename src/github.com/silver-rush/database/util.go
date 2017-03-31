@@ -5,7 +5,7 @@ import "os"
 
 //OpenAllDatabase will make a connection to open all databases
 func OpenAllDatabase() {
-	os.Mkdir("db", os.ModeDir)
+	os.Mkdir("db", 0700)
 	OpenURLDB()
 	OpenWordDB()
 	OpenPostingDB()

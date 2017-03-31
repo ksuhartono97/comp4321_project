@@ -13,7 +13,7 @@ var docInfoDB *bolt.DB
 //OpenDocInfoDB opens the document information database
 func OpenDocInfoDB() {
 	var err error
-	docInfoDB, err = bolt.Open("db"+string(os.PathSeparator)+"doc_info.db", 0600, nil)
+	docInfoDB, err = bolt.Open("db"+string(os.PathSeparator)+"doc_info.db", 0700, nil)
 	if err != nil {
 		panic(fmt.Errorf("Open document information databse error: %s", err))
 	}

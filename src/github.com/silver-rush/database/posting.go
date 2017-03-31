@@ -13,7 +13,7 @@ var postingDB *bolt.DB
 //OpenPostingDB opens the posting list database
 func OpenPostingDB() {
 	var err error
-	postingDB, err = bolt.Open("db"+string(os.PathSeparator)+"posting_list.db", 0600, nil)
+	postingDB, err = bolt.Open("db"+string(os.PathSeparator)+"posting_list.db", 0700, nil)
 	if err != nil {
 		panic(fmt.Errorf("Open Posting List Database error: %s", err))
 	}
