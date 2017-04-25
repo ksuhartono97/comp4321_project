@@ -2,8 +2,9 @@ package database
 
 import (
 	"fmt"
+	"os"
 
-	"github.com/boltdb/bolt"
+	"../../boltdb/bolt"
 )
 
 var urlDB *bolt.DB
@@ -11,7 +12,7 @@ var urlDB *bolt.DB
 //OpenURLDB opens the url-id database
 func OpenURLDB() {
 	var err error
-	urlDB, err = bolt.Open("url_id.db", 0600, nil)
+	urlDB, err = bolt.Open("db"+string(os.PathSeparator)+"url_id.db", 0700, nil)
 	if err != nil {
 		panic(fmt.Errorf("Open URL ID error: %s", err))
 	}
@@ -37,43 +38,38 @@ func CloseURLDB() {
 }
 
 //GetURLID returns a unique id for the URL. If the record does not exist, it will create one.
-func GetURLID(url string) (id uint64, created bool) {
+func GetURLID(url string) (id int64, created bool) {
 	id = 0
-	created = true
+	created = false
 
-	var returnByte []byte
-	urlDB.View(func(tx *bolt.Tx) error {
-		bucket := tx.Bucket([]byte("url_to_id"))
-		returnByte = bucket.Get([]byte(url))
-		return nil
-	})
+	urlDB.Batch(func(tx *bolt.Tx) error {
+		urlToIDBuc := tx.Bucket([]byte("url_to_id"))
+		returnByte := urlToIDBuc.Get([]byte(url))
 
-	if returnByte == nil {
-		created = true
-
-		urlDB.Batch(func(tx *bolt.Tx) error {
+		if returnByte == nil {
+			created = true
 			idToURLBuc := tx.Bucket([]byte("id_to_url"))
-			id, _ = idToURLBuc.NextSequence()
+			nextID, _ := idToURLBuc.NextSequence()
+			id = int64(nextID)
 
 			err := idToURLBuc.Put(encode64Bit(id), []byte(url))
 			if err != nil {
 				return err
 			}
 
-			urlToIDBuc := tx.Bucket([]byte("url_to_id"))
 			err = urlToIDBuc.Put([]byte(url), encode64Bit(id))
-
 			return err
-		})
-	} else {
+		}
+
 		id = decode64Bit(returnByte)
-	}
+		return nil
+	})
 
 	return
 }
 
 //GetURLWithID returns the id given the URL, returns empty string if not found
-func GetURLWithID(id uint64) (s string) {
+func GetURLWithID(id int64) (s string) {
 	var returnByte []byte
 	urlDB.View(func(tx *bolt.Tx) error {
 		bucket := tx.Bucket([]byte("id_to_url"))

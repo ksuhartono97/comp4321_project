@@ -2,8 +2,9 @@ package database
 
 import (
 	"fmt"
+	"os"
 
-	"github.com/boltdb/bolt"
+	"../../../github.com/boltdb/bolt"
 )
 
 var wordDB *bolt.DB
@@ -11,7 +12,7 @@ var wordDB *bolt.DB
 //OpenWordDB opens the word-id database
 func OpenWordDB() {
 	var err error
-	wordDB, err = bolt.Open("word_id.db", 0600, nil)
+	wordDB, err = bolt.Open("db"+string(os.PathSeparator)+"word_id.db", 0700, nil)
 	if err != nil {
 		panic(fmt.Errorf("Open word ID error: %s", err))
 	}
@@ -37,43 +38,85 @@ func CloseWordDB() {
 }
 
 //GetIDWithWord returns a unique id for the word. If the record does not exist, it will create one.
-func GetIDWithWord(word string) (id uint64, created bool) {
+func GetIDWithWord(word string) (id int64, created bool) {
 	id = 0
 	created = false
 
-	var returnByte []byte
-	wordDB.View(func(tx *bolt.Tx) error {
-		bucket := tx.Bucket([]byte("word_to_id"))
-		returnByte = bucket.Get([]byte(word))
-		return nil
-	})
+	err := wordDB.Batch(func(tx *bolt.Tx) error {
 
-	if returnByte == nil {
-		created = true
+		wordToIDBuc := tx.Bucket([]byte("word_to_id"))
+		returnByte := wordToIDBuc.Get([]byte(word))
 
-		wordDB.Batch(func(tx *bolt.Tx) error {
+		if returnByte == nil {
+			created = true
 			idToWordBuc := tx.Bucket([]byte("id_to_word"))
-			id, _ = idToWordBuc.NextSequence()
+			nextID, _ := idToWordBuc.NextSequence()
+			id = int64(nextID)
 
 			err := idToWordBuc.Put(encode64Bit(id), []byte(word))
 			if err != nil {
 				return err
 			}
 
-			wordToIDBuc := tx.Bucket([]byte("word_to_id"))
 			err = wordToIDBuc.Put([]byte(word), encode64Bit(id))
-
 			return err
-		})
-	} else {
+		}
+
 		id = decode64Bit(returnByte)
+		return nil
+	})
+
+	if err != nil {
+		fmt.Println(err)
+		panic(err)
+	}
+
+	return
+}
+
+//BatchGetIDWithWord returns a slice of unique ids for each word. If the record does not exist, it will create one.
+func BatchGetIDWithWord(word []string) (id []int64, created []bool) {
+	id = make([]int64, len(word))
+	created = make([]bool, len(word))
+
+	err := wordDB.Batch(func(tx *bolt.Tx) error {
+
+		for i, s := range word {
+			wordToIDBuc := tx.Bucket([]byte("word_to_id"))
+			returnByte := wordToIDBuc.Get([]byte(s))
+
+			if returnByte == nil {
+				created[i] = true
+				idToWordBuc := tx.Bucket([]byte("id_to_word"))
+				nextID, _ := idToWordBuc.NextSequence()
+				id[i] = int64(nextID)
+				//fmt.Printf("%q %v\n", s, id[i])
+
+				err := idToWordBuc.Put(encode64Bit(id[i]), []byte(s))
+				if err != nil {
+					return err
+				}
+
+				err = wordToIDBuc.Put([]byte(s), encode64Bit(id[i]))
+				return err
+			}
+
+			id[i] = decode64Bit(returnByte)
+			//fmt.Printf("%q %v\n", s, id[i])
+		}
+		return nil
+	})
+
+	if err != nil {
+		fmt.Println(err)
+		panic(err)
 	}
 
 	return
 }
 
 //GetWordWithID returns the id given the word, returns empty string if not found
-func GetWordWithID(id uint64) (s string) {
+func GetWordWithID(id int64) (s string) {
 	var returnByte []byte
 	wordDB.View(func(tx *bolt.Tx) error {
 		bucket := tx.Bucket([]byte("id_to_word"))

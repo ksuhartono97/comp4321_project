@@ -4,22 +4,25 @@ import (
 	"fmt"
 	"io/ioutil"
 	"net/http"
+	"net/url"
 	"strings"
 	"sync"
 	"time"
 
+	"../../../golang.org/x/net/html"
+
 	"../../silver-rush/database"
 	"../../silver-rush/indexer"
-	"golang.org/x/net/html"
 )
 
 type UrlData struct {
 	sourceUrl    string
+	sourceID     int64
 	foundUrl     []string
 	pageTitle    string
 	pageSize     int
 	rawHTML      string
-	lastModified string
+	lastModified int64
 }
 
 var exploredPages = 0
@@ -36,8 +39,21 @@ func getHref(t html.Token) (ok bool, href string) {
 	return
 }
 
+func fixURL(href, base string) string {
+	uri, err := url.Parse(href)
+	if err != nil {
+		return ""
+	}
+	baseURL, err := url.Parse(base)
+	if err != nil {
+		return ""
+	}
+	uri = baseURL.ResolveReference(uri)
+	return uri.String()
+}
+
 // Extract all required info from a given webpage
-func crawl(src string, ch chan UrlData, chFinished chan bool) {
+func crawl(src string, srcID int64, ch chan UrlData, chFinished chan bool) {
 	//Retrieve the webpage
 	resp, err := http.Get(src)
 
@@ -51,7 +67,7 @@ func crawl(src string, ch chan UrlData, chFinished chan bool) {
 		return
 	}
 
-	urlResult := UrlData{sourceUrl: src}
+	urlResult := UrlData{sourceUrl: src, sourceID: srcID}
 
 	b := resp.Body
 	defer b.Close() // close Body when the function returns
@@ -79,14 +95,27 @@ func crawl(src string, ch chan UrlData, chFinished chan bool) {
 	if err != nil {
 		fmt.Println("Error while downloading head of", src)
 	} else {
+		timeString := ""
 		for k, v := range response.Header {
 			if k == "Last-Modified" {
-				urlResult.lastModified = v[0]
+				timeString = v[0]
+				if err != nil {
+					fmt.Println(err)
+				}
 			}
 		}
-		if urlResult.lastModified == "" {
-			ti := time.Now().UTC().Format("Mon, 02 Jan 2006 15:04:05 GMT")
-			urlResult.lastModified = ti
+		if timeString == "" {
+			urlResult.lastModified = time.Now().UTC().Unix()
+		} else {
+			layout := "Mon, 02 Jan 2006 15:04:05 GMT"
+			t, err := time.Parse(layout, timeString)
+
+			if err != nil {
+				fmt.Println("Time Parsing error")
+				panic(err)
+			}
+
+			urlResult.lastModified = t.Unix()
 		}
 	}
 
@@ -99,6 +128,7 @@ func crawl(src string, ch chan UrlData, chFinished chan bool) {
 		case tt == html.ErrorToken:
 			// End of the document, we're done, increment explored pages and return result
 			ch <- urlResult
+			feedToIndexer(src, srcID, &urlResult)
 			exploredPages++
 			return
 		case tt == html.StartTagToken:
@@ -112,9 +142,11 @@ func crawl(src string, ch chan UrlData, chFinished chan bool) {
 					continue
 				}
 
+				//Fix the URL into a absolute and valid form
+				url = fixURL(url, src)
 				// Make sure the url begins in http**
 				hasProto := strings.Index(url, "http") == 0
-				if hasProto {
+				if hasProto && len(url) > 0 {
 					urlResult.foundUrl = append(urlResult.foundUrl, url)
 				}
 			} else if t.Data == "title" {
@@ -139,29 +171,27 @@ func crawl(src string, ch chan UrlData, chFinished chan bool) {
 	}
 }
 
-func feedToIndexer(url string, urlData *UrlData) {
+func feedToIndexer(thisURL string, thisID int64, urlData *UrlData) {
 	//Feeding to the indexer
-	layout := "Mon, 02 Jan 2006 15:04:05 MST"
-
-	t, err := time.Parse(layout, urlData.lastModified)
-	if err != nil {
-		fmt.Println(err)
-	}
-
 	var wg sync.WaitGroup
-	wg.Add(len(urlData.foundUrl) + 2)
-	var parentID, thisID uint64
-	var childID []uint64
+	wg.Add(len(urlData.foundUrl))
+	var parentID int64
+	var childID []int64
 
-	go func() {
-		defer wg.Done()
-		parentID, _ = database.GetURLID(urlData.sourceUrl)
-	}()
+	//TODO: Actually put parent id here
+	//Parent ID should be passed from the parent, no more database access here
 
-	go func() {
-		defer wg.Done()
-		thisID, _ = database.GetURLID(url)
-	}()
+	// go func() {
+	// 	defer wg.Done()
+	// 	parentID, _ = database.GetURLID(urlData.sourceUrl)
+	// }()
+
+	// go func() {
+	// 	defer wg.Done()
+	// 	thisID, _ = database.GetURLID(url)
+	// }()
+
+	parentID = thisID
 
 	for _, u := range urlData.foundUrl {
 		go func(url string) {
@@ -172,9 +202,8 @@ func feedToIndexer(url string, urlData *UrlData) {
 	}
 
 	wg.Wait()
-	indexer.Feed(thisID, urlData.rawHTML, uint32(t.Unix()), urlData.pageSize, parentID, childID, urlData.pageTitle)
-	fmt.Println("Feeding to the indxer: ", thisID)
-	fmt.Printf("\nTime: %v\nSize: %v\nParent: %v\nChild: %v\nTitle: %v\n", uint32(t.Unix()), urlData.pageSize, parentID, childID, urlData.pageTitle)
+	indexer.Feed(thisID, urlData.rawHTML, urlData.lastModified, int32(urlData.pageSize), parentID, childID, urlData.pageTitle)
+	fmt.Printf("\nTime: %v\nSize: %v\nParent: %v\nChild: %v\nTitle: %v\n", urlData.lastModified, urlData.pageSize, parentID, childID, urlData.pageTitle)
 }
 
 //Main search function
@@ -187,12 +216,19 @@ func PrintLinks(links ...string) {
 	chFinished := make(chan bool)
 
 	// Kick off the crawl process (concurrently)
+	skipped := 0
 	for _, url := range seedUrls {
-		go crawl(url, chUrls, chFinished)
+		urlID, _ := database.GetURLID(url)
+		size := database.GetTermsInDoc(urlID)
+		if len(size) == 0 {
+			go crawl(url, urlID, chUrls, chFinished)
+		} else {
+			skipped++
+		}
 	}
 
 	// Subscribe to both channels
-	for c := 0; c < len(seedUrls); {
+	for c := 0; c < len(seedUrls)-skipped; {
 		select {
 		case url := <-chUrls:
 			foundUrls[url.sourceUrl] = url
@@ -213,8 +249,6 @@ func PrintLinks(links ...string) {
 		//fmt.Println("Page Title: " + url.pageTitle)
 		//fmt.Println("Page Size: ", url.pageSize)
 		//fmt.Println("Last Modified: " + url.lastModified)
-
-		feedToIndexer(seedUrls[0], &url)
 
 		// Calculate remaining URLs needed
 		diff := 30 - exploredPages
