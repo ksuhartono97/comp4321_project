@@ -1,5 +1,4 @@
 [submodule "src/golang.org/x/net"]
-	url = git@github.com:golang/net.git
-	path = src/golang.org/x/net
+	url = https://github.com/golang/net
 [submodule "src/github.com/boltdb/bolt"]
-	url = https://github.com/boltdb/bolt
+url = https://github.com/boltdb/bolt
