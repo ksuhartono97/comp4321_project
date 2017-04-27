@@ -1,13 +1,13 @@
 package webcrawler
 
 import (
-	"fmt"
 	"io/ioutil"
 	"net/http"
 	"net/url"
 	"strings"
 	"sync"
 	"time"
+	"fmt"
 
 	"../../../golang.org/x/net/html"
 
@@ -26,17 +26,7 @@ type UrlData struct {
 }
 
 var exploredPages = 0
-var crawledUrls []string
-
-//Helper function to check if a string is in a slice
-func StringInSlice(a string, list []string) bool {
-    for _, b := range list {
-        if b == a {
-            return true
-        }
-    }
-    return false
-}
+var crawledUrls map[string]bool = make(map[string]bool)
 
 // Helper function to pull the href attribute from a Token
 func getHref(t html.Token) (ok bool, href string) {
@@ -224,10 +214,11 @@ func CrawlLinks(links ...string) {
 
 	//Safety check to ensure we don't recrawls links
 	for _, url := range links {
-		temp := StringInSlice(url, crawledUrls)
-		fmt.Println(temp)
-		if !temp  {
-			crawledUrls = append(crawledUrls, url)
+		if crawledUrls[url] {
+    fmt.Println("Already been here.")
+		continue
+		} else {
+			crawledUrls[url] = true;
 			seedUrls = append(seedUrls, url)
 		}
 	}
