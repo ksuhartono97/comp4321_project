@@ -28,6 +28,16 @@ type UrlData struct {
 var exploredPages = 0
 var crawledUrls []string
 
+//Helper function to check if a string is in a slice
+func StringInSlice(a string, list []string) bool {
+    for _, b := range list {
+        if b == a {
+            return true
+        }
+    }
+    return false
+}
+
 // Helper function to pull the href attribute from a Token
 func getHref(t html.Token) (ok bool, href string) {
 	// Iterate over all of the Token's attributes until we find an "href"
@@ -210,10 +220,16 @@ func feedToIndexer(thisURL string, thisID int64, urlData *UrlData) {
 //Main search function
 func CrawlLinks(links ...string) {
 	foundUrls := make(map[string]UrlData)
-	seedUrls := links
+	var seedUrls []string
 
-	for i, lur := range seedUrls {
-		
+	//Safety check to ensure we don't recrawls links
+	for _, url := range links {
+		temp := StringInSlice(url, crawledUrls)
+		fmt.Println(temp)
+		if !temp  {
+			crawledUrls = append(crawledUrls, url)
+			seedUrls = append(seedUrls, url)
+		}
 	}
 
 	// Channels
