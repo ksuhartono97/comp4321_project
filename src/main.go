@@ -15,7 +15,7 @@ func main() {
 	defer database.CloseAllDatabase()
 
 	webcrawler.CrawlerInit()
-	webcrawler.PrintLinks("http://www.cse.ust.hk/")
+	webcrawler.CrawlLinks("http://www.cse.ust.hk/")
 
 	elapsed := time.Since(start)
 	log.Printf("Took %s\n", elapsed)

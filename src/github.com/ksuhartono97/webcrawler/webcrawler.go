@@ -26,6 +26,7 @@ type UrlData struct {
 }
 
 var exploredPages = 0
+var crawledUrls []string
 
 // Helper function to pull the href attribute from a Token
 func getHref(t html.Token) (ok bool, href string) {
@@ -207,9 +208,13 @@ func feedToIndexer(thisURL string, thisID int64, urlData *UrlData) {
 }
 
 //Main search function
-func PrintLinks(links ...string) {
+func CrawlLinks(links ...string) {
 	foundUrls := make(map[string]UrlData)
 	seedUrls := links
+
+	for i, lur := range seedUrls {
+		
+	}
 
 	// Channels
 	chUrls := make(chan UrlData)
@@ -263,7 +268,7 @@ func PrintLinks(links ...string) {
 		urlArray := url.foundUrl[:toBeCalled]
 
 		if toBeCalled > 0 {
-			PrintLinks(urlArray...)
+			CrawlLinks(urlArray...)
 		}
 	}
 
