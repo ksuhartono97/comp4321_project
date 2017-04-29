@@ -6,6 +6,18 @@ import (
 	"net/http"
 )
 
+type UrlData struct {
+	sourceUrl    string
+	sourceID     int64
+	foundUrl     []string
+	pageTitle    string
+	pageSize     int
+	rawHTML      string
+	lastModified int64
+}
+
+//var queryResult [1]UrlData = {UrlData{sourceUrl: "google.com", sourceID: "213", pageTitle:"Choco", pageSize:123, rawHtml:"lul", lastModified:"Yesterday"}}
+
 func queryHandler(w http.ResponseWriter, r *http.Request) {
 	fmt.Println("method:", r.Method) //get request method
 	if r.Method == "GET" {
