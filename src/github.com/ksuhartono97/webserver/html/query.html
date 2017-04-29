@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>COMP 4321 Search Engine Project</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="resources/query.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  </head>
+
+  <body>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-12">
+          <h1 align="center" class="whiteText">COMP 4321 Search Engine</h1>
+        </div>
+      </div>
+    </div>
+    <div class="container searchContainer theme-showcase">
+        <form action="/query" method="post" class="searchBlock">
+            <div class="row">
+              <div class="col-sm-12" align="center">
+                <h3 class="whiteText">Enter Query Here:</h3>
+              </div>
+            </div>
+            <input type="text" name="searchInput" class="searchBar"/>
+            <input type="submit" value="Search" class="searchButton">
+        </form>
+    </div>
+  </body>
+
+</html>

@@ -1,0 +1,35 @@
+.vertical-align {
+  display: flex;
+  flex-direction: row;
+}
+
+.searchContainer {
+  position: relative;
+  height: 55vh;
+}
+
+.searchBlock {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  transform: translateX(21%);
+}
+
+.searchBar {
+  height: 6%;
+  height: 6vh;
+  width: 750px;
+}
+
+.searchButton {
+  height:6%;
+  height:6vh;
+}
+
+.whiteText {
+  color:white;
+}
+
+body {
+    background-color: #222;;
+}
