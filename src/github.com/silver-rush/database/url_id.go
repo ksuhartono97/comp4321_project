@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"os"
 
-	"../../boltdb/bolt"
+	"github.com/boltdb/bolt"
 )
 
 var urlDB *bolt.DB
@@ -23,9 +23,15 @@ func OpenURLDB() {
 			panic(fmt.Errorf("Create URL to id bucket error: %s", err))
 		}
 
-		_, err = tx.CreateBucketIfNotExists([]byte("id_to_url"))
+		idToURLBuc, err := tx.CreateBucketIfNotExists([]byte("id_to_url"))
 		if err != nil {
 			panic(fmt.Errorf("Create id to URL bucket error: %s", err))
+		}
+
+		totalDocByte := idToURLBuc.Get(encode64Bit(0))
+		if totalDocByte == nil {
+			//Init the total documents count if not done so
+			idToURLBuc.Put(encode64Bit(0), encode32Bit(0))
 		}
 
 		return nil
@@ -42,28 +48,42 @@ func GetURLID(url string) (id int64, created bool) {
 	id = 0
 	created = false
 
-	urlDB.Batch(func(tx *bolt.Tx) error {
+	urlDB.View(func(tx *bolt.Tx) error {
 		urlToIDBuc := tx.Bucket([]byte("url_to_id"))
 		returnByte := urlToIDBuc.Get([]byte(url))
 
 		if returnByte == nil {
+			//id not found. Need to create one.
 			created = true
+		} else {
+			//ID found.
+			id = decode64Bit(returnByte)
+		}
+		return nil
+	})
+
+	if created {
+		urlDB.Batch(func(tx *bolt.Tx) error {
+			urlToIDBuc := tx.Bucket([]byte("url_to_id"))
 			idToURLBuc := tx.Bucket([]byte("id_to_url"))
 			nextID, _ := idToURLBuc.NextSequence()
 			id = int64(nextID)
 
-			err := idToURLBuc.Put(encode64Bit(id), []byte(url))
+			//Add one to the total document count (stored at 0th in idToURLBuc)
+			err := idToURLBuc.Put(encode64Bit(0), encode32Bit(decode32Bit(idToURLBuc.Get(encode64Bit(0)))+1))
+			if err != nil {
+				return err
+			}
+
+			err = idToURLBuc.Put(encode64Bit(id), []byte(url))
 			if err != nil {
 				return err
 			}
 
 			err = urlToIDBuc.Put([]byte(url), encode64Bit(id))
 			return err
-		}
-
-		id = decode64Bit(returnByte)
-		return nil
-	})
+		})
+	}
 
 	return
 }

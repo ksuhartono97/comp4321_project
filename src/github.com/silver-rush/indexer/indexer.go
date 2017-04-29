@@ -30,20 +30,18 @@ func Feed(docID int64, raw string, lastModify int64, size int32, parent int64, c
 	}
 
 	var wg sync.WaitGroup
-	wg.Add(len(wordMap) + 1)
+	wg.Add(2)
 	//Start goroutines to add words to the posting list
-	for wordID, p := range wordMap {
-		go func(wordID int64, p database.Posting) {
-			defer wg.Done()
-			database.InsertIntoPostingList(wordID, docID, &p)
-		}(wordID, p)
-	}
+	go func(records map[int64]database.Posting) {
+		defer wg.Done()
+		database.BatchInsertIntoPostingList(docID, records)
+	}(wordMap)
 
 	go func() {
 		defer wg.Done()
 		var d database.DocInfo
 
-		//TODO: To be removed
+		//Make sure the children are unique
 		childMap := make(map[int64]bool)
 		var uniqueChild []int64
 		for _, id := range child {
@@ -115,6 +113,7 @@ func iterateNode(node *html.Node, wordMap map[int64]database.Posting, pos int32)
 		if len(wordList) != 0 {
 			//Collect word id using the word
 			idList, _ := database.BatchGetIDWithWord(wordList)
+			//fmt.Printf("%v\n", idList)
 			for _, id := range idList {
 				p := wordMap[id]
 				p.TermFreq++

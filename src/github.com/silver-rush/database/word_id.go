@@ -23,10 +23,13 @@ func OpenWordDB() {
 			panic(fmt.Errorf("Create word to id bucket error: %s", err))
 		}
 
-		_, err = tx.CreateBucketIfNotExists([]byte("id_to_word"))
+		idToWordBuc, err := tx.CreateBucketIfNotExists([]byte("id_to_word"))
 		if err != nil {
 			panic(fmt.Errorf("Create id to word bucket error: %s", err))
 		}
+
+		//ID zero is reserved
+		idToWordBuc.Put(encode64Bit(0), encode32Bit(0))
 
 		return nil
 	})
@@ -70,7 +73,6 @@ func GetIDWithWord(word string) (id int64, created bool) {
 		fmt.Println(err)
 		panic(err)
 	}
-
 	return
 }
 
@@ -79,7 +81,7 @@ func BatchGetIDWithWord(word []string) (id []int64, created []bool) {
 	id = make([]int64, len(word))
 	created = make([]bool, len(word))
 
-	err := wordDB.Batch(func(tx *bolt.Tx) error {
+	err := wordDB.Update(func(tx *bolt.Tx) error {
 
 		for i, s := range word {
 			wordToIDBuc := tx.Bucket([]byte("word_to_id"))
@@ -90,7 +92,7 @@ func BatchGetIDWithWord(word []string) (id []int64, created []bool) {
 				idToWordBuc := tx.Bucket([]byte("id_to_word"))
 				nextID, _ := idToWordBuc.NextSequence()
 				id[i] = int64(nextID)
-				//fmt.Printf("%q %v\n", s, id[i])
+				//fmt.Printf("New ID: %v %v\n", word[i], nextID)
 
 				err := idToWordBuc.Put(encode64Bit(id[i]), []byte(s))
 				if err != nil {
@@ -98,11 +100,13 @@ func BatchGetIDWithWord(word []string) (id []int64, created []bool) {
 				}
 
 				err = wordToIDBuc.Put([]byte(s), encode64Bit(id[i]))
-				return err
+				if err != nil {
+					return err
+				}
+			} else {
+				id[i] = decode64Bit(returnByte)
+				//fmt.Printf("Old ID: %v %v\n", word[i], id[i])
 			}
-
-			id[i] = decode64Bit(returnByte)
-			//fmt.Printf("%q %v\n", s, id[i])
 		}
 		return nil
 	})
@@ -111,14 +115,13 @@ func BatchGetIDWithWord(word []string) (id []int64, created []bool) {
 		fmt.Println(err)
 		panic(err)
 	}
-
 	return
 }
 
 //GetWordWithID returns the id given the word, returns empty string if not found
 func GetWordWithID(id int64) (s string) {
 	var returnByte []byte
-	wordDB.View(func(tx *bolt.Tx) error {
+	wordDB.Batch(func(tx *bolt.Tx) error {
 		bucket := tx.Bucket([]byte("id_to_word"))
 		returnByte = bucket.Get(encode64Bit(id))
 		return nil
