@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"html/template"
 	"net/http"
-	"io/ioutil"
 	"strings"
 )
 
@@ -19,23 +18,24 @@ type UrlData struct {
 }
 
 //var queryResult [1]UrlData = {UrlData{sourceUrl: "google.com", sourceID: "213", pageTitle:"Choco", pageSize:123, rawHtml:"lul", lastModified:"Yesterday"}}
-var resultString = "Here is a string"
+var resultString = "Here is a string\n Thomas \n Dong \n Doo \n Dah"
 
 type Page struct {
-	Title string
 	Body  []byte
+	StringArr []string
 }
 
-func (p *Page) save() error {
-	filename := p.Title + ".txt"
-	return ioutil.WriteFile(filename, p.Body, 0600)
-}
 
 func loadResult() (*Page) {
 	// filename := "resources/" + title + ".txt"
 	body := []byte(resultString)
 	fmt.Println(body);
-	return &Page{Title: "result", Body: body}
+	q := strings.Split(resultString, "\n")
+	// p.StringArr = q
+	for _, content := range q {
+		fmt.Println(content)
+	}
+	return &Page{Body: body, StringArr:q}
 }
 
 func queryHandler(w http.ResponseWriter, r *http.Request) {

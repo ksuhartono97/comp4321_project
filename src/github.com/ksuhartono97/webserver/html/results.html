@@ -18,7 +18,9 @@
     <div class="row">
       <div class="col-sm-12">
         <div id="resultDisplay">
-          {{printf "%s" .Body}}
+          <!-- {{printf "%s" .Body}} -->
+          {{range .StringArr}}{{.}}<br>{{end}}
+          <br>
         </div>
       </div>
     </div>
