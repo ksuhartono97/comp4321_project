@@ -26,7 +26,7 @@ func resultHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func StartWebServer() {
-	// http.Handle("/", http.FileServer(http.Dir("./html")))
+	http.Handle("/resources/", http.StripPrefix("/resources/", http.FileServer(http.Dir("resources"))))
 	http.HandleFunc("/query", queryHandler)
 	http.HandleFunc("/result", resultHandler)
 	http.ListenAndServe(":8080", nil)

@@ -8,3 +8,6 @@ Sorry for any extra troubles caused by this procedure.
 
 The database file are located in /src/db/
 The spider_result.txt is in /src/
+
+To open the website, after doing "go run main.go" in /src, open a
+web browser and go to http://localhost:8080/query
