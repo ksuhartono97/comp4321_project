@@ -62,15 +62,10 @@ func decodePosting(b []byte) *Posting {
 	return &p
 }
 
-//InsertIntoPostingList a record into the posting list of the given word ID, it will also update the forward list
-func InsertIntoPostingList(wordID int64, docID int64, p *Posting) {
+//BatchInsertIntoPostingList insert records in batch
+func BatchInsertIntoPostingList(docID int64, records map[int64]Posting) {
 	err := postingDB.Batch(func(tx *bolt.Tx) error {
 		allPostingBucket := tx.Bucket([]byte("posting"))
-		postingBucket, err := allPostingBucket.CreateBucketIfNotExists(encode64Bit(wordID))
-		if err != nil {
-			fmt.Println("Create Posting bucket error.")
-			return err
-		}
 
 		allForwardBucket := tx.Bucket([]byte("forward"))
 		forwardBucket, err := allForwardBucket.CreateBucketIfNotExists(encode64Bit(docID))
@@ -79,16 +74,65 @@ func InsertIntoPostingList(wordID int64, docID int64, p *Posting) {
 			return err
 		}
 
-		err = postingBucket.Put(encode64Bit(docID), encodePosting(p))
-		if err != nil {
-			fmt.Println(err)
-			return err
-		}
+		for wordID, posting := range records {
+			postingBucket, err := allPostingBucket.CreateBucketIfNotExists(encode64Bit(wordID))
+			if err != nil {
+				return err
+			}
 
-		err = forwardBucket.Put(encode64Bit(wordID), []byte{0})
-		if err != nil {
-			fmt.Println(err)
-			return err
+			docAlreadyExist := postingBucket.Get(encode64Bit(docID))
+			if docAlreadyExist == nil {
+				//If the document is not in the posting list before, increase DF by 1
+				totalDFByte := postingBucket.Get(encode64Bit(0))
+				var totalDF int32
+				if totalDFByte != nil {
+					//totalTerms stores the current total document frequency
+					totalDF = decode32Bit(totalDFByte)
+				} else {
+					totalDF = 0
+				}
+
+				//Insert the total DF back
+				err = postingBucket.Put(encode64Bit(0), encode32Bit(totalDF+1))
+				if err != nil {
+					return err
+				}
+			}
+
+			err = postingBucket.Put(encode64Bit(docID), encodePosting(&posting))
+			if err != nil {
+				return err
+			}
+
+			termAlreadyExist := forwardBucket.Get(encode64Bit(wordID))
+			if termAlreadyExist == nil {
+				//Increase totalTerms by 1 if the term was not indexed for this document before
+				totalTermsByte := forwardBucket.Get(encode64Bit(0))
+				//fmt.Printf("%v\n", totalTermsByte)
+				var totalTerms int32
+				if totalTermsByte != nil {
+					//fmt.Printf("Added \n")
+					//totalTF stores the current total number of terms in the document
+					totalTerms = decode32Bit(totalTermsByte)
+				} else {
+					//fmt.Printf("Zero \n")
+					totalTerms = 0
+				}
+
+				//Insert the total DF back
+				//fmt.Printf("Put %v \n", encode32Bit(totalTerms+1))
+				err = forwardBucket.Put(encode64Bit(0), encode32Bit(totalTerms+1))
+
+				if err != nil {
+					return err
+				}
+			}
+
+			//fmt.Printf("Word Put %v \n", encode64Bit(wordID))
+			err = forwardBucket.Put(encode64Bit(wordID), []byte{0})
+			if err != nil {
+				return err
+			}
 		}
 
 		return nil
@@ -131,7 +175,7 @@ func GetTermsInDoc(docID int64) []int64 {
 		}
 
 		if err := forwardBucket.ForEach(func(k, v []byte) error {
-			//Skipping the zeroth index... which is weird for some reason?
+			//The zeroth index has special meaning.
 			id := decode64Bit(k)
 			if id != 0 {
 				list = append(list, id)
