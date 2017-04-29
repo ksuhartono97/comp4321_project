@@ -5,7 +5,7 @@ import (
 	"time"
 
 	"./github.com/ksuhartono97/webcrawler"
-
+	"./github.com/ksuhartono97/webserver"
 	"./github.com/silver-rush/database"
 )
 
@@ -19,4 +19,6 @@ func main() {
 
 	elapsed := time.Since(start)
 	log.Printf("Took %s\n", elapsed)
+
+	webserver.StartWebServer()
 }

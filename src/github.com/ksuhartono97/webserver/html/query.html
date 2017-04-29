@@ -17,12 +17,29 @@
           <h1 align="center">COMP 4321 Search Engine</h1>
         </div>
       </div>
-      <div class="row">
+      <!-- <div class="row">
         <div class="col-sm-12">
           <input type="search" id="submitQuery" placeholder="Input Query Here">
         </div>
+      </div> -->
+    </div>
+    <!-- <div class="jumbotron vertical-align"> -->
+    <div class="container">
+      <div class="row vertical-align">
+        <div class="col-sm-2">
+
+        </div>
+        <form action="/query" method="post">
+          <!-- <div class="col-sm-8"> -->
+            <input type="text" name="searchInput" class="searchBar"/>
+          <!-- </div> -->
+          <!-- <div class="col-sm-2"> -->
+            <input type="submit" value="Search" class="searchButton">
+          <!-- </div> -->
+        </form>
       </div>
     </div>
+    <!-- </div> -->
   </body>
 
 </html>

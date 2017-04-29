@@ -1,0 +1,15 @@
+.vertical-align {
+  display: flex;
+  flex-direction: row;
+}
+
+.searchBar {
+  height: 6%;
+  height: 6vh;
+  width: 750px;
+}
+
+.searchButton {
+  height:6%;
+  height:6vh;
+}
