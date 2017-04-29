@@ -11,14 +11,15 @@ import (
 
 func main() {
 	start := time.Now()
-	database.OpenAllDatabase()
-	defer database.CloseAllDatabase()
 
-	webcrawler.CrawlerInit()
-	webcrawler.CrawlLinks("http://www.cse.ust.hk/")
-
-	elapsed := time.Since(start)
-	log.Printf("Took %s\n", elapsed)
+	go func() {
+		database.OpenAllDatabase()
+		defer database.CloseAllDatabase()
+		webcrawler.CrawlerInit()
+		webcrawler.CrawlLinks("http://www.cse.ust.hk/")
+		elapsed := time.Since(start)
+		log.Printf("Took %s\n", elapsed)
+	}()
 
 	webserver.StartWebServer()
 }
