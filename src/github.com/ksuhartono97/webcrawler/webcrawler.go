@@ -1,13 +1,13 @@
 package webcrawler
 
 import (
-	"fmt"
 	"io/ioutil"
 	"net/http"
 	"net/url"
 	"strings"
 	"sync"
 	"time"
+	"fmt"
 
 	"../../../golang.org/x/net/html"
 
@@ -26,6 +26,7 @@ type UrlData struct {
 }
 
 var exploredPages = 0
+var crawledUrls map[string]bool = make(map[string]bool)
 
 // Helper function to pull the href attribute from a Token
 func getHref(t html.Token) (ok bool, href string) {
@@ -207,9 +208,20 @@ func feedToIndexer(thisURL string, thisID int64, urlData *UrlData) {
 }
 
 //Main search function
-func PrintLinks(links ...string) {
+func CrawlLinks(links ...string) {
 	foundUrls := make(map[string]UrlData)
-	seedUrls := links
+	var seedUrls []string
+
+	//Safety check to ensure we don't recrawls links
+	for _, url := range links {
+		if crawledUrls[url] {
+    fmt.Println("Already been here.")
+		continue
+		} else {
+			crawledUrls[url] = true;
+			seedUrls = append(seedUrls, url)
+		}
+	}
 
 	// Channels
 	chUrls := make(chan UrlData)
@@ -263,7 +275,7 @@ func PrintLinks(links ...string) {
 		urlArray := url.foundUrl[:toBeCalled]
 
 		if toBeCalled > 0 {
-			PrintLinks(urlArray...)
+			CrawlLinks(urlArray...)
 		}
 	}
 
