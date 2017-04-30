@@ -54,19 +54,107 @@ func RetrieveRankedDocID(query string) []int64 {
 					fmt.Printf("Do not exist.\n")
 					//Zero term weight
 				} else {
-					docIDCollection, termFreqCollection, documentFreq := database.GetDocOfTerm(termID)
+					docIDCollection, postingCollection, documentFreq := database.GetDocOfTerm(termID)
 					inverseDocFreq := math.Log2(float64(totalDoc) / float64(documentFreq))
 
 					for i := 0; i < int(documentFreq); i++ {
 						//This result is not divided by max tf yet. Will do afterwards.
-						tfIdfChannel <- tfIdfStruct{docIDCollection[i], float64(termFreqCollection[i]) * inverseDocFreq}
+						tfIdfChannel <- tfIdfStruct{docIDCollection[i], float64(postingCollection[i].TermFreq) * inverseDocFreq}
 					}
 				}
 				doneChannel <- true
 			}(group[0])
 		} else {
 			//Phrase search.
-			doneChannel <- true
+			go func(group []string) {
+				termIDSlice := make([]int64, len(group))
+				allExist := true
+				var minDF int32
+				var indexWithMinDF int
+				allDocIDCollection := make([][]int64, len(group))
+				allPostingCollection := make([][]*database.Posting, len(group))
+				for i, term := range group {
+					id, exist := database.GetIDWithWordDoNotCreate(term)
+					if !exist {
+						//If one of the term in the query does not exist, give up immediately
+						allExist = false
+						break
+					}
+					termIDSlice[i] = id
+					docIDCollection, postingCollection, documentFreq := database.GetDocOfTerm(id)
+					allDocIDCollection[i] = docIDCollection
+					allPostingCollection[i] = postingCollection
+					//Assign the first term to be the min. DF first no matter what
+					if i == 0 || documentFreq < minDF {
+						minDF = documentFreq
+						indexWithMinDF = i
+					}
+				}
+
+				//This specifies the amount of offset the term should have in the phrase
+				positionOffset := make([]int, len(group))
+				for i := range group {
+					positionOffset[i] = i - indexWithMinDF
+				}
+
+				progressPointers := make([]int, len(group))
+				if allExist {
+					dfOfPhrase := 0
+					tfMap := make(map[int64]int)
+					for i, docID := range allDocIDCollection[indexWithMinDF] {
+						tfInDoc := 0
+						for _, startPos := range allPostingCollection[indexWithMinDF][i].Positions {
+							documentPossible := true
+							for j := range group {
+								positionPossible := false
+								if j != indexWithMinDF {
+									for (len(allDocIDCollection[j]) < progressPointers[j]) && (allDocIDCollection[j][progressPointers[j]] < docID) {
+										//Skip until the end or overshoot
+										progressPointers[j]++
+									}
+
+									if len(allDocIDCollection[j]) < progressPointers[j] && (allDocIDCollection[j][progressPointers[j]] == docID) {
+										//Look into the position if docID matches
+										for _, tarPos := range allPostingCollection[progressPointers[j]][i].Positions {
+											if int(tarPos) == int(startPos)+positionOffset[j] {
+												positionPossible = true
+												break
+											}
+										}
+										//If one of the term does not satisfy, go search for next position
+										if !positionPossible {
+											break
+										}
+									} else {
+										//This documnet is not possible to have a match. Skip the rest of the positions.
+										documentPossible = false
+									}
+								}
+								if !documentPossible {
+									//Go to next docID
+									break
+								}
+
+								if positionPossible {
+									//If position is still possible after all searches, it exists for real
+									tfInDoc++
+								}
+							}
+						}
+						if tfInDoc != 0 {
+							tfMap[docID] = tfInDoc
+							dfOfPhrase++
+						}
+					}
+
+					//After everything is computed, get tfidf (as we can only get DF after all searches)
+					inverseDocFreq := math.Log2(float64(totalDoc) / float64(dfOfPhrase))
+					for k, v := range tfMap {
+						tfIdfChannel <- tfIdfStruct{k, float64(v) * inverseDocFreq}
+					}
+				}
+				doneChannel <- true
+			}(group)
 		}
 	}
 

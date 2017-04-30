@@ -243,7 +243,7 @@ func GetMaxTFOfDoc(docID int64) int32 {
 }
 
 //GetDocOfTerm returns a collection of documents containing the termID, together with their term frequency
-func GetDocOfTerm(termID int64) (docIDCollection []int64, termFreqCollection []int32, total int32) {
+func GetDocOfTerm(termID int64) (docIDCollection []int64, postingCollection []*Posting, total int32) {
 	postingDB.View(func(tx *bolt.Tx) error {
 		allPostingBuc := tx.Bucket([]byte("posting"))
 		specifiedPostingBuc := allPostingBuc.Bucket(encode64Bit(termID))
@@ -251,7 +251,7 @@ func GetDocOfTerm(termID int64) (docIDCollection []int64, termFreqCollection []i
 		//Get the total document count in advance to save reallocation
 		total = decode32Bit(specifiedPostingBuc.Get(encode64Bit(0)))
 		docIDCollection = make([]int64, total)
-		termFreqCollection = make([]int32, total)
+		postingCollection = make([]*Posting, total)
 		docCount := 0
 
 		//Iterate through all the postings
@@ -260,7 +260,7 @@ func GetDocOfTerm(termID int64) (docIDCollection []int64, termFreqCollection []i
 			if id != 0 {
 				docIDCollection[docCount] = id
 				posting := decodePosting(v)
-				termFreqCollection[docCount] = posting.TermFreq
+				postingCollection[docCount] = posting
 				docCount++
 			}
 			return nil
