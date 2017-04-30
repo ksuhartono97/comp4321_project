@@ -31,7 +31,6 @@ type CrawlObject struct {
 }
 
 var exploredPages = 0
-// var crawledUrls map[string]bool = make(map[string]bool)
 
 // Helper function to pull the href attribute from a Token
 func getHref(t html.Token) (ok bool, href string) {
@@ -45,6 +44,7 @@ func getHref(t html.Token) (ok bool, href string) {
 	return
 }
 
+//Fixes the URL to an absolute URL
 func fixURL(href, base string) string {
 	uri, err := url.Parse(href)
 	if err != nil {
@@ -58,6 +58,7 @@ func fixURL(href, base string) string {
 	return uri.String()
 }
 
+//Gets the last modified time of a string 
 func getLastModifiedTime(href string) (int64, error) {
 	currTime := time.Now().UTC().Unix()
 	response, err := http.Head(href)
@@ -135,20 +136,6 @@ func crawl(src string, srcID int64, ch chan UrlData, chFinished chan bool) {
 	}
 
 	urlResult.lastModified = timeString
-
-	// if timeString == "" {
-	// 	urlResult.lastModified = time.Now().UTC().Unix()
-	// } else {
-	// 	layout := "Mon, 02 Jan 2006 15:04:05 GMT"
-	// 	t, err := time.Parse(layout, timeString)
-	//
-	// 	if err != nil {
-	// 		fmt.Println("Time Parsing error")
-	// 		panic(err)
-	// 	}
-	//
-	// 	urlResult.lastModified = t.Unix()
-	// }
 
 	z := html.NewTokenizer(b)
 
@@ -242,20 +229,9 @@ func CrawlLinks(links ...string) {
 	foundUrls := make(map[string]UrlData)
 	seedUrls := []CrawlObject{}
 
-	//Safety check to ensure we don't recrawls links
-	// for _, url := range links {
-	// 	if crawledUrls[url] {
-	//     fmt.Println("Already been here.")
-	// 		continue
-	// 	} else {
-	// 		crawledUrls[url] = true;
-	// 		seedUrls = append(seedUrls, url)
-	// 	}
-	// }
-
+	//Check to see if URL is okay to crawl
 	for _, url := range links {
 		lastMod, _ := getLastModifiedTime(url)
-		// fmt.Println(lastMod)
 		_id, crawlCheck := indexer.CheckURL(url, lastMod)
 		if crawlCheck {
 			seedUrls = append(seedUrls, CrawlObject{url: url, id:_id})

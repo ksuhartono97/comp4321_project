@@ -18,26 +18,31 @@ type UrlData struct {
 }
 
 //var queryResult [1]UrlData = {UrlData{sourceUrl: "google.com", sourceID: "213", pageTitle:"Choco", pageSize:123, rawHtml:"lul", lastModified:"Yesterday"}}
-var resultString = "Here is a string\n Thomas \n Dong \n Doo \n Dah"
-
+var resultString = "Here is a string\n Thomas \n Dong \n Doo \n Dah\n"
+var resultString2 = "Ding ding\n Dong\n \n Dudu"
 type Page struct {
 	Body  []byte
 	StringArr []string
 }
 
+var expectedQueryResult []string
 
+//Load up the result to the html page
 func loadResult() (*Page) {
-	// filename := "resources/" + title + ".txt"
+	//Construct an array for the result
+	strRes := []string{}
 	body := []byte(resultString)
 	fmt.Println(body);
-	q := strings.Split(resultString, "\n")
-	// p.StringArr = q
-	for _, content := range q {
-		fmt.Println(content)
+
+	//Decompose all the strings that are in the result
+	for _, str := range expectedQueryResult {
+		q := strings.Split(str, "\n")
+		strRes = append(strRes, q...)
 	}
-	return &Page{Body: body, StringArr:q}
+	return &Page{Body: body, StringArr:strRes}
 }
 
+//Handler for the query page
 func queryHandler(w http.ResponseWriter, r *http.Request) {
 	fmt.Println("method:", r.Method) //get request method
 	if r.Method == "GET" {
@@ -48,11 +53,14 @@ func queryHandler(w http.ResponseWriter, r *http.Request) {
 		r.ParseForm()
 		fmt.Println("Query:", r.Form["searchInput"])
 		temp := strings.Join(r.Form["searchInput"], ",")
+		//Do something to actually submit query here, do not redirect to result page
+		//before we actually have the result!!
 		UpdateResultString(temp)
     http.Redirect(w, r, "/result", http.StatusSeeOther)
 	}
 }
 
+//Handler for the result page
 func resultHandler(w http.ResponseWriter, r *http.Request) {
 	fmt.Println("method:", r.Method) //get request method
 	t, _ := template.ParseFiles("./github.com/ksuhartono97/webserver/html/results.html")
@@ -60,11 +68,14 @@ func resultHandler(w http.ResponseWriter, r *http.Request) {
 	t.Execute(w, p)
 }
 
+//May be deprecated soon, will update later
 func UpdateResultString (newString string) {
 	resultString = newString
 }
 
 func StartWebServer() {
+	expectedQueryResult= append(expectedQueryResult,resultString)
+	expectedQueryResult= append(expectedQueryResult,resultString2)
 	http.Handle("/resources/", http.StripPrefix("/resources/", http.FileServer(http.Dir("resources"))))
 	http.HandleFunc("/query", queryHandler)
 	http.HandleFunc("/result", resultHandler)
