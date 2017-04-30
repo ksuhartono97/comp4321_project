@@ -44,14 +44,14 @@ func loadResult() (*Page) {
 
 //Handler for the query page
 func queryHandler(w http.ResponseWriter, r *http.Request) {
-	fmt.Println("method:", r.Method) //get request method
+	// fmt.Println("method:", r.Method) //get request method
 	if r.Method == "GET" {
 		t, _ := template.ParseFiles("./github.com/ksuhartono97/webserver/html/query.html")
 		t.Execute(w, nil)
 	} else {
     //Instead of Println will export to something else here.
 		r.ParseForm()
-		fmt.Println("Query:", r.Form["searchInput"])
+		// fmt.Println("Query:", r.Form["searchInput"])
 		temp := strings.Join(r.Form["searchInput"], ",")
 		//Do something to actually submit query here, do not redirect to result page
 		//before we actually have the result!!
@@ -62,7 +62,7 @@ func queryHandler(w http.ResponseWriter, r *http.Request) {
 
 //Handler for the result page
 func resultHandler(w http.ResponseWriter, r *http.Request) {
-	fmt.Println("method:", r.Method) //get request method
+	// fmt.Println("method:", r.Method) //get request method
 	t, _ := template.ParseFiles("./github.com/ksuhartono97/webserver/html/results.html")
 	p := loadResult()
 	t.Execute(w, p)
