@@ -4,7 +4,7 @@ import "../../silver-rush/database"
 
 //CheckURL will check whether you should crawl this page or not.
 func CheckURL(url string, lastModify int64) (id int64, shouldCrawl bool) {
-	shouldCrawl = false
+	shouldCrawl = true
 	id, created := database.GetURLID(url)
 	if created {
 		//Must crawl if url does not exist in database
@@ -13,8 +13,10 @@ func CheckURL(url string, lastModify int64) (id int64, shouldCrawl bool) {
 
 	//Otherwise, check the last modified date
 	docInfo := database.GetDocInfo(id)
-	if docInfo.Time < lastModify {
-		shouldCrawl = true
+	if docInfo != nil {
+		if docInfo.Time >= lastModify {
+			shouldCrawl = false
+		}
 	}
 
 	return
