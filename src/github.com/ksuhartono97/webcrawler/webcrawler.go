@@ -25,8 +25,13 @@ type UrlData struct {
 	lastModified int64
 }
 
+type CrawlObject struct {
+	url		string
+	id		int64
+}
+
 var exploredPages = 0
-var crawledUrls map[string]bool = make(map[string]bool)
+// var crawledUrls map[string]bool = make(map[string]bool)
 
 // Helper function to pull the href attribute from a Token
 func getHref(t html.Token) (ok bool, href string) {
@@ -53,6 +58,37 @@ func fixURL(href, base string) string {
 	return uri.String()
 }
 
+func getLastModifiedTime(href string) (int64, error) {
+	currTime := time.Now().UTC().Unix()
+	response, err := http.Head(href)
+	if err != nil {
+		fmt.Println("Error while downloading head of", href)
+		return currTime, err
+	} else {
+		timeString := ""
+		for k, v := range response.Header {
+			if k == "Last-Modified" {
+				timeString = v[0]
+				if err != nil {
+					fmt.Println(err)
+					return currTime, err
+				} else {
+					layout := "Mon, 02 Jan 2006 15:04:05 GMT"
+					t, err := time.Parse(layout, timeString)
+
+					if err != nil {
+						fmt.Println("Time Parsing error")
+						panic(err)
+						return currTime, err
+					}
+					return t.UTC().Unix(), nil
+				}
+			}
+		}
+		return currTime, nil
+	}
+}
+
 // Extract all required info from a given webpage
 func crawl(src string, srcID int64, ch chan UrlData, chFinished chan bool) {
 	//Retrieve the webpage
@@ -64,7 +100,8 @@ func crawl(src string, srcID int64, ch chan UrlData, chFinished chan bool) {
 	}()
 
 	if err != nil {
-		fmt.Println("ERROR: Failed to crawl \"" + src + "\"")
+		fmt.Println(err)
+		// fmt.Println("ERROR: Failed to crawl \"" + src + "\"")
 		return
 	}
 
@@ -92,33 +129,26 @@ func crawl(src string, srcID int64, ch chan UrlData, chFinished chan bool) {
 	// Get raw HTML
 	urlResult.rawHTML = string(htmlData)
 
-	response, err := http.Head(src)
+	timeString, err := getLastModifiedTime(src)
 	if err != nil {
-		fmt.Println("Error while downloading head of", src)
-	} else {
-		timeString := ""
-		for k, v := range response.Header {
-			if k == "Last-Modified" {
-				timeString = v[0]
-				if err != nil {
-					fmt.Println(err)
-				}
-			}
-		}
-		if timeString == "" {
-			urlResult.lastModified = time.Now().UTC().Unix()
-		} else {
-			layout := "Mon, 02 Jan 2006 15:04:05 GMT"
-			t, err := time.Parse(layout, timeString)
-
-			if err != nil {
-				fmt.Println("Time Parsing error")
-				panic(err)
-			}
-
-			urlResult.lastModified = t.Unix()
-		}
+		fmt.Println(err)
 	}
+
+	urlResult.lastModified = timeString
+
+	// if timeString == "" {
+	// 	urlResult.lastModified = time.Now().UTC().Unix()
+	// } else {
+	// 	layout := "Mon, 02 Jan 2006 15:04:05 GMT"
+	// 	t, err := time.Parse(layout, timeString)
+	//
+	// 	if err != nil {
+	// 		fmt.Println("Time Parsing error")
+	// 		panic(err)
+	// 	}
+	//
+	// 	urlResult.lastModified = t.Unix()
+	// }
 
 	z := html.NewTokenizer(b)
 
@@ -210,16 +240,25 @@ func feedToIndexer(thisURL string, thisID int64, urlData *UrlData) {
 //Main search function
 func CrawlLinks(links ...string) {
 	foundUrls := make(map[string]UrlData)
-	var seedUrls []string
+	seedUrls := []CrawlObject{}
 
 	//Safety check to ensure we don't recrawls links
+	// for _, url := range links {
+	// 	if crawledUrls[url] {
+	//     fmt.Println("Already been here.")
+	// 		continue
+	// 	} else {
+	// 		crawledUrls[url] = true;
+	// 		seedUrls = append(seedUrls, url)
+	// 	}
+	// }
+
 	for _, url := range links {
-		if crawledUrls[url] {
-    fmt.Println("Already been here.")
-		continue
-		} else {
-			crawledUrls[url] = true;
-			seedUrls = append(seedUrls, url)
+		lastMod, _ := getLastModifiedTime(url)
+		// fmt.Println(lastMod)
+		_id, crawlCheck := indexer.CheckURL(url, lastMod)
+		if crawlCheck {
+			seedUrls = append(seedUrls, CrawlObject{url: url, id:_id})
 		}
 	}
 
@@ -229,11 +268,11 @@ func CrawlLinks(links ...string) {
 
 	// Kick off the crawl process (concurrently)
 	skipped := 0
-	for _, url := range seedUrls {
-		urlID, _ := database.GetURLID(url)
-		size := database.GetTermsInDoc(urlID)
+	for _, obj := range seedUrls {
+		// urlID, _ := database.GetURLID(url)
+		size := database.GetTermsInDoc(obj.id)
 		if len(size) == 0 {
-			go crawl(url, urlID, chUrls, chFinished)
+			go crawl(obj.url, obj.id, chUrls, chFinished)
 		} else {
 			skipped++
 		}
@@ -249,7 +288,7 @@ func CrawlLinks(links ...string) {
 		}
 	}
 
-	fmt.Println("\n\nTotal explored ", exploredPages)
+	fmt.Println("\nTotal explored ", exploredPages)
 
 	for _, url := range foundUrls {
 
@@ -263,23 +302,22 @@ func CrawlLinks(links ...string) {
 		//fmt.Println("Last Modified: " + url.lastModified)
 
 		// Calculate remaining URLs needed
-		diff := 30 - exploredPages
+		diff := 300 - exploredPages
 		remaining := diff - len(url.foundUrl)
-		var toBeCalled = 0
+		toBeCalled := 0
 		if remaining < 0 {
 			toBeCalled = len(url.foundUrl) + remaining
 		} else {
 			toBeCalled = len(url.foundUrl)
 		}
-
 		urlArray := url.foundUrl[:toBeCalled]
 
 		if toBeCalled > 0 {
 			CrawlLinks(urlArray...)
 		}
 	}
-
 	close(chUrls)
+	close(chFinished)
 }
 
 //To be called before each initial search
