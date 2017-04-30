@@ -103,3 +103,20 @@ func GetURLWithID(id int64) (s string) {
 
 	return string(returnByte)
 }
+
+//GetTotalNumberOfDocument returns the total number of documents in the database
+func GetTotalNumberOfDocument() int32 {
+	var returnByte []byte
+	urlDB.View(func(tx *bolt.Tx) error {
+		bucket := tx.Bucket([]byte("id_to_url"))
+		returnByte = bucket.Get(encode64Bit(0))
+		return nil
+	})
+
+	if returnByte == nil {
+		return 0
+	}
+
+	return decode32Bit(returnByte)
+
+}
