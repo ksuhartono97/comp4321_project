@@ -44,6 +44,7 @@ func RetrieveRankedDocID(query string) []int64 {
 	doneChannel := make(chan bool)
 	for _, group := range queryTerms {
 		//Group is a slice. Contains more than one value only in phrase searches
+		fmt.Printf("Group: %v Len: %d\n", group, len(group))
 		if len(group) == 1 {
 			//Single word
 			go func(s string) {
@@ -91,6 +92,7 @@ func RetrieveRankedDocID(query string) []int64 {
 					}
 				}
 
+				fmt.Printf("IDs: %v Len: %d\n", termIDSlice, len(group))
 				//This specifies the amount of offset the term should have in the phrase
 				positionOffset := make([]int, len(group))
 				for i := range group {
