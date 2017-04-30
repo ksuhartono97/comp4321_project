@@ -1,449 +1,324 @@
-Sarah Brightman: In Concert (1998)
-https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/280.html
-Thu, 09 Mar 2017 12:55:58 GMT   3296
-Fantasy 1;more 2;Partial 1;is 2;the 7;for 7;a 2;All 1;are 2;of 4;have 1;Tour 1;under 1;Las 1;should 1;index 1;and 3;Music 2;TV 7;Zealand 1;Movie 4;New 1;following 2;Desert 1;Back 1;to 8;areas 1;them 1;News 2;some 1;Index 1;My 3;Vegas 1;was 1;Note 1;on 1;found 1;because 1;company 1;The 3;Concert 13;may 4;be 2;will 1;Inc 1;US 1;additional 2;Jobs 1;Free 1;Trial 1;Copyright 1;Internet 1;Database 1;Terms 1;can 1;Privacy 1;Policy 1;up 1;service 1;Live 3;provided 1;License 1;content 1;results 2;users 1;only 1;which 1;English 1;There 2;Andrew 2;Advertise 1;see 1;Now 2;For 1;World 1;complete 1;Britney 1;Spears 1;Luna 1;Harem 2;aka 3;available 1;Warlow 1;V 4;series 1;Playing 2;Or 1;prefer 1;Movies 4;link 1;starring 1;DVD 1;Episode 2;Video 1;special 1;IMDbTV 1;interest 1;Message 1;choosing 1;our 1;Boards 2;Enable 1;Showtimes 2;adult 1;La 1;that 1;Tickets 1;names 1;IMDbPro 2;More 1;IMDb 5;Searches 1;Resume 2;return 1;all 2;Login 1;category 1;Register 2;Preferences 1;with 1;TitleSearch 2;Games 1;each 1;Top 2;RecommendationsBox 1;Photos 1;Office 1;Independent 1;Trailers 1;Film 1;GameBase 1;better 1;Browse 1;Help 2;Titles 6;Episodes 1;Names 1;Companies 1;Keywords 1;Characters 2;Quotes 1;Bios 1;Plots 2;tips 1;Biographies 1;Quotesmore 1;searches 2;Your 2;yield 1;search 6;Matches 3;Suggestions 1;Improving 1;Results 3;original 2;changed 1;likely 1;not 2;give 1;from 1;matches 4;you 6;again 1;your 1;query 1;Search 5;title 4;amongst 1;A 2;alternative 1;titles 2;in 10;various 1;regions 1;languages 1;AKA 1;Title 2;searching 1;particular 1;episode 2;this 2;Series 1;use 1;Sarah 15;Brightman 15;com 1;In 8;If 2;These 1;One 2;Night 2;Lloyd 2;An 1;we 1;Australia 2;Eden 2;Webber 2;Anthony 1;Approx 1;Displaying 3;Home 2;Result 1;Exact 1;
+The Hunchback of Notre Dame II (2001)
+https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/255.html
+Sun, 30 Apr 2017 18:35:32 GMT   558
+Redirect 2;with 2;SSL 2;If 2;it 1;is 3;not 1;redirected 1;please 2;follows 1;https 1;course 2;cse 3;ust 3;hk 3;comp 1;labs 1;TestPages 1;CSD 1;account 1;required 1;for 2;accessing 2;CASS 2;there 1;any 1;problem 1;refer 1;to 1;http 1;cssystem 1;FAQ 1;cassaccess 1;html 2;Apache 1;Server 1;at 1;Port 1;Movie 1;
 Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie.htm
 -------------------------------------------------------------------------------------------
 Test page
 https://course.cse.ust.hk/comp4321/labs/TestPages/testpage.htm
-Thu, 09 Mar 2017 12:55:49 GMT   579
-Test 2;page 2;This 1;is 2;the 2;for 1;a 1;crawler 1;Before 1;getting 1;Admission 1;of 2;CSE 1;department 1;HKUST 1;You 1;should 1;read 1;through 1;these 2;international 1;news 1;and 1;books 1;Here 1;my 1;Movie 1;List 1;New 1;
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/books.htm
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/ust_cse.htm
+Sun, 30 Apr 2017 18:34:47 GMT   556
+Redirect 2;with 2;SSL 2;If 2;it 1;is 3;not 1;redirected 1;please 2;follows 1;https 1;course 2;cse 3;ust 3;hk 3;comp 1;labs 1;TestPages 1;testpage 1;htm 1;CSD 1;account 1;required 1;for 2;accessing 2;CASS 2;there 1;any 1;problem 1;refer 1;to 1;http 1;cssystem 1;FAQ 1;cassaccess 1;html 1;Apache 1;Server 1;at 1;Port 1;
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/news.htm
 Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie.htm
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/ust_cse.htm
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/books.htm
 -------------------------------------------------------------------------------------------
-News
-https://course.cse.ust.hk/comp4321/labs/TestPages/news.htm
-Thu, 09 Mar 2017 12:55:49 GMT   365
-news 2;Back 1;to 1;main 1;News 2;BBC 1;CNN 1;
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/testpage.htm
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/news/bbc.htm
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/news/cnn.htm
--------------------------------------------------------------------------------------------
-The Legend (1993)
-https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/281.html
-Thu, 09 Mar 2017 12:55:58 GMT   3029
-USA 1;more 3;is 2;the 10;for 7;a 2;find 1;All 1;are 2;of 2;have 1;under 1;should 2;or 1;index 1;and 2;TV 6;Movie 4;following 2;Back 1;to 9;areas 1;them 1;News 2;some 1;Index 1;My 3;was 1;Note 1;on 1;found 1;because 1;company 1;The 12;any 1;may 4;James 1;be 2;will 1;Inc 1;US 1;returned 1;partial 1;additional 2;Jobs 1;displayed 1;Free 1;exact 1;Trial 1;refine 1;Copyright 1;fewer 1;want 1;Internet 1;items 1;Database 1;Terms 1;can 2;Privacy 1;Policy 1;up 1;service 1;provided 1;License 1;content 1;Fong 1;Sai 1;Yuk 1;Alamat 1;Ang 1;if 2;Balmain 1;results 2;Boys 1;users 1;Legenda 1;only 1;which 1;English 1;There 2;Advertise 1;see 2;Now 2;For 1;aka 5;available 1;series 1;Playing 2;Or 1;prefer 1;Movies 4;link 1;DVD 1;Episode 2;Video 1;special 1;IMDbTV 1;interest 1;Message 1;choosing 1;our 1;Boards 2;Enable 1;Showtimes 2;adult 1;that 2;Tickets 1;names 1;IMDbPro 2;More 1;IMDb 5;Searches 1;Resume 2;return 1;all 4;Login 1;category 1;Register 2;Preferences 1;didn 1;say 1;with 1;TitleSearch 2;Games 1;warn 1;each 1;Top 2;RecommendationsBox 1;See 1;Photos 1;Office 1;Independent 1;Trailers 1;Film 1;GameBase 1;better 1;Browse 1;Help 2;Titles 4;but 2;Episodes 1;Names 1;Companies 1;t 2;Keywords 1;Characters 2;ve 1;Quotes 1;Bios 1;Plots 2;tips 1;Biographies 1;so 1;Quotesmore 1;searches 2;Your 3;yield 1;search 8;Matches 1;Suggestions 1;else 1;Improving 1;Results 2;original 2;changed 1;likely 1;not 2;give 1;matches 9;you 10;again 1;your 2;query 1;Search 5;than 1;title 4;amongst 1;A 1;alternative 1;titles 2;Dean 1;in 3;various 1;regions 1;languages 1;AKA 1;Title 2;searching 1;particular 1;episode 2;this 2;Series 1;use 1;com 1;literal 1;If 2;These 1;don 1;something 1;An 1;it 1;we 3;working 1;Australia 1;Legend 12;Displaying 1;Home 2;Exact 1;
+A Night at the Opera (1935)
+https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/253.html
+Sun, 30 Apr 2017 18:35:32 GMT   558
+Redirect 2;with 2;SSL 2;If 2;it 1;is 3;not 1;redirected 1;please 2;follows 1;https 1;course 2;cse 3;ust 3;hk 3;comp 1;labs 1;TestPages 1;CSD 1;account 1;required 1;for 2;accessing 2;CASS 2;there 1;any 1;problem 1;refer 1;to 1;http 1;cssystem 1;FAQ 1;cassaccess 1;html 2;Apache 1;Server 1;at 1;Port 1;Movie 1;
 Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie.htm
 -------------------------------------------------------------------------------------------
 Movie Index Page
 https://course.cse.ust.hk/comp4321/labs/TestPages/Movie.htm
-Thu, 09 Mar 2017 12:55:49 GMT   19525
-Anniversary 1;IFilm 1;Bridget 1;Double 2;Deranged 1;Jones 1;Feature 1;Billy 1;Diary 1;ixtynin 1;Blanks 1;Option 1;Grind 1;Tae 1;Zero 1;the 41;I 1;Bo 1;for 1;Lucy 1;Cardio 1;a 4;Season 12;Circuit 1;Congo 1;Missing 2;Before 1;Jingle 1;Action 2;All 1;Beginning 1;Way 4;Braddock 1;of 33;Killing 1;Panic 1;Winter 1;Streets 1;Kills 1;Smoochy 1;IMAX 1;Dead 1;Frogmen 1;Birds 1;Silkwood 1;Airplane 1;Powerpuff 1;Sequel 1;Girls 1;Sand 1;Elfen 1;X 3;Lied 1;Men 1;Iron 2;United 1;and 24;Monkey 1;SoulTaker 1;Louder 1;Marilyn 1;Than 1;Manson 1;Bombs 1;Fear 1;Movie 4;Record 1;Satanic 1;Lodoss 1;Arliss 2;War 2;Chasing 1;Chronicles 1;Freedom 1;Heroic 1;Tosh 1;Back 4;Knight 1;Stepping 1;to 6;Chain 2;Razor 1;main 2;Command 2;Taking 1;Lemon 1;Lives 1;Drop 1;Gupt 1;Kid 1;Deer 1;Index 1;Hunter 1;Page 1;Roman 1;My 4;Ruby 1;movie 1;Bucket 1;list 1;Sports 1;Dinosaur 1;Illustrated 1;Planet 2;Swimsuit 1;Isle 1;Venus 1;Man 3;Boyz 1;TT 1;Unconstitutional 1;Review 1;Our 1;Character 1;Civil 1;Paula 1;Liberties 1;Abdul 1;Denise 1;s 19;on 4;Austin 1;Get 2;Ultimate 1;Up 3;Fat 1;Dance 2;Burner 1;The 60;Royal 1;Three 1;Rise 1;Rumble 1;Stooges 1;Fall 2;Cyberslam 1;Sing 1;ECW 2;They 1;Song 2;Sick 1;Came 1;Six 1;What 1;G 1;Pants 1;Do 2;Concert 2;Deep 1;We 3;Dona 1;Nine 1;Know 1;Herlinda 1;Onmyoji 1;Class 1;Her 1;Agronomist 1;Nuke 1;Son 2;Querelle 1;Em 1;Inside 1;Dinner 1;High 1;Space 2;Rush 1;Fighter 1;Station 1;Read 1;Full 1;Mostly 1;Along 1;Frame 1;Martha 1;Beast 1;Documentary 1;Battle 1;That 1;Shorts 1;Algiers 1;Show 4;Favorite 1;Fishy 1;Impostor 1;Brunette 1;Story 2;Cherry 1;Lord 2;Sam 1;Triumph 1;Rings 1;Bridge 1;US 1;Return 1;Shamanic 1;Festival 1;King 1;Princess 2;Neon 2;Extended 1;Notre 2;Bible 1;Edition 2;Musique 1;Winston 1;Bonus 5;Sanford 1;Churchill 1;Material 5;Great 2;Wilderness 1;Nature 2;Race 1;Years 1;Antarctica 2;Obsessed 1;Voyage 1;Neil 1;Stevie 1;Planets 1;Diamond 1;Ray 1;Yellow 1;Greatest 1;Vaughan 1;Chappelle 1;Hits 1;Trouble 1;Midsomer 2;Live 10;at 4;Murders 2;Screamers 1;Montreux 1;Will 1;Seconds 1;Magnolia 1;Cookout 1;Immortal 1;Spartan 1;Henry 1;Beloved 1;No 1;Portrait 1;By 1;Scandal 1;Serial 1;Dawn 1;Duplex 1;Carol 1;Early 2;Widescreen 1;Burnett 1;Light 1;Eye 1;Stoppers 1;Seeta 1;Vichy 1;Butch 1;Aur 1;Bruce 1;Sundance 1;Geeta 1;Lee 1;Days 2;Strange 1;Warrior 2;Gabriel 1;Relations 1;Journey 1;Growing 1;Chump 1;Dominion 1;Unsolved 1;Change 1;Tank 1;Mysteries 1;Clifford 3;Police 1;Psychics 1;Saves 1;Part 3;Marooned 1;Day 1;Peter 3;Iraq 1;Fluffiest 1;Wimsey 1;Gross 1;Friend 1;Murder 1;Anatomy 1;Cleo 1;Must 1;Chato 1;Bloody 1;Advertise 1;Animation 1;Valentine 1;Bear 1;Winsor 1;Inspector 1;Cub 1;McCay 1;Morse 1;Silk 1;Unhook 1;Death 3;Stockings 1;Stars 1;Is 1;Rambo 1;Crazys 1;Now 1;First 1;Sci 1;Neighbour 1;Blood 4;Fi 1;Never 1;II 3;Broken 1;Die 1;Travel 1;Blossoms 1;Alone 1;by 3;Led 1;Sesame 1;Train 1;Zeppelin 1;Street 2;Africa 1;Remains 1;Elmo 1;Plain 1;Same 1;World 3;Dirty 1;Winnie 1;On 1;Beyonce 1;Pooh 1;Lilo 1;Wembley 1;Springtime 1;Stitch 1;Cube 1;Roo 1;Boycott 1;Hypercube 1;Woman 1;Something 1;Fools 1;Year 1;Gotta 1;Cold 2;North 1;Give 1;Blooded 1;Northwest 1;Classic 1;Nighthawks 1;Genesis 1;Albums 1;Effect 2;Evangelion 2;Meat 1;aka 1;End 1;Loaf 1;Twins 1;Stellvia 1;Bat 1;Fatal 1;Road 1;Out 3;Beauty 2;Dogz 1;Hell 3;Mr 1;Boston 1;ABC 1;Darkwolf 1;Strangler 2;Primetime 1;Drowning 1;Oleanna 1;Mel 1;Dry 1;Michael 1;Gibson 1;Land 2;Moore 1;Passion 1;Arachnid 1;Awful 1;Christ 1;Lucio 1;Hunters 2;Aqua 1;Fulci 1;Cast 1;Teen 1;Beyond 3;Giant 1;Hunger 1;Viva 1;Shadow 1;Force 1;La 1;Wood 1;Vol 1;Bam 1;Stuart 1;Ashtanga 1;Spirit 1;Opera 1;Yoga 2;GTO 1;Westender 1;Beginner 1;Teacher 1;Hunchback 1;Practice 1;Onizuka 1;Dame 1;with 2;Set 1;Ghost 1;Nicki 1;Cat 1;Dog 1;Doane 1;Canary 1;Samurai 1;Ferngully 1;Naked 1;Charlotte 1;Magical 1;Lies 1;Web 1;Rescue 1;Star 2;Mann 1;Lady 1;Trek 2;Animal 1;Chatterley 1;Voyager 1;Marat 1;Zatoichi 1;Allergies 1;Sade 1;Conspiracy 1;Natural 1;Big 1;Daydream 1;Approach 1;Clock 1;Obsession 1;Wild 1;Herbie 1;Love 3;Goddess 1;Rides 1;Reinvented 1;Mercy 1;Again 1;Pitcher 1;Tricky 1;Dragon 1;Pin 1;Master 1;Ball 1;Horror 1;Game 1;Tournament 1;Vision 2;Deepak 1;Saga 1;Searching 1;Chopra 1;Angelina 1;Paradise 1;Wizard 1;Ballerina 1;Silent 1;Alchemy 1;Lights 1;Service 1;Your 2;Jeff 1;Spitfire 1;Handkerchiefs 1;Corwin 1;Grill 1;Cannibal 1;Experience 1;Letter 1;Women 1;Costa 1;Rudolph 1;Avocado 1;Rica 1;Red 2;Jungle 1;Amazon 1;Nosed 1;Where 1;Saudade 1;Reindeer 1;Sleeping 1;Futuro 1;Bad 1;Dogs 2;Touched 1;Beautiful 1;Lie 1;an 1;Justice 1;Sweet 1;Angel 1;League 1;November 1;Final 1;Devo 1;Edward 1;Countdown 1;Complete 2;Murrow 1;Parenthood 1;Truth 2;Collection 1;City 1;About 1;Firetrap 1;Saludos 1;De 1;Sleepover 1;Amigos 1;evolution 1;Nightmare 1;Female 1;A 11;Little 2;Yakuza 1;Yank 1;MTV 2;Tale 1;in 10;Demon 1;Taxi 1;R 2;Koji 1;Crazy 1;F 1;Strongest 1;as 1;Jonah 1;Husbands 1;Evelyn 1;VeggieTales 1;Wives 1;Harvest 1;Weather 1;Laird 1;Enigma 1;Underground 1;White 2;MCMXC 1;Bonesetter 1;Knuckle 1;D 1;re 1;Extreme 1;Micki 1;Not 1;Killer 2;Maude 1;Married 1;Within 1;Sarah 1;Jade 1;Gentlemen 1;Brightman 1;Carandiru 1;Fortune 1;In 2;Richard 2;Gormenghast 1;Blue 1;III 1;Ninotchka 1;Seed 1;Dragonheart 1;John 3;If 1;Sex 2;Cleese 1;These 1;Beauties 1;How 1;Walls 1;Libertine 1;Irritate 1;Could 1;Ricky 1;People 1;Talk 1;Martin 1;Making 1;Sasquatch 1;One 2;Band 1;Own 1;Night 4;Best 5;Thunderbirds 1;Only 1;Last 2;Are 1;Ken 1;Pryor 1;Go 2;Burns 1;Sunset 1;Luther 1;America 1;Strip 1;Vandross 1;Empire 2;Fame 1;Always 1;Air 1;Chorus 1;Forever 1;Crash 1;Smokey 1;An 1;Dive 1;Bandit 1;Evening 1;Outside 1;Cartoon 3;Songs 1;Law 1;Network 1;Saturday 2;Lost 3;Halloween 1;Chris 1;Pershing 1;Creepy 1;Kattan 1;Point 2;Capers 1;Avengers 1;Hotel 1;Tomorrow 1;Harold 1;Barbarian 1;Funny 1;Kumar 1;Queen 1;Face 1;Castle 1;Vampire 3;Jack 1;Chained 1;Journals 1;Devil 2;Heat 1;Invader 1;Brigade 1;Mountain 1;Zim 1;Adam 1;Gilda 1;WWE 2;Reservoir 1;Radner 1;Armageddon 1;History 1;Lennon 3;Tai 1;Channel 1;Very 1;Chi 1;Presents 1;Oasis 1;Forms 1;Troy 2;Ace 1;Maya 1;Unearthing 1;Ventura 1;Lin 1;Legend 4;When 1;Strong 1;Pressure 2;Calls 1;Clear 1;Regular 1;His 1;At 1;Guys 1;Life 1;Home 2;Bollywood 1;Hebrew 1;Among 1;Bound 1;Hammer 1;Strangers 1;Scratch 1;Crunch 1;Davy 1;Shot 1;Pick 1;Crockett 1;Moby 1;Spot 1;th 1;Play 1;Pilates 1;
+Sun, 30 Apr 2017 18:34:48 GMT   553
+Redirect 2;with 2;SSL 2;If 2;it 1;is 3;not 1;redirected 1;please 2;follows 1;https 1;course 2;cse 3;ust 3;hk 3;comp 1;labs 1;TestPages 1;htm 1;CSD 1;account 1;required 1;for 2;accessing 2;CASS 2;there 1;any 1;problem 1;refer 1;to 1;http 1;cssystem 1;FAQ 1;cassaccess 1;html 1;Apache 1;Server 1;at 1;Port 1;Movie 1;
 Child  https://course.cse.ust.hk/comp4321/labs/TestPages/testpage.htm
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/156.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/295.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/138.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/88.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/157.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/139.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/89.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/158.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/60.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/90.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/145.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/144.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/91.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/146.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/147.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/149.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/148.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/150.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/229.html
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/2.html
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/26.html
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/1.html
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/16.html
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/6.html
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/20.html
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/23.html
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/12.html
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/19.html
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/9.html
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/21.html
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/10.html
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/14.html
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/17.html
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/22.html
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/25.html
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/24.html
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/29.html
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/27.html
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/15.html
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/28.html
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/113.html
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/31.html
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/32.html
 Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/159.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/160.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/237.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/95.html
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/30.html
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/137.html
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/35.html
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/138.html
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/136.html
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/115.html
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/39.html
 Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/143.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/96.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/152.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/80.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/230.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/97.html
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/40.html
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/147.html
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/41.html
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/118.html
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/146.html
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/42.html
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/149.html
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/43.html
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/119.html
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/45.html
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/120.html
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/44.html
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/122.html
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/46.html
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/121.html
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/47.html
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/123.html
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/124.html
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/154.html
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/125.html
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/153.html
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/126.html
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/155.html
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/128.html
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/156.html
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/157.html
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/158.html
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/129.html
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/48.html
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/132.html
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/50.html
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/297.html
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/229.html
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/52.html
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/195.html
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/194.html
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/53.html
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/232.html
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/160.html
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/196.html
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/55.html
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/233.html
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/161.html
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/198.html
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/54.html
 Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/163.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/243.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/164.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/244.html
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/197.html
 Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/235.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/98.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/92.html
 Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/165.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/101.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/238.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/239.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/166.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/241.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/255.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/231.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/167.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/256.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/102.html
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/200.html
 Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/162.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/93.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/105.html
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/201.html
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/164.html
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/202.html
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/167.html
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/58.html
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/199.html
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/168.html
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/239.html
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/205.html
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/169.html
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/204.html
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/245.html
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/63.html
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/206.html
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/244.html
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/166.html
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/64.html
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/231.html
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/207.html
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/234.html
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/170.html
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/208.html
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/243.html
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/65.html
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/209.html
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/246.html
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/67.html
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/210.html
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/248.html
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/175.html
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/249.html
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/212.html
 Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/178.html
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/247.html
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/72.html
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/176.html
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/242.html
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/214.html
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/68.html
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/177.html
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/215.html
 Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/179.html
 Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/180.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/246.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/181.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/106.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/247.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/182.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/107.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/108.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/257.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/183.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/184.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/249.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/233.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/110.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/141.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/250.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/142.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/253.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/236.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/185.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/186.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/240.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/260.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/168.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/251.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/169.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/170.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/187.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/172.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/161.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/175.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/11.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/242.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/12.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/174.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/232.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/245.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/177.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/234.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/109.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/258.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/103.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/104.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/100.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/99.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/188.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/171.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/259.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/254.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/252.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/13.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/151.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/190.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/15.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/191.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/16.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/192.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/173.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/193.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/189.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/176.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/14.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/261.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/199.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/194.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/262.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/201.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/202.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/195.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/200.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/203.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/197.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/204.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/111.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/205.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/112.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/196.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/198.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/206.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/113.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/263.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/207.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/114.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/265.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/208.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/264.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/266.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/209.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/115.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/267.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/210.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/116.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/268.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/211.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/117.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/269.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/212.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/118.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/213.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/119.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/270.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/214.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/272.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/215.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/273.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/271.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/216.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/274.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/120.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/121.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/122.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/123.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/276.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/284.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/285.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/124.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/277.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/286.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/287.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/278.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/288.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/279.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/289.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/290.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/280.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/291.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/281.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/292.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/282.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/293.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/283.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/294.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/125.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/217.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/275.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/218.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/17.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/126.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/18.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/127.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/221.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/19.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/222.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/128.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/220.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/223.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/219.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/129.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/224.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/20.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/130.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/131.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/225.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/21.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/132.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/227.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/22.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/226.html
+Child  ;  
 Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/228.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/133.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/134.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/26.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/94.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/136.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/23.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/24.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/27.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/135.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/30.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/25.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/28.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/29.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/296.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/31.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/297.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/298.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/300.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/32.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/299.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/248.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/43.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/8.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/4.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/5.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/6.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/1.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/7.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/2.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/3.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/59.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/33.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/34.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/35.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/68.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/47.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/48.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/41.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/36.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/40.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/45.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/49.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/42.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/37.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/44.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/84.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/50.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/137.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/46.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/38.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/39.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/85.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/51.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/61.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/63.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/62.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/86.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/82.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/65.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/64.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/52.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/67.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/83.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/66.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/53.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/56.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/54.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/55.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/9.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/154.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/69.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/71.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/73.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/72.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/77.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/153.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/76.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/78.html
 Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/75.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/79.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/70.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/155.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/58.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/81.html
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/227.html
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/181.html
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/77.html
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/182.html
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/187.html
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/260.html
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/190.html
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/251.html
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/80.html
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/189.html
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/261.html
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/186.html
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/192.html
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/262.html
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/185.html
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/191.html
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/259.html
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/188.html
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/193.html
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/263.html
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/265.html
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/83.html
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/283.html
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/284.html
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/98.html
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/280.html
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/102.html
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/286.html
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/104.html
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/85.html
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/287.html
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/103.html
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/288.html
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/100.html
 Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/87.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/10.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/74.html
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/140.html
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/268.html
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/101.html
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/88.html
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/107.html
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/291.html
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/89.html
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/108.html
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/292.html
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/271.html
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/106.html
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/91.html
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/272.html
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/93.html
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/109.html
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/295.html
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/274.html
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/111.html
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/94.html
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/276.html
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/299.html
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/96.html
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/110.html
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/300.html
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/95.html
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/275.html
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/285.html
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/279.html
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/298.html
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/278.html
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/277.html
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/282.html
+-------------------------------------------------------------------------------------------
+Westender (2003)
+https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/254.html
+Sun, 30 Apr 2017 18:35:32 GMT   558
+Redirect 2;with 2;SSL 2;If 2;it 1;is 3;not 1;redirected 1;please 2;follows 1;https 1;course 2;cse 3;ust 3;hk 3;comp 1;labs 1;TestPages 1;CSD 1;account 1;required 1;for 2;accessing 2;CASS 2;there 1;any 1;problem 1;refer 1;to 1;http 1;cssystem 1;FAQ 1;cassaccess 1;html 2;Apache 1;Server 1;at 1;Port 1;Movie 1;
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie.htm
 -------------------------------------------------------------------------------------------
 CSE department of HKUST
 https://course.cse.ust.hk/comp4321/labs/TestPages/ust_cse.htm
-Thu, 09 Mar 2017 12:55:50 GMT   372
-Admission 2;of 2;CSE 2;department 2;HKUST 2;PG 1;UG 1;Back 1;to 1;main 1;
+Sun, 30 Apr 2017 18:34:48 GMT   555
+Redirect 2;with 2;SSL 2;If 2;it 1;is 3;not 1;redirected 1;please 2;follows 1;https 1;course 2;cse 4;ust 4;hk 3;comp 1;labs 1;TestPages 1;htm 1;CSD 1;account 1;required 1;for 2;accessing 2;CASS 2;there 1;any 1;problem 1;refer 1;to 1;http 1;cssystem 1;FAQ 1;cassaccess 1;html 1;Apache 1;Server 1;at 1;Port 1;
 Child  https://course.cse.ust.hk/comp4321/labs/TestPages/testpage.htm
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/ust_cse/UG.htm
 Child  https://course.cse.ust.hk/comp4321/labs/TestPages/ust_cse/PG.htm
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/ust_cse/UG.htm
 -------------------------------------------------------------------------------------------
-Blue Seed: Beyond (2003)
-https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/282.html
-Thu, 09 Mar 2017 12:55:58 GMT   5811
-empty 1;Add 2;page 1;update 1;USA 4;question 1;This 1;more 7;Comment 1;is 6;comment 1;pretty 1;the 22;I 7;useful 1;for 4;way 3;box 1;a 11;find 1;Author 1;new 1;same 1;States 1;All 2;are 3;of 5;have 1;used 1;think 1;they 5;under 1;when 2;You 1;moving 1;through 1;computer 1;or 3;me 1;news 1;United 1;third 1;index 1;Follows 1;and 13;might 1;Also 1;first 1;TV 4;Movie 6;obviously 1;episodes 2;Back 1;to 12;many 1;main 2;News 2;even 5;Index 1;though 1;articles 1;My 3;story 2;movie 1;goes 1;characters 2;was 5;add 1;do 4;crew 2;trivia 2;Let 1;official 2;start 1;animated 1;interesting 1;sites 2;no 1;memorable 2;quotes 2;Overview 1;on 5;found 1;details 5;Pok 1;Picture 1;because 1;combined 1;mon 1;Up 1;process 1;company 2;credits 2;The 2;tv 1;animation 1;schedule 1;Promotional 1;They 1;taglines 1;aren 1;posters 1;photo 1;seemed 1;above 1;gallery 1;may 1;Awards 1;be 2;Reviews 1;external 1;reviews 2;will 2;take 1;Fighter 1;March 1;Show 1;included 1;nothing 2;going 1;newsgroup 1;Inc 1;awards 1;ratings 1;US 1;recommendations 2;message 2;looks 1;board 3;like 1;Plot 1;Jobs 1;plot 2;Free 1;creditstrailersuser 1;summary 2;Trial 1;Fun 1;Copyright 1;Stuff 1;Internet 1;goofs 1;Database 1;Doll 1;soundtrack 1;Terms 1;listing 1;Privacy 1;made 1;crazy 1;Policy 1;alternate 1;service 2;versions 1;provided 1;love 1;connections 1;FAQ 2;Info 1;License 1;Perfect 1;business 1;merchandising 1;So 1;content 1;links 1;literature 1;release 2;dates 2;filming 1;bomb 1;if 3;locations 1;technical 1;users 1;specs 1;laserdisc 1;listings 1;External 1;showtimes 1;which 2;miscellaneous 1;photographs 1;clips 2;video 1;English 1;advertisement 1;photos 1;Advertise 1;Animation 1;trailer 1;see 2;good 1;login 1;rate 1;User 7;too 1;Rating 6;recommendation 1;off 3;votes 1;Now 2;First 1;one 1;Never 2;II 1;by 2;sound 1;dubbed 1;Street 1;Release 1;On 1;September 1;user 2;Date 1;show 2;Genre 1;report 1;Japanese 2;series 2;Playing 2;about 2;Movies 4;quality 1;DVD 2;Video 1;IMDbTV 1;Message 1;Beyond 3;our 2;Boards 2;Showtimes 2;that 3;Tickets 1;IMDbPro 2;terrorist 1;IMDb 11;Resume 2;all 3;Login 1;Register 3;say 1;with 5;Games 1;Top 3;RecommendationsBox 1;Photos 1;Office 1;Independent 1;Trailers 1;Film 1;version 1;almost 1;GameBase 1;Comments 1;Was 1;other 1;Browse 1;Two 1;Discuss 1;Help 2;Titles 1;but 3;Episodes 1;Names 1;actually 1;comments 1;Companies 1;funny 2;t 5;watched 1;Keywords 1;Characters 1;Quotes 2;connectionsrelease 1;Bios 1;awaiting 1;watch 1;Plots 1;also 1;tips 1;It 5;short 1;has 1;week 1;Amazon 6;entire 1;But 1;original 1;enjoyed 1;sitting 1;changed 1;database 2;ADV 1;wrote 1;recommends 1;dang 1;an 1;not 4;excited 1;from 1;rented 1;you 6;resembles 1;where 1;worse 2;your 1;Secondly 1;exist 1;revive 1;Search 1;bad 2;errors 1;Unrated 1;enemy 1;than 1;title 4;omissions 1;fought 1;managers 1;hot 1;charm 1;examined 1;legend 1;approved 1;villain 1;in 6;Clicking 1;laughably 1;back 1;Update 1;unbearable 1;as 1;buttonwill 1;insult 1;step 2;injury 1;throw 1;involves 1;planting 1;out 1;episode 2;being 1;spring 1;this 11;level 1;SHOP 1;changes 1;rip 1;com 3;Known 1;wasn 3;well 1;ca 1;As 1;dramatic 1;Blue 6;co 1;fan 1;Seed 5;uk 1;Runtime 1;pride 1;If 1;de 1;min 1;myself 1;fr 1;troll 1;DVDVHSCDAll 5;arguing 1;trolls 1;Quicklinks 1;Motion 1;lousy 1;honestly 1;detailscombined 1;Country 1;enough 1;OAV 1;detailsfull 1;Just 1;cannot 1;keywords 1;cast 4;Language 1;rewatch 1;old 1;crewcompany 1;TERRIBLE 1;tapes 1;Rakusho 1;since 1;Credited 1;Hyper 1;America 1;Tekken 1;had 1;Color 3;Mewtwo 1;An 1;part 1;Even 1;it 8;Certification 1;future 1;And 1;things 1;office 1;Aokushimitama 5;blue 6;seed 6;Other 1;AOKUSHIMITAM 1;Returns 1;commentsrecommendationsmovie 1;Tiffany 1;won 1;Grant 1;water 1;MOVIEmeter 1;Kome 1;last 1;SawaguchiAllison 1;Links 2;why 1;Keith 1;trailers 2;Sakura 1;Burn 1;KusimikadoMonica 1;full 2;act 1;Rial 1;Momiji 1;Home 2;Fujimiyamore 1;NTSC 1;saying 1;wolfecastle 1;Connections 1;occasions 1;Japan 1;
+Ghost Dog: The Way of the Samurai (2000)
+https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/256.html
+Sun, 30 Apr 2017 18:35:32 GMT   558
+Redirect 2;with 2;SSL 2;If 2;it 1;is 3;not 1;redirected 1;please 2;follows 1;https 1;course 2;cse 3;ust 3;hk 3;comp 1;labs 1;TestPages 1;CSD 1;account 1;required 1;for 2;accessing 2;CASS 2;there 1;any 1;problem 1;refer 1;to 1;http 1;cssystem 1;FAQ 1;cassaccess 1;html 2;Apache 1;Server 1;at 1;Port 1;Movie 1;
 Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie.htm
 -------------------------------------------------------------------------------------------
 books
 https://course.cse.ust.hk/comp4321/labs/TestPages/books.htm
-Thu, 09 Mar 2017 12:55:49 GMT   578
-the 1;for 1;of 2;read 1;and 2;books 1;Back 1;to 2;main 1;Books 1;articles 1;Automated 1;Keyword 1;Classification 1;Information 1;Retrieval 1;Generation 1;Uses 1;Machine 1;Readable 1;Data 1;Bases 1;Note 1;on 1;Pseudo 1;Mathematics 1;Relevance 1;A 1;
+Sun, 30 Apr 2017 18:34:48 GMT   553
+Redirect 2;with 2;SSL 2;If 2;it 1;is 3;not 1;redirected 1;please 2;follows 1;https 1;course 2;cse 3;ust 3;hk 3;comp 1;labs 1;TestPages 1;htm 1;CSD 1;account 1;required 1;for 2;accessing 2;CASS 2;there 1;any 1;problem 1;refer 1;to 1;http 1;cssystem 1;FAQ 1;cassaccess 1;html 1;Apache 1;Server 1;at 1;Port 1;books 1;
 Child  https://course.cse.ust.hk/comp4321/labs/TestPages/testpage.htm
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/books/book1.htm
 Child  https://course.cse.ust.hk/comp4321/labs/TestPages/books/book2.htm
 Child  https://course.cse.ust.hk/comp4321/labs/TestPages/books/book3.htm
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/books/book1.htm
 -------------------------------------------------------------------------------------------
-PG
-https://course.cse.ust.hk/comp4321/labs/TestPages/ust_cse/PG.htm
-Thu, 09 Mar 2017 12:56:02 GMT   3193
-page 1;is 3;the 22;Program 1;for 5;Applicants 2;a 8;admission 7;postgraduate 8;programs 3;All 1;are 3;Admission 1;required 4;of 18;have 2;completed 2;time 2;HKUST 1;they 1;enter 1;should 2;bachelor 1;degree 1;computer 6;these 2;science 7;or 2;related 1;and 9;engineering 1;field 1;Students 2;admitted 5;Record 2;program 3;must 4;demonstrate 3;PG 2;competence 3;following 1;core 2;to 8;areas 3;Computer 1;Organization 1;Principles 2;Programming 1;Languages 1;Systems 2;Software 1;Operating 1;Design 1;Analysis 1;Algorithms 1;addition 1;students 3;into 3;PhD 2;Theory 1;Computation 1;Competence 1;s 3;on 2;appraised 1;during 1;process 1;student 1;The 1;whose 2;formal 1;background 1;deemed 2;inadequate 1;any 3;above 2;may 4;be 8;provisional 1;basis 1;will 3;take 2;remedial 1;courses 3;prescribed 1;Postgraduate 1;Studies 1;Committee 1;obtain 1;grade 1;least 1;B 1;Such 1;additional 1;requirements 1;stipulated 1;individual 1;offer 1;Deficiencies 1;area 1;can 1;made 1;up 1;at 1;concurrently 1;work 1;submit 2;officially 1;certified 1;academic 2;transcripts 1;undergraduate 1;studies 2;if 3;results 4;subject 2;Graduate 2;GRE 2;applicants 1;only 1;taken 2;submitted 2;year 1;after 1;English 6;proficiency 4;test 3;see 1;below 1;two 2;letters 1;recommendation 1;one 1;statement 1;plan 1;study 1;by 2;application 3;form 1;For 1;MSc 1;MPhil 1;standard 1;examinations 1;such 2;Examination 1;helpful 1;determining 1;suitability 1;supplementary 1;information 1;available 1;Department 3;with 2;other 1;been 1;needs 1;sufficient 1;previous 1;an 3;degrees 1;from 1;institution 1;where 1;primary 1;language 3;instruction 1;than 1;TOEFL 1;A 1;together 1;their 1;in 11;within 1;years 1;as 5;Notwithstanding 1;require 1;newly 1;undergo 1;assessment 1;necessary 1;enhancement 1;based 1;applicant 1;record 1;In 1;well 1;research 1;
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/ust_cse.htm
--------------------------------------------------------------------------------------------
-UG
-https://course.cse.ust.hk/comp4321/labs/TestPages/ust_cse/UG.htm
-Thu, 09 Mar 2017 12:56:02 GMT   3983
-training 4;Training 1;modules 1;This 2;winter 1;is 3;summer 1;the 14;Program 1;breaks 1;for 3;practical 1;a 4;skills 2;postgraduate 1;Intensive 1;programs 6;written 1;are 3;conversational 1;presentation 1;of 21;have 1;projects 1;project 1;time 2;specialization 1;HKUST 5;under 1;guidance 1;faculty 1;degree 2;advisors 1;computer 1;Student 1;tutors 1;or 2;Second 1;related 3;third 1;and 13;helpers 1;providing 1;Students 1;help 1;first 1;program 8;Graduates 1;graduates 3;choose 2;pursue 1;UG 1;following 2;immediately 1;graduation 1;to 7;areas 3;many 2;Computer 8;them 1;stayed 1;Philosophy 1;some 1;went 1;abroad 1;Software 1;top 1;universities 1;Stanford 1;Information 3;University 5;Southern 1;California 1;students 3;Toronto 1;Texas 1;Our 1;Illinois 1;Urbana 1;Champaign 1;Those 1;s 1;on 4;Austin 1;found 1;during 1;excellent 1;jobs 2;student 2;disciplines 1;The 3;look 1;clearly 1;great 1;advantages 1;completing 1;comprehensive 1;solid 1;fundamentals 1;be 1;emerging 1;Inquiries 1;need 1;advice 1;assistance 1;procedures 1;courses 1;choice 1;entrance 1;matters 1;welcome 1;contact 1;us 1;requirements 2;area 1;can 1;at 5;work 2;undergraduate 2;only 1;year 6;after 3;English 2;two 2;study 7;by 2;application 1;MPhil 1;information 1;Department 5;Science 7;offers 2;who 3;interested 1;learning 1;about 1;computing 4;technology 1;COMP 2;BEng 3;our 4;general 2;that 2;provides 2;broad 1;education 1;all 2;CSIE 4;with 2;Engineering 6;specialized 1;focusing 1;multimedia 1;networking 1;While 3;other 3;Hong 2;Kong 2;closer 1;Electrical 3;Electronic 3;unique 1;its 1;emphasis 2;Master 1;software 1;fact 1;also 4;satisfies 1;typical 1;It 1;has 1;been 1;carefully 1;designed 1;specific 2;needs 1;mind 1;an 1;from 2;Final 1;About 1;A 1;in 13;years 1;as 2;In 1;Besides 2;jointly 1;Spectrum 1;IT 2;Related 1;Programs 1;offered 1;One 3;best 1;viewed 1;spectrum 2;Hardware 1;CPEG 1;EEIC 1;ELEC 1;Generally 1;speaking 1;shifts 1;soft 1;hard 1;we 1;move 1;across 1;different 2;suit 1;interests 1;job 1;market 1;demands 1;Other 1;Opportunities 1;regular 1;enjoy 1;number 1;opportunities 1;including 3;Overseas 1;exchange 1;full 2;overseas 1;paying 1;tuition 1;fee 1;Work 1;outside 1;Industrial 1;
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/ust_cse.htm
--------------------------------------------------------------------------------------------
-BBC news
-https://course.cse.ust.hk/comp4321/labs/TestPages/news/bbc.htm
-Thu, 09 Mar 2017 12:56:02 GMT   475
-for 1;project 1;news 2;Back 1;to 1;News 1;BBC 2;Fifth 1;nest 1;rare 1;birds 1;MP 1;urges 1;BT 1;Goonhilly 1;commitment 1;West 1;Ham 1;Blackburn 1;
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/news.htm
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/news/bbc2.htm
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/news/bbc3.htm
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/news/bbc1.htm
--------------------------------------------------------------------------------------------
-Nighthawks (1981)
-https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/125.html
-Thu, 09 Mar 2017 12:55:51 GMT   7979
-empty 1;verse 1;Brown 1;Williams 3;Add 2;Welcome 1;page 1;Billy 2;update 1;USA 5;question 1;Goofs 1;Cops 1;This 1;more 21;Comment 1;crewcut 1;is 6;comment 2;Allentown 1;the 18;I 2;useful 2;Sly 3;for 4;box 1;Soundtrack 1;a 15;Author 1;scheduletaglinestrailerspostersuser 1;Action 1;All 1;are 1;rd 1;of 5;have 1;his 4;used 1;think 1;under 2;when 1;You 1;through 1;international 2;or 2;true 1;cops 1;news 1;challenge 1;index 1;film 2;Rutger 1;and 9;might 2;remorseless 1;gold 1;Also 1;Featured 1;Though 1;first 3;TV 3;several 1;Yeah 1;totally 1;Movie 5;unrecognizable 1;replaced 1;beard 2;New 5;people 1;unlike 1;Cash 1;following 1;Hollywood 4;cocky 1;Back 1;tough 1;muscles 1;to 14;pleasure 1;brawny 1;main 2;oily 1;News 2;Revealing 1;suave 1;mistakes 1;exceptionally 1;Murtaughesque 1;Cable 1;relies 1;Index 1;mood 1;articles 1;creditstv 1;gameplan 1;My 3;story 2;bulgarianstallion 1;movie 1;surgery 1;Brian 1;fenimore 1;was 1;SPOILER 1;Tagline 1;whowhatwherewhenwhy 1;do 2;crew 2;Additonal 1;Man 1;flick 1;trivia 2;Look 1;modano 1;official 2;heard 1;dvd 1;sites 2;please 1;no 2;second 1;memorable 2;here 1;aveilbrief 1;quotes 2;ahmad 1;playing 1;Overview 1;Izzard 1;s 7;on 6;found 1;details 5;Joe 1;Enforcer 1;because 1;combined 1;scenes 1;process 1;company 2;credits 2;partner 1;The 4;look 1;tv 1;schedule 1;great 4;perfect 1;Promotional 1;They 1;taglines 1;Kill 1;what 1;posters 1;plays 1;What 1;photo 1;York 5;above 1;gallery 1;may 1;Awards 1;be 4;Reviews 1;external 1;reviews 2;will 2;take 2;Station 1;reviewsuser 1;roles 1;Show 1;included 1;newsgroup 1;Inc 1;awards 1;then 2;ratings 1;team 1;US 1;least 1;recommendations 2;message 2;hope 1;board 3;Dr 1;Plot 3;Jobs 1;home 1;role 1;Finally 1;plot 2;Free 1;summary 2;Trial 1;Fun 1;Copyright 1;long 1;Stuff 1;Internet 1;goofs 1;Database 1;before 1;soundtrack 1;Terms 1;Ray 1;can 1;listing 1;Privacy 1;dangerous 1;crazy 1;Policy 1;Roger 1;alternate 1;service 1;at 3;cause 1;versions 1;provided 1;connections 1;FAQ 2;West 1;Info 1;License 1;business 2;merchandising 1;content 1;links 1;shock 1;literature 1;release 1;dates 1;filming 1;if 1;locations 1;Bruce 1;put 1;technical 1;users 1;specs 1;laserdisc 1;deal 1;listings 1;shows 1;Eddie 1;External 1;only 1;final 1;showtimes 1;Police 2;which 2;miscellaneous 1;photographs 1;Peter 1;clips 2;colors 1;after 1;video 1;English 1;very 3;advertisement 1;photos 1;Tango 2;sequence 1;Advertise 1;trailer 1;good 2;login 1;rate 1;two 1;User 8;him 1;Rating 6;much 1;recommendation 1;votes 1;h 1;Now 2;Director 1;Vengeance 1;Car 1;Die 2;Shooting 1;by 1;sound 1;Writers 1;Train 1;Street 2;Release 1;Thompson 2;chase 3;make 1;user 2;Date 1;show 1;Genre 1;such 1;Outline 1;down 1;heart 1;PA 1;scene 1;guy 1;Nighthawks 6;report 1;happened 1;who 5;songs 1;Playing 2;Movies 4;doesn 2;DVD 2;realistic 1;UK 1;Video 1;NIGHTHAWKS 1;song 2;IMDbTV 1;Malmuthmore 1;Cast 1;Message 1;Shaber 1;really 1;our 3;Boards 2;andPaul 1;Showtimes 2;Drama 1;Sylbert 1;that 2;Tickets 1;Wulfgar 4;IMDbPro 2;terrorist 4;IMDb 11;holds 1;Resume 2;hostage 1;Login 1;Deke 3;Register 3;DaSilva 3;with 3;Games 1;cop 4;stars 1;Top 3;times 1;RecommendationsBox 1;known 1;suspense 1;proves 1;David 1;Photos 1;Office 1;man 1;Independent 1;Trailers 1;Conservative 1;German 1;Film 2;street 1;GameBase 1;Comments 1;Was 1;reluctantly 1;portray 1;other 2;better 1;Browse 1;Discuss 1;agrees 1;cool 1;Help 2;Recent 1;terminate 1;Anti 1;conclusion 1;Titles 1;detailsmiscellaneous 1;Posts 1;demanded 1;Terrorism 1;Big 1;but 4;Episodes 1;updated 1;media 1;El 1;Names 1;daily 1;tactics 1;Bus 1;Sugar 1;comments 1;Companies 1;toughest 2;t 3;Keywords 2;hero 3;Pleasure 1;He 2;Characters 1;VS 2;Quotes 3;overview 1;meanest 2;Bios 1;billed 1;villian 3;deserves 1;watch 1;Plots 1;Sylvester 1;also 2;tips 1;August 1;Stallone 4;Sgt 2;Hard 2;DaSilvaBilly 1;It 1;Warriors 1;Dee 3;has 3;FoxLindsay 1;Wagner 1;IrenePersis 1;killed 1;week 1;Khambatta 1;Shakka 1;Amazon 6;HollandNigel 1;But 1;original 1;enjoyed 1;Davenport 1;database 2;HartmanRutger 1;recommends 1;Hauer 3;tracks 1;an 4;not 1;Reinhardt 2;from 2;Heymar 2;you 10;WulfgarHilary 1;again 1;Pam 1;Dress 1;your 1;Hilarie 1;makes 1;City 2;Spinell 1;Search 1;errors 1;Lt 1;title 4;omissions 1;MunafoWalter 1;managers 1;Mathews 1;examined 1;CommissionerE 1;approved 1;Dean 1;in 8;Clicking 1;SergeantCaesar 1;Immigration 2;R 2;Update 1;Cordova 1;as 4;buttonwill 1;Puerto 1;step 2;Rican 1;proprietorCharles 1;Duval 1;GhiselinTony 1;out 3;Munafo 1;re 1;this 8;MikeHoward 1;SHOP 1;Stein 1;Disco 2;com 4;Known 1;managerTawn 1;ca 1;As 1;Christian 1;co 1;Hostessmore 1;uk 1;Runtime 1;Hawks 1;If 2;he 4;de 1;min 1;certificate 1;fr 1;Nova 2;don 1;DVDVHSCDAll 5;Scotia 2;However 1;Rent 1;Ireland 1;character 1;Quicklinks 1;IRT 1;Martin 1;detailscombined 1;Country 1;Subway 1;best 1;detailsfull 1;East 1;Night 1;keywords 1;cast 3;Language 1;Bronx 1;Last 1;Are 1;crewcompany 1;French 1;St 1;since 1;commentsexternal 1;April 1;Color 2;Det 2;With 1;Aspect 1;An 1;ratingsrecommendationsmessage 1;Ratio 1;Matthew 1;boardplot 1;Sound 1;summaryplot 1;Mix 1;it 2;most 1;keywordsAmazon 1;Dolby 1;Iceland 1;summarymemorable 1;Certification 1;future 1;quotestriviagoofssoundtrack 1;Technicolor 1;nonsense 1;listingalternate 1;office 2;versionsmovie 1;Finland 1;connectionsmerchandising 1;K 1;linksbox 1;Productions 1;job 1;businessrelease 1;Canada 2;datesfilming 1;locationstechnical 1;Sweden 1;Other 1;specslaserdisc 1;Filming 1;detailsDVD 1;Locations 1;does 3;Norway 1;Germany 1;MOVIEmeter 1;Officer 2;performance 1;last 1;appear 1;Links 2;why 1;When 1;attention 1;trailers 2;Company 1;Trivia 1;full 2;Home 2;m 1;Poll 1;tunnel 1;Connections 1;construction 1;underground 1;th 2;disco 1;
+Mann (1999)
+https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/258.html
+Sun, 30 Apr 2017 18:35:32 GMT   558
+Redirect 2;with 2;SSL 2;If 2;it 1;is 3;not 1;redirected 1;please 2;follows 1;https 1;course 2;cse 3;ust 3;hk 3;comp 1;labs 1;TestPages 1;CSD 1;account 1;required 1;for 2;accessing 2;CASS 2;there 1;any 1;problem 1;refer 1;to 1;http 1;cssystem 1;FAQ 1;cassaccess 1;html 2;Apache 1;Server 1;at 1;Port 1;Movie 1;
 Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie.htm
 -------------------------------------------------------------------------------------------
-CNN news
-https://course.cse.ust.hk/comp4321/labs/TestPages/news/cnn.htm
-Thu, 09 Mar 2017 12:56:02 GMT   427
-is 1;news 2;Back 1;to 1;News 1;CNN 2;on 1;may 1;Sauerkraut 1;Capital 1;sweet 1;accordions 1;Warming 1;cause 1;economic 1;chaos 1;
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/news.htm
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/news/cnn2.htm
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/news/cnn1.htm
+News
+https://course.cse.ust.hk/comp4321/labs/TestPages/news.htm
+Sun, 30 Apr 2017 18:34:48 GMT   552
+Redirect 2;with 2;SSL 2;If 2;it 1;is 3;not 1;redirected 1;please 2;follows 1;https 1;course 2;cse 3;ust 3;hk 3;comp 1;labs 1;TestPages 1;htm 1;CSD 1;account 1;required 1;for 2;accessing 2;CASS 2;there 1;any 1;problem 1;refer 1;to 1;http 1;cssystem 1;FAQ 1;cassaccess 1;html 1;Apache 1;Server 1;at 1;Port 1;news 1;
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/testpage.htm
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/news/bbc.htm
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/news/cnn.htm
 -------------------------------------------------------------------------------------------
-Cherry 2000 (1988)
-https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/217.html
-Thu, 09 Mar 2017 12:55:55 GMT   6819
-empty 1;Add 2;page 1;update 1;USA 4;question 1;Goofs 1;This 1;more 19;Comment 1;is 7;comment 2;the 16;I 2;useful 2;for 1;box 1;February 1;a 10;find 1;Author 1;same 1;Action 1;Judge 1;All 1;cut 1;of 7;his 1;Phantom 1;Lawyer 1;they 1;under 2;when 1;You 1;Intelligence 1;through 1;science 1;or 1;me 1;news 1;index 1;film 3;and 8;both 1;CHERRY 1;Pamela 1;first 2;TV 2;Movie 6;satirical 1;Ed 1;people 1;ERP 1;PG 1;sliding 1;following 1;immediately 1;Hollywood 1;chute 1;Back 1;suitcase 1;to 8;National 1;opens 1;main 3;bottom 1;News 2;Treadwell 1;psychopathic 1;impose 1;Index 1;Hunter 1;Duncan 1;articles 1;creditstv 1;craig 1;My 3;story 1;duncan 1;movie 6;kp 1;Bell 1;Spring 1;was 1;specsDVD 1;apparent 1;Tagline 1;zeitgeist 1;California 1;crew 2;purely 1;trivia 2;premises 1;official 2;Wars 1;autonomous 1;sites 2;artificially 1;memorable 2;Summary 1;robotic 1;quotes 2;Overview 1;intelligent 1;s 6;on 5;found 1;details 5;combined 1;someone 2;Gwynne 1;process 1;company 2;entertaining 1;saw 2;credits 2;The 7;tv 1;She 1;schedule 1;perfect 2;Promotional 1;They 1;taglines 1;Six 1;posters 1;originally 1;scheduletaglinespostersuser 1;What 1;photo 1;above 1;gallery 1;may 2;Awards 2;James 1;be 3;Reviews 1;external 1;reviews 2;will 2;take 1;received 1;Party 1;Mayo 1;Show 1;included 1;appears 1;Park 1;newsgroup 1;Cherry 8;Inc 1;awards 1;Tom 1;Sam 4;then 1;ratings 1;US 1;recommendations 2;message 2;board 3;partial 1;killer 1;Plot 3;Jobs 1;plot 2;Free 1;Referenced 1;summary 2;Trial 1;Jarnatt 1;Fun 2;Copyright 1;Almereyda 1;Stuff 1;Internet 1;Fonvielle 1;goofs 1;Database 1;Blond 1;hit 1;soundtrack 1;political 1;Terms 1;Lester 1;travels 1;listing 1;Privacy 1;ends 1;made 1;crazy 1;Policy 1;Futuristic 1;alternate 1;service 1;competently 1;perspective 2;at 1;versions 1;provided 1;TreadwellJennifer 1;connections 1;Balgobin 1;FAQ 2;Jim 1;cult 1;Glory 1;West 1;Info 1;License 1;Larry 1;ClerkMarshall 1;business 1;merchandising 1;content 1;org 1;BillHarry 1;links 1;Carey 1;literature 1;release 1;Snappy 2;dates 1;Don 1;TomLaurence 1;filming 1;Fishburne 2;if 1;locations 1;Glu 2;technical 1;Gidley 1;users 1;specs 1;Melanie 1;values 1;laserdisc 1;Edith 1;listings 1;TrackerMichael 1;External 1;Slim 1;only 1;showtimes 1;DesignerBrion 1;which 1;miscellaneous 1;Stacy 1;photographs 1;TrackerBen 1;clips 2;Fingered 1;video 1;Andrews 1;TrackerJeff 1;English 1;advertisement 1;Levine 1;photos 1;MartyJennifer 1;Advertise 1;trailer 1;Randa 1;login 1;WomanCameron 1;rate 1;Hole 1;Milzer 1;User 8;Elaine 2;Death 1;Rating 6;much 1;Ginger 3;recommendation 1;votes 1;WomanHoward 1;Now 2;Sci 2;Director 1;Swain 1;Fi 2;C 1;SkeetJack 1;Thibeau 1;Robot 3;Stubby 1;by 2;sound 1;Writers 1;Manmore 1;status 1;buildings 1;Release 1;user 2;Date 1;Genre 1;seen 1;down 1;Johnson 2;aka 1;report 1;Road 1;who 3;Playing 2;Michael 1;about 1;Movies 4;DVD 3;Episode 1;UK 1;Video 1;IMDbTV 1;Cast 1;Message 1;our 2;Boards 2;E 1;Valley 1;Showtimes 2;less 1;Transformers 1;that 4;were 2;Tickets 1;IMDbPro 2;IMDb 11;MD 1;particularly 1;Resume 2;Login 1;Register 3;with 1;Games 1;Top 3;RecommendationsBox 1;David 1;Photos 1;Office 1;man 2;Independent 2;Trailers 1;Film 3;version 1;Star 1;While 1;GameBase 1;Comments 1;Was 1;Craig 1;other 1;Browse 1;quotesgoofsmovie 1;Discuss 1;Help 2;linksrelease 1;Recent 1;Titles 1;Posts 1;Silver 1;Episodes 1;updated 1;Names 1;daily 1;comments 1;Companies 1;immersed 1;t 1;Keywords 2;Again 1;Characters 1;Quotes 3;overview 1;Bios 1;billed 1;Plots 1;k 1;also 1;tips 1;Comedy 1;Young 1;It 1;week 1;nose 1;Amazon 6;enjoyed 1;database 2;recommends 1;Beautiful 1;not 4;from 1;you 4;shut 1;mid 1;your 1;exist 1;Search 1;errors 1;De 1;title 4;omissions 1;managers 1;examined 1;always 1;approved 1;in 7;Clicking 1;Update 1;as 3;buttonwill 1;step 2;played 1;Evil 1;out 1;this 10;Jr 1;companions 1;SHOP 1;consumer 1;nomination 1;products 1;com 4;suffer 1;In 2;those 1;ca 1;DeLuxe 1;collapse 1;co 1;Steve 1;decade 1;uk 1;Runtime 1;outlandish 1;If 1;de 1;min 2;presently 1;Sex 1;fr 1;achieving 1;DVDVHSCDAll 5;conventional 1;SF 1;Quicklinks 1;eartuna 1;detailscombined 1;Country 1;Romantic 1;Anyone 1;detailsfull 1;earth 1;Stormrider 1;keywords 1;cast 3;Language 1;Lloyd 1;Dome 1;crewcompany 1;dodenhoff 1;Try 1;since 1;Who 1;larryman 1;America 1;commentsexternal 1;jaeaster 1;April 1;Color 2;Artificial 1;Forever 1;With 1;reviewsawardsuser 1;Aspect 1;AI 1;An 2;ratingsrecommendationsmessage 1;Ratio 1;Dredd 1;boardplot 1;Sound 1;Menace 1;summaryplot 1;Mix 1;Matrix 1;it 1;keywordsAmazon 1;Dolby 1;Iceland 1;would 2;summarymemorable 1;Certification 1;Australia 1;future 3;Griffith 1;Jake 1;Hotel 1;office 1;connectionsmerchandising 1;M 1;Spain 1;Productions 1;datesfilming 1;locationstechnical 1;Other 1;Filming 1;Locations 1;lake 1;Germany 1;water 1;MOVIEmeter 1;fiction 1;sitesmiscellaneous 1;last 1;Links 2;why 1;When 1;trailers 2;Company 1;Continuity 1;full 2;detailsofficial 1;Home 2;Connections 1;woman 1;
+Stuart Little 2 (2002)
+https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/252.html
+Sun, 30 Apr 2017 18:35:32 GMT   558
+Redirect 2;with 2;SSL 2;If 2;it 1;is 3;not 1;redirected 1;please 2;follows 1;https 1;course 2;cse 3;ust 3;hk 3;comp 1;labs 1;TestPages 1;CSD 1;account 1;required 1;for 2;accessing 2;CASS 2;there 1;any 1;problem 1;refer 1;to 1;http 1;cssystem 1;FAQ 1;cassaccess 1;html 2;Apache 1;Server 1;at 1;Port 1;Movie 1;
 Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie.htm
 -------------------------------------------------------------------------------------------
-book1
-https://course.cse.ust.hk/comp4321/labs/TestPages/books/book1.htm
-Thu, 09 Mar 2017 12:55:50 GMT   1584
-This 1;is 6;the 12;I 3;for 3;a 6;example 1;are 1;of 15;have 2;they 1;these 1;or 6;related 1;and 4;point 1;my 1;Back 1;to 6;main 2;Books 1;Automated 1;Keyword 1;Classification 1;Information 1;Retrieval 1;no 1;using 1;choice 1;simply 1;made 2;raged 1;round 1;view 1;purpose 1;reasonable 1;subject 1;which 3;between 2;For 1;information 2;that 5;with 2;am 1;kind 1;but 1;argument 1;so 1;has 4;been 3;an 1;not 3;from 1;book 2;primarily 1;monograph 1;discussion 1;topics 1;broadened 1;their 1;surrounding 1;in 5;context 1;retrieval 4;as 3;whole 1;textbook 1;attempt 1;therefore 1;justify 1;topic 1;this 4;account 1;use 5;certain 1;concepts 1;provide 1;research 1;elementary 1;description 1;either 1;instance 1;Chapter 2;assumed 1;reader 1;familiar 1;idea 1;keywords 1;considered 1;relation 1;device 1;controlled 1;thesaurus 1;descriptor 1;simple 1;class 1;lists 1;it 4;document 1;descriptions 2;syntactic 1;structure 1;Equally 1;recall 1;precision 1;ratios 2;means 1;characterising 1;without 1;justification 1;does 1;set 1;mean 1;unaware 1;performance 1;difficulties 1;doing 1;attention 1;devoted 1;controversy 1;
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/books.htm
--------------------------------------------------------------------------------------------
-Evelyn (2002)
-https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/275.html
-Thu, 09 Mar 2017 12:55:58 GMT   8940
-empty 1;Eustace 1;Add 2;Daithi 1;page 1;update 1;USA 3;question 1;Goofs 1;likable 1;Suillebhain 1;This 3;more 21;Comment 1;Andrea 1;is 12;material 1;comment 2;Irvine 1;the 35;I 2;useful 2;BrigidMarian 1;for 6;box 1;Soundtrack 1;TheresaKaren 1;a 19;get 1;Author 1;Ardiff 1;same 1;Of 3;FelicityJulianna 1;written 1;States 1;Bond 1;Margulies 1;All 1;are 4;Bernadette 1;watching 1;BeattieBosco 1;of 16;have 5;his 3;Hogan 1;think 1;Malleymore 1;time 1;admit 1;they 1;under 1;when 1;You 3;should 1;through 1;or 4;true 2;news 1;United 1;index 1;film 3;pants 1;Father 2;and 16;might 1;Music 1;Constitution 1;MPAA 1;amended 1;first 3;TV 3;Rated 1;leaving 1;Movie 5;support 1;finances 1;people 2;wards 1;PG 6;Why 1;Catholic 2;following 1;rooting 1;schools 1;Back 1;institutions 1;to 8;many 1;movies 1;Studios 1;religious 1;main 2;them 2;having 1;listingcrazy 1;angle 1;News 2;Lives 1;sadistic 1;nun 1;some 1;Brigid 1;Index 1;visible 1;ladies 1;articles 1;fine 1;faith 2;My 4;story 5;supporting 1;helping 1;inspiring 1;movie 4;keywordsmemorable 1;goes 1;flawed 1;trouble 1;Maurice 1;drinks 1;was 5;specsDVD 1;swears 1;Tagline 1;positive 1;steady 1;crew 2;ccthemovieman 1;superficial 1;trivia 2;Lockport 1;thieves 1;did 1;official 2;nobody 1;sites 2;hits 1;no 1;memorable 2;Summary 1;here 3;allies 1;quotes 2;boys 1;lawyers 1;Overview 1;Rea 1;s 8;on 8;found 1;details 5;Aiden 1;excellent 1;because 1;combined 1;scenes 1;Bates 2;process 1;company 2;ever 1;MOVIE 1;rugged 1;credits 2;barrister 1;The 5;whose 1;tv 1;Photo 1;winds 1;schedule 1;Gallery 1;live 1;finished 1;great 2;Promotional 1;irish 1;They 1;taglines 1;aren 1;accents 1;what 2;posters 1;plays 2;greys 1;photo 1;obsessy 1;above 1;gallery 1;WORST 1;may 1;Awards 2;James 1;Behind 1;reason 1;BOND 1;be 3;Reviews 1;upon 1;bonsai 1;external 1;creditsmovie 1;feel 1;midget 1;reviews 2;sitesmiscellaneousphotographsvideo 1;explination 1;will 2;Lalena 1;take 1;mostly 1;oc 1;March 1;Mommie 1;places 1;Superman 1;another 1;roles 1;Chariots 1;Show 1;included 1;newsgroup 1;father 3;Story 4;day 2;Inc 1;awards 1;Stephen 1;ratings 1;team 1;open 1;US 1;least 1;recommendations 2;Me 1;message 2;board 3;Overall 1;Plot 3;Jobs 1;Devlin 1;role 3;plot 2;Free 1;Mrs 1;Referenced 1;summary 2;Trial 1;screen 1;Fun 1;line 1;Copyright 1;Stuff 1;Internet 1;emotionally 1;goofs 1;Database 1;soundtrack 1;Terms 1;everyone 1;can 2;listing 1;Privacy 1;crazy 1;Policy 1;up 1;right 2;alternate 1;service 1;lot 2;versions 1;provided 1;love 1;little 4;connections 1;FAQ 2;Henry 1;Info 1;License 1;No 1;business 1;merchandising 1;content 1;links 1;NY 1;literature 1;release 1;dates 1;portrayed 1;DV 1;filming 1;if 1;locations 1;wrong 1;Bruce 1;technical 1;users 1;specs 1;laserdisc 1;listings 1;Ardmore 1;External 1;far 1;Herbert 1;only 1;showtimes 1;state 1;Bray 1;which 2;miscellaneous 1;focused 1;County 1;loving 2;photographs 1;Wicklow 1;today 1;clips 3;Child 1;CineEvelyn 1;after 2;video 1;SPCC 1;English 1;advertisement 1;pair 1;photos 2;Sister 4;Jesus 1;Advertise 1;trailer 1;hung 1;sister 1;see 3;good 3;login 1;lucky 1;Inspector 1;behind 1;rate 1;Banks 1;two 3;User 8;too 1;Roses 1;him 2;Rating 6;much 2;manipulative 1;recommendation 1;off 1;votes 1;exaggerated 1;Now 2;one 4;Director 1;purposes 1;custody 1;tear 1;course 1;by 3;sound 1;O 3;Christmas 2;Eve 1;twice 1;forced 1;Release 1;On 2;user 2;Date 1;ex 1;Genre 1;such 1;heart 1;bring 1;Fire 1;report 1;situation 1;rather 1;Road 1;who 2;government 1;V 1;Playing 2;drama 1;about 2;Movies 4;doesn 1;care 1;thing 1;DVD 2;UK 3;Since 1;Video 2;IMDbTV 1;determination 1;Cast 1;Message 1;Writer 1;really 1;Their 1;our 2;Boards 2;Showtimes 2;Drama 1;that 6;Tickets 1;IMDbPro 2;kids 4;IMDb 11;three 2;Resume 2;brothers 1;all 1;Login 1;Register 3;didn 1;negative 1;with 6;Games 1;EVELYN 1;Top 3;RecommendationsBox 1;identify 1;Photos 1;Office 1;man 4;Charlotte 1;Independent 1;win 1;Trailers 1;Film 1;nominations 1;version 1;almost 1;GameBase 1;Comments 1;Was 1;other 1;better 1;Browse 1;Discuss 1;Help 2;Recent 1;Titles 1;Posts 1;but 8;Episodes 1;updated 1;EVER 1;Names 1;daily 1;comments 1;Companies 1;Sophie 2;t 4;Keywords 2;He 1;Characters 1;Quotes 3;overview 1;Bios 1;billed 1;Game 1;Plots 1;also 1;tips 1;August 1;runs 1;has 4;week 1;Amazon 6;Quinn 2;thematic 1;Irish 1;But 1;enjoyed 1;changed 1;database 2;recommends 1;an 2;not 2;from 2;institution 1;you 11;Dearest 1;mid 1;makes 1;normally 1;language 1;lead 1;Search 1;bad 1;errors 1;than 3;title 4;omissions 1;managers 1;called 1;A 1;examined 1;their 1;approved 1;wonderful 1;quotesgoofssoundtrack 1;in 15;Clicking 1;actors 1;Update 1;as 8;buttonwill 1;Evelyn 13;step 2;played 2;Paul 1;out 2;being 1;this 12;based 2;SHOP 1;end 2;family 1;com 3;wasn 1;ca 1;co 1;Can 1;Alan 1;uk 1;Runtime 1;If 2;he 7;de 1;min 2;fr 1;Argentina 1;DVDVHSCDAll 5;wife 2;Rent 1;Ireland 3;Quicklinks 1;involving 1;detailscombined 1;Country 1;devastated 1;enough 1;Desmond 3;One 1;best 2;detailsfull 1;Switzerland 2;keywords 1;cast 3;Language 1;crewcompany 1;big 1;creditstaglinestrailerspostersphoto 1;since 1;galleryuser 1;commentsexternal 1;had 1;reviewsnewsgroup 1;Color 2;reviewsawardsuser 1;Aspect 1;Pierce 2;An 1;speaking 1;ratingsrecommendationsmessage 1;Ratio 1;Beresford 1;boardplot 1;Sound 1;DTS 1;nasty 1;Pender 1;summaryplot 1;Mix 1;Digital 1;nation 1;it 5;Dolby 1;Doyle 8;Certification 1;Australia 1;abandons 1;future 1;canton 2;homes 1;unemployment 1;things 1;Trespassing 1;office 2;Singapore 1;Grandfather 1;connectionsmerchandising 1;Touching 2;linksbox 1;Spain 1;Catch 1;Involving 2;job 1;businessrelease 1;Geneva 1;Canada 1;Netherlands 1;caring 1;Vavasseur 2;case 1;means 1;datesfilming 1;Vaud 1;AL 1;others 1;DoyleNiall 1;locationstechnical 1;Sweden 1;Beagan 1;Other 1;Filming 1;Abuse 1;Dermot 3;Locations 1;DoyleHugh 1;detailsliterature 1;probably 1;McDonagh 1;Very 3;listingsnews 1;Germany 1;Hugh 1;articlesofficial 1;MOVIEmeter 1;Macdonagh 1;last 1;Brother 1;Brosnan 4;Links 2;why 2;DoyleMairead 1;When 2;trailers 2;Company 1;DoyleFrank 1;Continuity 1;DoyleClaire 1;His 1;full 2;Loss 2;Mullan 1;At 1;DaisleyAlvaro 1;Home 2;Lucchesi 1;given 1;LoganGarrett 1;Kelly 1;Keogh 1;Connections 1;District 1;however 1;woman 1;JudgeDaithi 1;parts 1;lines 1;Suilleabhain 1;
+Isle of Man TT 2004 Review (2004)
+https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/2.html
+Sun, 30 Apr 2017 18:35:29 GMT   556
+Redirect 2;with 2;SSL 2;If 2;it 1;is 3;not 1;redirected 1;please 2;follows 1;https 1;course 2;cse 3;ust 3;hk 3;comp 1;labs 1;TestPages 1;CSD 1;account 1;required 1;for 2;accessing 2;CASS 2;there 1;any 1;problem 1;refer 1;to 1;http 1;cssystem 1;FAQ 1;cassaccess 1;html 2;Apache 1;Server 1;at 1;Port 1;Movie 1;
 Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie.htm
 -------------------------------------------------------------------------------------------
-book2
-https://course.cse.ust.hk/comp4321/labs/TestPages/books/book2.htm
-Thu, 09 Mar 2017 12:55:50 GMT   2043
-Volume 2;prepared 1;Williams 2;update 1;This 1;consisting 1;is 7;material 2;the 10;accordance 1;for 2;initial 1;a 2;compilation 1;same 1;definition 1;are 6;boundaries 1;applications 1;of 13;used 3;continued 1;base 2;organized 1;collection 1;records 1;containing 1;bibliographic 3;these 1;e 1;or 4;g 1;related 1;index 1;and 10;consider 1;constraints 1;precludes 1;several 1;concerned 2;numerical 1;nonbibliographic 1;chemical 1;structures 1;Back 1;Milen 1;to 4;areas 1;many 2;et 1;al 1;excluded 2;Thus 1;some 1;even 1;Books 1;though 3;Systems 1;Chemical 1;Abstracts 1;CAS 2;Registry 2;Number 1;element 1;Generation 1;papers 1;Uses 1;Machine 1;Readable 1;Data 1;Bases 1;s 1;The 3;be 1;will 1;regarding 1;progress 1;building 1;choice 1;System 1;Similarly 1;textual 1;included 1;Consultants 1;Inc 1;Navy 1;miniaturized 1;hardware 1;shipboard 1;scope 1;Finally 1;publications 1;via 1;phototypesetting 1;considering 1;production 1;operation 1;data 10;generation 3;environment 1;year 1;First 1;by 2;storage 2;common 1;such 2;information 5;report 1;thus 1;general 1;that 3;with 3;itself 1;other 1;It 1;Service 1;an 2;not 2;book 1;primarily 2;A 1;their 1;in 7;within 1;retrieval 3;as 2;therefore 1;this 2;use 1;research 1;considered 2;most 1;document 1;we 2;chapter 2;continues 1;coverage 2;machine 2;readable 2;bases 6;inaugurated 1;
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/books.htm
--------------------------------------------------------------------------------------------
-Triumph: Live at the US Festival (1983)
-https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/218.html
-Thu, 09 Mar 2017 12:55:55 GMT   3746
-more 2;is 2;the 25;for 8;a 2;All 1;are 2;of 4;have 1;Davis 1;under 1;should 1;hou 1;index 1;and 2;Music 1;TV 8;Movie 4;CBS 1;New 1;following 2;Back 1;to 8;areas 1;them 1;News 2;some 1;Index 1;My 3;Sports 1;was 1;Fei 2;tian 1;miao 1;xiang 1;Attends 1;Joss 1;Montreal 2;Heavenly 1;Note 1;Lively 1;on 1;found 1;Cincinnati 1;Ultimate 1;because 1;company 1;The 5;Royal 1;Fall 1;may 4;hong 2;be 2;will 1;Inc 1;Triumph 7;US 8;Orleans 1;Festival 22;additional 2;Jobs 1;Free 1;Trial 1;Great 2;Copyright 1;Internet 1;Database 1;Terms 1;can 1;Privacy 1;Policy 1;up 1;service 1;Huang 2;Live 17;at 16;provided 1;Stick 1;Montreux 1;License 1;content 1;results 2;users 1;Summer 1;only 1;which 1;Temple 1;Survival 1;video 1;English 1;There 2;Advertise 1;see 1;Now 2;For 1;Jazz 4;complete 1;Fire 1;aka 4;available 1;British 2;V 6;series 1;Playing 2;Or 1;Michael 1;prefer 1;Movies 4;link 1;DVD 1;Episode 2;UK 2;Video 1;special 1;IMDbTV 1;interest 1;Message 1;choosing 1;our 1;Boards 2;Enable 1;Showtimes 2;adult 1;that 1;Tickets 1;names 1;IMDbPro 2;More 1;IMDb 5;Searches 1;Resume 2;return 1;all 2;Login 1;category 1;Register 2;Preferences 1;with 1;TitleSearch 2;Games 1;each 1;Top 2;RecommendationsBox 1;Photos 1;Office 1;Independent 1;Trailers 1;Carpet 1;Film 2;GameBase 1;Hall 1;better 1;Browse 1;Hong 1;Help 2;Zatoichi 1;Kong 1;Titles 4;Episodes 1;Names 1;Companies 1;Goddess 1;Keywords 1;Characters 2;Quotes 1;Bios 1;Plots 2;tips 1;Biographies 1;Quotesmore 1;Young 1;Miles 1;searches 2;Your 2;yield 1;search 6;Matches 1;Suggestions 1;Improving 1;Red 1;Results 2;original 2;changed 1;Dixie 1;likely 1;Dregs 1;not 2;give 1;Diana 1;from 2;matches 4;Krall 1;you 6;Baaba 1;again 1;Maal 1;your 1;Nesmith 2;Parade 1;query 1;Britt 1;Search 5;Provinssirock 1;title 5;Arts 1;Tribeca 1;amongst 1;Zat 1;A 1;alternative 1;ichi 1;MTV 1;titles 2;abare 1;in 3;various 1;himatsuri 1;regions 1;Sonic 1;languages 1;Striptease 2;AKA 1;Title 2;searching 1;particular 1;episode 2;this 2;Series 1;use 1;com 1;If 2;These 1;People 1;Band 1;jin 1;An 1;we 1;Cult 2;Presents 1;Approx 1;Displaying 1;Home 2;Industrial 1;
+Marat / Sade (1967)
+https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/260.html
+Sun, 30 Apr 2017 18:35:31 GMT   558
+Redirect 2;with 2;SSL 2;If 2;it 1;is 3;not 1;redirected 1;please 2;follows 1;https 1;course 2;cse 3;ust 3;hk 3;comp 1;labs 1;TestPages 1;CSD 1;account 1;required 1;for 2;accessing 2;CASS 2;there 1;any 1;problem 1;refer 1;to 1;http 1;cssystem 1;FAQ 1;cassaccess 1;html 2;Apache 1;Server 1;at 1;Port 1;Movie 1;
 Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie.htm
 -------------------------------------------------------------------------------------------
-book3
-https://course.cse.ust.hk/comp4321/labs/TestPages/books/book3.htm
-Thu, 09 Mar 2017 12:55:50 GMT   1949
-This 1;more 2;is 5;the 15;a 11;find 1;same 2;definition 1;are 1;of 14;have 2;serious 1;they 1;when 1;degree 1;cover 1;e 1;or 4;and 9;both 1;books 1;numerical 1;Back 1;to 7;Thus 1;some 1;Books 1;articles 1;Recently 1;reports 1;dealing 1;systems 4;i 1;Note 1;advanced 1;on 3;doctrine 2;Pseudo 1;evaluated 1;Mathematics 1;terms 1;Relevance 1;percentage 1;relevancy 1;formal 1;Although 1;seems 1;agreement 2;what 1;any 1;relevance 4;doubt 1;quantifiable 1;be 2;nevertheless 1;hand 1;growing 1;fixed 1;will 1;individual 1;little 1;relationship 1;exists 1;system 1;literature 1;frankly 1;subjective 2;notion 1;reported 1;users 1;equations 2;curves 1;mathematical 5;formulations 1;which 3;presumably 1;measures 1;characteristics 1;phenomenon 1;shifting 1;forth 1;admittedly 1;non 1;term 5;two 1;value 1;ancient 1;parallel 1;discussions 1;probability 1;course 1;legislate 1;by 2;meaning 1;between 1;depends 1;Alice 1;pointed 1;master 1;On 1;user 1;distinct 1;such 2;meanings 1;especially 1;usage 1;secure 1;acceptance 1;attributing 1;information 2;validity 1;represents 1;situation 1;merely 1;careless 1;who 1;ambiguity 1;that 3;all 1;with 1;other 1;its 1;It 1;has 1;designed 1;an 1;not 1;from 1;there 2;book 1;than 1;A 1;in 5;back 1;retrieval 1;as 2;out 1;use 1;single 1;provide 2;One 1;cannot 1;it 3;document 2;we 1;recall 2;means 1;does 1;number 1;performance 1;given 1;
-Child  https://course.cse.ust.hk/comp4321/labs/TestPages/books.htm
--------------------------------------------------------------------------------------------
-7 Seconds (2005)
-https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/17.html
-Thu, 09 Mar 2017 12:55:53 GMT   3521
-USA 4;more 2;is 2;the 9;for 7;a 2;All 1;are 2;of 3;have 1;under 1;should 1;index 1;and 3;TV 5;Movie 4;following 2;Desert 1;Back 1;to 12;areas 1;them 1;Image 1;News 2;some 1;Index 1;My 3;was 1;Note 1;on 1;found 1;because 1;company 1;The 2;Nine 1;may 4;be 2;will 1;Frame 1;Inc 1;US 1;additional 2;Jobs 1;Free 1;Trial 1;Copyright 1;Internet 1;Database 1;Terms 1;can 1;Privacy 1;Policy 1;up 1;service 1;provided 1;Eating 1;Seconds 30;License 1;content 1;Thirty 1;results 2;users 1;only 1;which 1;English 1;There 2;Gone 5;Advertise 1;see 1;Now 2;by 1;For 1;September 2;aka 5;available 1;Out 1;V 2;series 1;Playing 2;Or 1;prefer 1;Movies 4;link 1;DVD 1;Episode 2;Video 1;special 1;IMDbTV 1;interest 1;Message 1;choosing 1;Spare 2;our 1;Boards 2;Enable 1;Showtimes 2;adult 1;that 1;Tickets 1;names 1;IMDbPro 2;More 1;IMDb 5;Searches 1;Resume 2;return 1;all 2;Login 1;category 1;Register 2;Preferences 1;with 1;TitleSearch 2;Games 1;each 1;Top 2;RecommendationsBox 1;Photos 1;Office 1;Independent 1;Trailers 1;Film 1;GameBase 1;better 1;Browse 1;Help 2;Titles 6;Episodes 1;Hours 1;Names 1;Sixty 2;Companies 1;Sophie 2;Keywords 1;Seventeen 1;He 1;Characters 2;Eleven 1;Quotes 1;Minutes 2;Bios 1;Tokyo 1;Plots 2;secondes 1;tips 1;Disaster 1;Biographies 1;Shining 1;Quotesmore 1;enacted 1;searches 2;Bunnies 1;Your 2;yield 1;Sloppy 1;search 6;Ride 1;Matches 2;Stands 1;Suggestions 1;Counting 1;Improving 1;Results 4;original 2;changed 1;likely 1;not 2;give 1;from 1;matches 4;you 6;again 1;your 1;query 1;Search 5;title 3;amongst 1;A 1;alternative 4;titles 2;in 10;various 1;regions 1;languages 1;Five 1;AKA 1;Title 2;searching 1;particular 1;episode 2;this 2;Series 1;use 1;com 1;spelling 3;If 2;These 1;Re 1;One 1;An 1;we 1;Other 1;Over 1;Approx 1;His 1;Displaying 3;Life 1;Home 2;Popular 2;Result 2;Exact 1;
+Dinosaur Planet (2003)
+https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/1.html
+Sun, 30 Apr 2017 18:35:30 GMT   556
+Redirect 2;with 2;SSL 2;If 2;it 1;is 3;not 1;redirected 1;please 2;follows 1;https 1;course 2;cse 3;ust 3;hk 3;comp 1;labs 1;TestPages 1;CSD 1;account 1;required 1;for 2;accessing 2;CASS 2;there 1;any 1;problem 1;refer 1;to 1;http 1;cssystem 1;FAQ 1;cassaccess 1;html 2;Apache 1;Server 1;at 1;Port 1;Movie 1;
 Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie.htm
 -------------------------------------------------------------------------------------------
-What the #$*! Do We Know!? (2004)
-https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/8.html
-Thu, 09 Mar 2017 12:56:01 GMT   4147
-USA 5;more 2;is 2;the 22;I 9;for 7;a 2;All 1;are 2;of 4;have 1;under 1;You 7;should 1;Sequel 1;e 1;Men 1;or 1;me 1;index 1;and 3;TV 6;Movie 4;qu 1;New 1;following 2;Back 1;to 15;areas 1;them 1;News 2;some 1;Family 1;Index 1;My 3;Islam 1;was 1;informal 1;no 1;Note 1;s 1;on 2;found 1;because 1;company 1;Report 2;The 6;Rise 1;She 1;They 1;What 30;Do 17;We 16;may 4;Know 22;be 2;will 1;Yo 1;That 1;Say 1;Story 1;Inc 1;US 1;Me 1;additional 2;Jobs 1;Free 1;Trial 1;Copyright 1;Internet 1;Database 1;Terms 1;can 1;Privacy 1;Policy 1;up 1;service 1;provided 1;West 1;License 1;No 1;content 1;Don 4;results 2;users 1;Summer 4;Fate 1;only 1;which 1;English 4;There 2;Advertise 1;see 1;Is 2;Now 5;For 1;Done 1;World 1;aka 7;available 1;V 4;series 1;Playing 2;Or 1;Der 1;prefer 1;Movies 4;link 1;DVD 1;Episode 2;Video 1;special 1;IMDbTV 1;interest 1;Message 1;choosing 1;our 1;Boards 2;Enable 1;Showtimes 2;adult 1;that 1;now 1;Tickets 1;names 1;IMDbPro 2;More 1;IMDb 5;Searches 1;Resume 2;return 1;all 2;Login 1;category 1;Am 1;Hot 1;Register 2;Preferences 1;with 2;TitleSearch 2;Games 1;each 1;Top 2;RecommendationsBox 1;Photos 1;Office 1;Independent 1;Trailers 1;Carpet 1;Film 1;GameBase 1;Was 1;better 1;Browse 1;Help 2;Titles 4;Knows 1;Episodes 1;Names 1;Companies 1;t 5;Keywords 1;Characters 2;Quotes 1;Bios 1;Plots 2;tips 1;Biographies 1;Did 6;Quotesmore 1;It 1;searches 2;Your 3;yield 1;search 6;Matches 1;Suggestions 1;Improving 1;Red 1;Results 2;Eyes 1;But 1;original 2;changed 1;likely 1;not 2;give 1;matches 4;you 6;Doesn 1;again 1;Should 1;your 1;Terminator 1;query 1;Effects 1;Search 5;Think 2;title 9;Vicious 1;amongst 1;Circle 1;A 1;alternative 2;Trying 1;titles 2;han 1;in 3;various 1;hecho 1;regions 1;tus 1;languages 1;ojos 1;AKA 1;Have 1;Title 2;Wear 1;searching 1;Rwanda 1;particular 1;Speak 1;episode 2;Dies 1;this 2;Series 1;Neue 1;Not 3;use 1;Does 1;hei 1;nner 1;com 1;nicht 1;In 1;glich 1;literal 2;spelling 1;halten 1;Possible 1;If 4;Sex 1;These 1;ll 1;Making 1;Last 6;Are 1;Like 1;Always 1;Make 1;An 1;r 1;Digital 1;we 1;working 2;K 1;M 1;si 1;Bleep 1;Them 1;Parts 1;Needs 1;Vedeli 1;rady 1;Still 2;Continues 1;Shriek 2;Friday 2;Thirteenth 1;Approx 1;Displaying 1;Home 2;m 1;f 1;th 1;
+Midsomer Murders: Strangler's Wood (2000)
+https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/251.html
+Sun, 30 Apr 2017 18:35:32 GMT   558
+Redirect 2;with 2;SSL 2;If 2;it 1;is 3;not 1;redirected 1;please 2;follows 1;https 1;course 2;cse 3;ust 3;hk 3;comp 1;labs 1;TestPages 1;CSD 1;account 1;required 1;for 2;accessing 2;CASS 2;there 1;any 1;problem 1;refer 1;to 1;http 1;cssystem 1;FAQ 1;cassaccess 1;html 2;Apache 1;Server 1;at 1;Port 1;Movie 1;
 Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie.htm
 -------------------------------------------------------------------------------------------
-Vampire Effect (aka Twins Effect) (2003)
-https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/126.html
-Thu, 09 Mar 2017 12:55:51 GMT   3084
-USA 3;more 2;is 2;the 11;for 7;a 3;All 1;are 2;of 4;have 1;under 1;should 1;or 1;index 1;and 3;Bootcamp 1;Reflections 1;TV 4;Decade 1;Movie 4;Darkness 1;Chin 1;gei 1;bin 1;following 2;Back 1;to 8;areas 1;them 1;News 2;Lemon 2;some 1;Index 1;My 4;was 1;Note 1;on 2;found 1;because 1;company 1;Dance 1;The 2;may 4;be 2;will 1;Space 1;Vampires 1;Fearless 1;Inc 1;Killers 1;Pardon 1;US 1;Me 1;Teeth 1;Neck 1;additional 2;poster 1;Jobs 1;Grove 2;Free 1;Kids 2;Trial 1;Meet 2;Copyright 1;Monsters 1;Internet 1;Grasshopper 1;Database 1;Outer 1;Terms 1;can 1;Privacy 1;Policy 1;up 1;service 1;provided 1;License 1;content 1;results 2;users 1;only 1;which 1;There 2;Advertise 1;see 1;Now 2;For 1;Effect 15;aka 11;available 1;Twins 7;V 1;series 1;Playing 2;Or 1;prefer 1;Movies 4;link 1;DVD 2;Episode 2;Video 1;special 1;IMDbTV 1;interest 1;Message 1;choosing 1;our 1;Boards 2;Enable 1;Showtimes 2;adult 1;that 1;Tickets 1;names 1;IMDbPro 2;More 1;IMDb 5;Searches 1;Resume 2;return 1;all 2;Login 1;category 1;Register 2;Preferences 1;with 1;TitleSearch 2;Games 1;each 1;Top 2;RecommendationsBox 1;Photos 1;Office 1;Independent 1;Trailers 1;Film 1;GameBase 1;Lady 1;better 1;Browse 1;Help 2;Titles 4;Episodes 1;Names 1;Companies 1;Keywords 1;Characters 2;Quotes 1;Bios 1;Plots 2;tips 1;Biographies 1;Quotesmore 1;searches 2;Your 3;yield 1;search 6;Matches 1;Suggestions 1;Improving 1;Results 2;But 1;original 2;changed 1;likely 1;not 2;give 1;from 1;matches 4;you 6;again 1;your 1;query 1;Search 5;title 4;amongst 1;A 1;alternative 1;titles 2;in 4;various 1;regions 1;languages 1;AKA 1;Title 2;searching 1;particular 1;episode 2;this 2;Series 1;use 1;com 1;If 2;These 1;Are 1;An 1;we 1;Vampire 12;Pontianak 1;Kembali 1;Green 1;Returns 1;Approx 1;Displaying 1;Home 2;
+Sick (1997)
+https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/6.html
+Sun, 30 Apr 2017 18:35:31 GMT   556
+Redirect 2;with 2;SSL 2;If 2;it 1;is 3;not 1;redirected 1;please 2;follows 1;https 1;course 2;cse 3;ust 3;hk 3;comp 1;labs 1;TestPages 1;CSD 1;account 1;required 1;for 2;accessing 2;CASS 2;there 1;any 1;problem 1;refer 1;to 1;http 1;cssystem 1;FAQ 1;cassaccess 1;html 2;Apache 1;Server 1;at 1;Port 1;Movie 1;
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie.htm
+-------------------------------------------------------------------------------------------
+Charlotte's Web (1973)
+https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/257.html
+Sun, 30 Apr 2017 18:35:32 GMT   558
+Redirect 2;with 2;SSL 2;If 2;it 1;is 3;not 1;redirected 1;please 2;follows 1;https 1;course 2;cse 3;ust 3;hk 3;comp 1;labs 1;TestPages 1;CSD 1;account 1;required 1;for 2;accessing 2;CASS 2;there 1;any 1;problem 1;refer 1;to 1;http 1;cssystem 1;FAQ 1;cassaccess 1;html 2;Apache 1;Server 1;at 1;Port 1;Movie 1;
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie.htm
+-------------------------------------------------------------------------------------------
+Character (1997)
+https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/3.html
+Sun, 30 Apr 2017 18:35:31 GMT   556
+Redirect 2;with 2;SSL 2;If 2;it 1;is 3;not 1;redirected 1;please 2;follows 1;https 1;course 2;cse 3;ust 3;hk 3;comp 1;labs 1;TestPages 1;CSD 1;account 1;required 1;for 2;accessing 2;CASS 2;there 1;any 1;problem 1;refer 1;to 1;http 1;cssystem 1;FAQ 1;cassaccess 1;html 2;Apache 1;Server 1;at 1;Port 1;Movie 1;
+Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie.htm
+-------------------------------------------------------------------------------------------
+The Big Clock (1948)
+https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/261.html
+Sun, 30 Apr 2017 18:35:32 GMT   558
+Redirect 2;with 2;SSL 2;If 2;it 1;is 3;not 1;redirected 1;please 2;follows 1;https 1;course 2;cse 3;ust 3;hk 3;comp 1;labs 1;TestPages 1;CSD 1;account 1;required 1;for 2;accessing 2;CASS 2;there 1;any 1;problem 1;refer 1;to 1;http 1;cssystem 1;FAQ 1;cassaccess 1;html 2;Apache 1;Server 1;at 1;Port 1;Movie 1;
 Child  https://course.cse.ust.hk/comp4321/labs/TestPages/Movie.htm
 -------------------------------------------------------------------------------------------
 Paula Abdul's Get Up and Dance (1994)
 https://course.cse.ust.hk/comp4321/labs/TestPages/Movie/4.html
-Thu, 09 Mar 2017 12:55:59 GMT   2820
-USA 1;more 2;is 2;the 7;for 7;Cardio 1;a 2;All 1;are 2;of 2;have 1;under 1;should 1;index 1;and 6;TV 4;Movie 4;following 2;Back 1;to 8;areas 1;them 1;News 2;some 1;Index 1;My 3;was 1;Paula 9;Abdul 9;Note 1;s 9;on 1;found 1;Get 9;because 1;Up 9;company 1;Dance 11;may 4;be 2;will 1;Inc 1;US 1;additional 2;Jobs 1;Free 1;Trial 1;Copyright 1;Internet 1;Database 1;Terms 1;can 1;Privacy 1;Policy 1;up 1;service 1;provided 1;License 1;content 1;results 2;users 1;only 1;which 1;There 2;Advertise 1;see 1;Now 2;Marie 1;For 1;complete 1;aka 1;available 1;V 2;series 1;Playing 2;Or 1;prefer 1;Movies 4;link 1;DVD 1;Episode 2;Video 1;special 1;IMDbTV 1;interest 1;Message 1;choosing 1;our 1;Boards 2;Enable 1;Showtimes 2;adult 1;that 1;Tickets 1;names 1;IMDbPro 2;More 1;IMDb 5;Searches 1;Resume 2;return 1;all 2;Login 1;category 1;Register 2;Preferences 1;with 1;TitleSearch 2;Games 1;each 1;Top 2;RecommendationsBox 1;Photos 1;Office 1;Independent 1;Trailers 1;Film 1;GameBase 1;better 1;Browse 1;Help 2;Titles 5;Episodes 1;Names 1;Companies 1;Keywords 1;Characters 2;Quotes 1;Bios 1;Plots 2;tips 1;Biographies 1;Quotesmore 1;searches 2;Your 2;yield 1;search 6;Matches 2;Suggestions 1;Improving 1;Results 2;Lesson 1;original 2;changed 1;likely 1;not 2;give 1;matches 4;you 6;again 1;your 1;query 1;Search 5;title 3;amongst 1;A 1;alternative 1;titles 2;in 3;various 1;
+Sun, 30 Apr 2017 18:35:30 GMT   556
+Redirect 2;with 2;SSL 2;If 2;it 1;is 3;not 1;redirected 1;please 2;follows 1;https 1;course 2;cse 3;ust 3;hk 3;comp 1;labs 1;TestPages 1;CSD 1;account 1;required 1;for 2;accessing 2;CASS 2;there 1;any 1;problem 1;refer 1;to 1;http 1;cssystem 1;FAQ 1;cassaccess 1;html 2;

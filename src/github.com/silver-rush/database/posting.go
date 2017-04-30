@@ -35,6 +35,15 @@ func OpenPostingDB() {
 	})
 }
 
+//OpenPostingDBReadOnly opens the posting list database in read-only mode
+func OpenPostingDBReadOnly() {
+	var err error
+	postingDB, err = bolt.Open("db"+string(os.PathSeparator)+"posting_list.db", 0700, &bolt.Options{ReadOnly: true})
+	if err != nil {
+		panic(fmt.Errorf("Open Posting List Database error: %s", err))
+	}
+}
+
 //ClosePostingDB will close the posting list database
 func ClosePostingDB() {
 	postingDB.Close()
@@ -247,10 +256,13 @@ func GetDocOfTerm(termID int64) (docIDCollection []int64, termFreqCollection []i
 
 		//Iterate through all the postings
 		specifiedPostingBuc.ForEach(func(k, v []byte) error {
-			docIDCollection[docCount] = decode64Bit(k)
-			posting := decodePosting(v)
-			termFreqCollection[docCount] = posting.TermFreq
-			docCount++
+			id := decode64Bit(k)
+			if id != 0 {
+				docIDCollection[docCount] = id
+				posting := decodePosting(v)
+				termFreqCollection[docCount] = posting.TermFreq
+				docCount++
+			}
 			return nil
 		})
 		return nil
@@ -269,8 +281,11 @@ func GetRootSquaredTermFreqOfDoc(docID int64) float64 {
 			sum = 0
 		} else {
 			specifiedForwardBuc.ForEach(func(k, v []byte) error {
-				tf := decode32Bit(v)
-				sum += int64(tf * tf)
+				id := decode64Bit(k)
+				if id != 0 {
+					tf := decode32Bit(v)
+					sum += int64(tf * tf)
+				}
 				return nil
 			})
 		}

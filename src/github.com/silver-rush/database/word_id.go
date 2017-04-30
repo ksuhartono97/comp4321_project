@@ -35,6 +35,15 @@ func OpenWordDB() {
 	})
 }
 
+//OpenWordDBReadOnly opens the word-id database in read-only mode
+func OpenWordDBReadOnly() {
+	var err error
+	wordDB, err = bolt.Open("db"+string(os.PathSeparator)+"word_id.db", 0700, &bolt.Options{ReadOnly: true})
+	if err != nil {
+		panic(fmt.Errorf("Open word ID error: %s", err))
+	}
+}
+
 //CloseWordDB close the word-id database
 func CloseWordDB() {
 	wordDB.Close()
@@ -104,7 +113,7 @@ func BatchGetIDWithWord(word []string) (id []int64, created []bool) {
 	id = make([]int64, len(word))
 	created = make([]bool, len(word))
 
-	err := wordDB.Update(func(tx *bolt.Tx) error {
+	err := wordDB.Batch(func(tx *bolt.Tx) error {
 
 		for i, s := range word {
 			wordToIDBuc := tx.Bucket([]byte("word_to_id"))

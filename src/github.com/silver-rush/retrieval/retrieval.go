@@ -4,12 +4,34 @@ import (
 	"math"
 	"sort"
 
+	"fmt"
+
 	"../../silver-rush/database"
 )
 
-//Retrieve will return the retrieved docID ranked with similarity
-func Retrieve(query string) []int64 {
+//RetrieveRankedStringResult returns readable string result
+func RetrieveRankedStringResult(query string) []string {
+	docIDSlice := RetrieveRankedDocID(query)
+	fmt.Printf("Retrieval size: %d\n", len(docIDSlice))
+	allResult := make([]string, len(docIDSlice))
+	for i, id := range docIDSlice {
+		docInfo := database.GetDocInfo(id)
+		url := database.GetURLWithID(id)
+		pageResult := fmt.Sprintf("%s\n <b>URL</b>: %s \nSize: %d \nTime: %d\n\n",
+			docInfo.Title,
+			url,
+			docInfo.Size,
+			docInfo.Time)
+		allResult[i] = pageResult
+	}
+	return allResult
+}
+
+//RetrieveRankedDocID will return the retrieved docID ranked with similarity
+func RetrieveRankedDocID(query string) []int64 {
 	queryTerms := analyzeQuery(query)
+	fmt.Printf("Query size: %d\n", len(queryTerms))
+	fmt.Printf("Query terms: %v\n", queryTerms)
 
 	totalDoc := database.GetTotalNumberOfDocument()
 
@@ -26,8 +48,10 @@ func Retrieve(query string) []int64 {
 			//Single word
 			go func(s string) {
 				//Compute idf first
+				fmt.Printf("Term: %s\n", s)
 				termID, exist := database.GetIDWithWordDoNotCreate(s)
 				if !exist {
+					fmt.Printf("Do not exist.\n")
 					//Zero term weight
 				} else {
 					docIDCollection, termFreqCollection, documentFreq := database.GetDocOfTerm(termID)
@@ -42,6 +66,7 @@ func Retrieve(query string) []int64 {
 			}(group[0])
 		} else {
 			//Phrase search.
+			doneChannel <- true
 		}
 	}
 
@@ -65,9 +90,11 @@ func Retrieve(query string) []int64 {
 	i := 0
 	queryLength := len(queryTerms)
 	for k, v := range totalTfIdfMap {
+		//Obtain cosine similarity
 		docLength := database.GetRootSquaredTermFreqOfDoc(k)
+		maxTF := database.GetMaxTFOfDoc(k)
 		similaritySlice[i].docID = k
-		similaritySlice[i].similarity = v / docLength / float64(queryLength)
+		similaritySlice[i].similarity = v / docLength / float64(queryLength) / float64(maxTF)
 		i++
 	}
 

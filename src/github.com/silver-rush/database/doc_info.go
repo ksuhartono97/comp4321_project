@@ -28,6 +28,15 @@ func OpenDocInfoDB() {
 	})
 }
 
+//OpenDocInfoDBReadOnly opens the document information database in read-only mode
+func OpenDocInfoDBReadOnly() {
+	var err error
+	docInfoDB, err = bolt.Open("db"+string(os.PathSeparator)+"doc_info.db", 0700, &bolt.Options{ReadOnly: true})
+	if err != nil {
+		panic(fmt.Errorf("Open document information databse error: %s", err))
+	}
+}
+
 //CloseDocInfoDB will close the document information database
 func CloseDocInfoDB() {
 	docInfoDB.Close()
@@ -114,7 +123,9 @@ func GetAllDoc() []int64 {
 
 		if err := bucket.ForEach(func(k, v []byte) error {
 			list[i] = decode64Bit(k)
-			i++
+			if list[i] != 0 {
+				i++
+			}
 			return nil
 		}); err != nil {
 			return err

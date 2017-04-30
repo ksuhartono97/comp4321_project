@@ -1,13 +1,13 @@
 package webcrawler
 
 import (
+	"fmt"
 	"io/ioutil"
 	"net/http"
 	"net/url"
 	"strings"
 	"sync"
 	"time"
-	"fmt"
 
 	"../../../golang.org/x/net/html"
 
@@ -26,8 +26,8 @@ type UrlData struct {
 }
 
 type CrawlObject struct {
-	url		string
-	id		int64
+	url string
+	id  int64
 }
 
 var exploredPages = 0
@@ -58,7 +58,7 @@ func fixURL(href, base string) string {
 	return uri.String()
 }
 
-//Gets the last modified time of a string 
+//Gets the last modified time of a string
 func getLastModifiedTime(href string) (int64, error) {
 	currTime := time.Now().UTC().Unix()
 	response, err := http.Head(href)
@@ -234,7 +234,7 @@ func CrawlLinks(links ...string) {
 		lastMod, _ := getLastModifiedTime(url)
 		_id, crawlCheck := indexer.CheckURL(url, lastMod)
 		if crawlCheck {
-			seedUrls = append(seedUrls, CrawlObject{url: url, id:_id})
+			seedUrls = append(seedUrls, CrawlObject{url: url, id: _id})
 		}
 	}
 

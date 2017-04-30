@@ -38,6 +38,15 @@ func OpenURLDB() {
 	})
 }
 
+//OpenURLDBReadOnly opens the url-id database in read-only mode
+func OpenURLDBReadOnly() {
+	var err error
+	urlDB, err = bolt.Open("db"+string(os.PathSeparator)+"url_id.db", 0700, &bolt.Options{ReadOnly: true})
+	if err != nil {
+		panic(fmt.Errorf("Open URL ID error: %s", err))
+	}
+}
+
 //CloseURLDB close the url-id database
 func CloseURLDB() {
 	urlDB.Close()
