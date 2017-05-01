@@ -10,14 +10,21 @@ import (
 	"../../silver-rush/database"
 )
 
+//Result is a struct containing the result of retrieval
+type Result struct {
+	docID int64
+	score float64
+	top5  []database.TfIDPair
+}
+
 //RetrieveRankedStringResult returns readable string result
 func RetrieveRankedStringResult(query string) []string {
 	docIDSlice := RetrieveRankedDocID(query)
 	fmt.Printf("Retrieval size: %d\n", len(docIDSlice))
 	allResult := make([]string, len(docIDSlice))
-	for i, id := range docIDSlice {
-		docInfo := database.GetDocInfo(id)
-		url := database.GetURLWithID(id)
+	for i, result := range docIDSlice {
+		docInfo := database.GetDocInfo(result.docID)
+		url := database.GetURLWithID(result.docID)
 		pageResult := fmt.Sprintf("%s\n <b>URL</b>: <a href=\"%s\">%s</a> \nSize: %d \nTime: %d\n\n",
 			docInfo.Title,
 			url,
@@ -30,7 +37,7 @@ func RetrieveRankedStringResult(query string) []string {
 }
 
 //RetrieveRankedDocID will return the retrieved docID ranked with similarity
-func RetrieveRankedDocID(query string) []int64 {
+func RetrieveRankedDocID(query string) []Result {
 	queryTerms := analyzeQuery(query)
 	fmt.Printf("Query size: %d\n", len(queryTerms))
 	fmt.Printf("Query terms: %v\n", queryTerms)
@@ -229,31 +236,20 @@ func RetrieveRankedDocID(query string) []int64 {
 		}
 	}
 
-	type similarityStruct struct {
-		docID      int64
-		similarity float64
-	}
-	similaritySlice := make([]similarityStruct, len(totalTfIdfMap))
+	resultSlice := make([]Result, len(totalSimilarityMap))
 	i := 0
-	for k, v := range totalTfIdfMap {
-		//Obtain cosine similarity
-		docLength := database.GetRootSquaredTermFreqOfDoc(k)
-		maxTF := database.GetMaxTFOfDoc(k)
-		similaritySlice[i].docID = k
-		similaritySlice[i].similarity = v / docLength / float64(queryLength) / float64(maxTF)
+	for k, v := range totalSimilarityMap {
+		resultSlice[i].docID = k
+		resultSlice[i].score = v
+		resultSlice[i].top5 = top5StemmedMap[k]
 		i++
 	}
 
 	//Sort it so that the array is in the order of similarity
-	sort.Slice(similaritySlice, func(i, j int) bool {
+	sort.Slice(resultSlice, func(i, j int) bool {
 		//In descending order
-		return similaritySlice[i].similarity > similaritySlice[j].similarity
+		return resultSlice[i].score > resultSlice[j].score
 	})
 
-	rankedResult := make([]int64, len(similaritySlice))
-	for i, s := range similaritySlice {
-		rankedResult[i] = s.docID
-	}
-
-	return rankedResult
+	return resultSlice
 }
