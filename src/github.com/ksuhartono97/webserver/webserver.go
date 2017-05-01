@@ -70,10 +70,12 @@ func resultHandler(w http.ResponseWriter, r *http.Request) {
 	})
 }
 
+//Handler for /
 func rootHandler(w http.ResponseWriter, r *http.Request) {
 	http.Redirect(w, r, "/query", http.StatusSeeOther)
 }
 
+//Run and host the webserver so that it will be accessible through "localhost:8080"
 func StartWebServer() {
 	expectedQueryResult = append(expectedQueryResult, resultString)
 	expectedQueryResult = append(expectedQueryResult, resultString2)
