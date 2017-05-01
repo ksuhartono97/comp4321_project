@@ -73,13 +73,13 @@ func Feed(docID int64, raw string, lastModify int64, size int32, parent int64, c
 	}()
 
 	wg.Wait()
-	fmt.Println("Indexed: ", docID, ". ")
+	fmt.Printf("Indexed: %d with parent: %d", docID, parent)
 }
 
 //JustAddParentIDToURL does not re-index the page. It simply add one entry to the parentID of the current page.
 func JustAddParentIDToURL(parentID, pageID int64) {
 	d := database.GetDocInfo(pageID)
-	if d != nil {
+	if d != nil && parentID != pageID {
 		for _, id := range d.Parent {
 			if id == parentID {
 				//If id already exist, go home.
