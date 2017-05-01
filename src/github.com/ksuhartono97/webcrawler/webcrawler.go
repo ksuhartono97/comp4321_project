@@ -31,6 +31,7 @@ type CrawlObject struct {
 }
 
 var exploredPages = 0
+var expectedNumberOfPages = 300
 
 // Helper function to pull the href attribute from a Token
 func getHref(t html.Token) (ok bool, href string) {
@@ -258,7 +259,7 @@ func CrawlLinks(parentID int64, links ...string) {
 
 	for _, url := range foundUrls {
 		// Calculate remaining URLs needed
-		diff := 300 - exploredPages
+		diff := expectedNumberOfPages - exploredPages
 		remaining := diff - len(url.foundUrl)
 		toBeCalled := 0
 		if remaining < 0 {
