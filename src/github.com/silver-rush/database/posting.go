@@ -31,6 +31,16 @@ func OpenPostingDB() {
 			panic(fmt.Errorf("Create forward list bucket error: %s", err))
 		}
 
+		_, err = tx.CreateBucketIfNotExists([]byte("stem_posting"))
+		if err != nil {
+			panic(fmt.Errorf("Create stemmed posting list bucket error: %s", err))
+		}
+
+		_, err = tx.CreateBucketIfNotExists([]byte("stem_forward"))
+		if err != nil {
+			panic(fmt.Errorf("Create stemmed forward list bucket error: %s", err))
+		}
+
 		return nil
 	})
 }
@@ -160,6 +170,11 @@ func BatchInsertIntoPostingList(docID int64, records map[int64]Posting) {
 		fmt.Println(err)
 		panic(err)
 	}
+}
+
+//BatchInsertIntoStemmedList insert a batch of words into the stemmed queue
+func BatchInsertIntoStemmedList(docID int64, records map[int64]Posting) {
+
 }
 
 //GetPosting returns a posting from the database with the given document ID and relevant information, return nil if not found
