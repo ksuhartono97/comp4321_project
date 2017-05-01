@@ -12,6 +12,14 @@ func OpenAllDatabase() {
 	OpenDocInfoDB()
 }
 
+//OpenAllDatabaseReadOnly will make a connection to open all databases in read-only mode
+func OpenAllDatabaseReadOnly() {
+	OpenURLDBReadOnly()
+	OpenWordDBReadOnly()
+	OpenPostingDBReadOnly()
+	OpenDocInfoDBReadOnly()
+}
+
 //CloseAllDatabase will close all database connection
 func CloseAllDatabase() {
 	CloseURLDB()
