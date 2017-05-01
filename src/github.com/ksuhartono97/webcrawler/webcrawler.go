@@ -210,7 +210,7 @@ func feedToIndexer(thisURL string, thisID int64, urlData *UrlData, parentID int6
 }
 
 //Main search function call this to crawl all the links, this is the base link, pass in -1 as parentID
-func CrawlLinks( parentID int64, links ...string) {
+func CrawlLinks(parentID int64, links ...string) {
 	foundUrls := make(map[string]UrlData)
 	seedUrls := []CrawlObject{}
 
@@ -269,7 +269,7 @@ func CrawlLinks( parentID int64, links ...string) {
 		urlArray := url.foundUrl[:toBeCalled]
 
 		if toBeCalled > 0 {
-			CrawlLinks(url.sourceID,urlArray...)
+			CrawlLinks(url.sourceID, urlArray...)
 		}
 	}
 	close(chUrls)
