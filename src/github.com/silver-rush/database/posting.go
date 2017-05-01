@@ -4,6 +4,7 @@ import (
 	"encoding/binary"
 	"fmt"
 	"os"
+	"sort"
 
 	"math"
 
@@ -173,8 +174,92 @@ func BatchInsertIntoPostingList(docID int64, records map[int64]Posting) {
 }
 
 //BatchInsertIntoStemmedList insert a batch of words into the stemmed queue
-func BatchInsertIntoStemmedList(docID int64, records map[int64]Posting) {
+func BatchInsertIntoStemmedList(docID int64, records map[int64]int32) {
+	err := postingDB.Batch(func(tx *bolt.Tx) error {
+		allPostingBucket := tx.Bucket([]byte("stem_posting"))
 
+		allForwardBucket := tx.Bucket([]byte("stem_forward"))
+		forwardBucket, err := allForwardBucket.CreateBucketIfNotExists(encode64Bit(docID))
+		if err != nil {
+			fmt.Println("Create Forward bucket error.")
+			return err
+		}
+
+		var maxTF int32
+		maxTF = 0
+		for wordID, termFreq := range records {
+			postingBucket, err := allPostingBucket.CreateBucketIfNotExists(encode64Bit(wordID))
+			if err != nil {
+				return err
+			}
+
+			docAlreadyExist := postingBucket.Get(encode64Bit(docID))
+			if docAlreadyExist == nil {
+				//If the document is not in the posting list before, increase DF by 1
+				totalDFByte := postingBucket.Get(encode64Bit(0))
+				var totalDF int32
+				if totalDFByte != nil {
+					//totalTerms stores the current total document frequency
+					totalDF = decode32Bit(totalDFByte)
+				} else {
+					totalDF = 0
+				}
+
+				//Insert the total DF back
+				err = postingBucket.Put(encode64Bit(0), encode32Bit(totalDF+1))
+				if err != nil {
+					return err
+				}
+			}
+
+			err = postingBucket.Put(encode64Bit(docID), encode32Bit(termFreq))
+			if err != nil {
+				return err
+			}
+
+			termAlreadyExist := forwardBucket.Get(encode64Bit(wordID))
+			if termAlreadyExist == nil {
+				//Increase totalTerms by 1 if the term was not indexed for this document before
+				totalTermsByte := forwardBucket.Get(encode64Bit(0))
+				var totalTerms int32
+				if totalTermsByte != nil {
+					//totalTF stores the current total number of terms in the document
+					totalTerms = decode32Bit(totalTermsByte)
+				} else {
+					totalTerms = 0
+				}
+
+				//Insert the total DF back
+				err = forwardBucket.Put(encode64Bit(0), encode32Bit(totalTerms+1))
+
+				if err != nil {
+					return err
+				}
+			}
+
+			if termFreq > maxTF {
+				maxTF = termFreq
+			}
+
+			err = forwardBucket.Put(encode64Bit(wordID), encode32Bit(termFreq))
+			if err != nil {
+				return err
+			}
+		}
+
+		//ID 0 stores the precomputed max TF
+		err = forwardBucket.Put(encode64Bit(0), encode32Bit(maxTF))
+		if err != nil {
+			return err
+		}
+
+		return nil
+	})
+
+	if err != nil {
+		fmt.Println(err)
+		panic(err)
+	}
 }
 
 //GetPosting returns a posting from the database with the given document ID and relevant information, return nil if not found
@@ -257,6 +342,23 @@ func GetMaxTFOfDoc(docID int64) int32 {
 	return result
 }
 
+//GetMaxTFOfDocStem returns the maximum TF in the document, used in the stemmed list
+func GetMaxTFOfDocStem(docID int64) int32 {
+	var result int32
+	postingDB.View(func(tx *bolt.Tx) error {
+		allForwardBuc := tx.Bucket([]byte("stem_forward"))
+		specifiedForwardBuc := allForwardBuc.Bucket(encode64Bit(docID))
+		if specifiedForwardBuc == nil {
+			result = 0
+		} else {
+			returnByte := specifiedForwardBuc.Get(encode64Bit(0))
+			result = decode32Bit(returnByte)
+		}
+		return nil
+	})
+	return result
+}
+
 //GetDocOfTerm returns a collection of documents containing the termID, together with their term frequency
 func GetDocOfTerm(termID int64) (docIDCollection []int64, postingCollection []*Posting, total int32) {
 	postingDB.View(func(tx *bolt.Tx) error {
@@ -276,6 +378,34 @@ func GetDocOfTerm(termID int64) (docIDCollection []int64, postingCollection []*P
 				docIDCollection[docCount] = id
 				posting := decodePosting(v)
 				postingCollection[docCount] = posting
+				docCount++
+			}
+			return nil
+		})
+		return nil
+	})
+	return
+}
+
+//GetDocOfStemTerm returns a collection of documents containing the termID, together with their term frequency, used in stemmed list
+func GetDocOfStemTerm(termID int64) (docIDCollection []int64, tfCollection []int32, total int32) {
+	postingDB.View(func(tx *bolt.Tx) error {
+		allPostingBuc := tx.Bucket([]byte("stem_posting"))
+		specifiedPostingBuc := allPostingBuc.Bucket(encode64Bit(termID))
+
+		//Get the total document count in advance to save reallocation
+		total = decode32Bit(specifiedPostingBuc.Get(encode64Bit(0)))
+		docIDCollection = make([]int64, total)
+		tfCollection = make([]int32, total)
+		docCount := 0
+
+		//Iterate through all the postings
+		specifiedPostingBuc.ForEach(func(k, v []byte) error {
+			id := decode64Bit(k)
+			if id != 0 {
+				docIDCollection[docCount] = id
+				tf := decode32Bit(v)
+				tfCollection[docCount] = tf
 				docCount++
 			}
 			return nil
@@ -308,4 +438,55 @@ func GetRootSquaredTermFreqOfDoc(docID int64) float64 {
 	})
 
 	return math.Sqrt(float64(sum))
+}
+
+//TfIDPair is a pair of data
+type TfIDPair struct {
+	tf int32
+	id int64
+}
+
+//GetRSStemTFOfDocAndTop5 returns the length of document in the cosine similarity sense AND the top 5 stemmed words, used in stemmed list
+func GetRSStemTFOfDocAndTop5(docID int64) (rsSum float64, top5Pair []TfIDPair) {
+	var sum int64
+	sum = 0
+
+	var pairSlice []TfIDPair
+	postingDB.View(func(tx *bolt.Tx) error {
+		allForwardBuc := tx.Bucket([]byte("stem_forward"))
+		specifiedForwardBuc := allForwardBuc.Bucket(encode64Bit(docID))
+		pairSlice = make([]TfIDPair, specifiedForwardBuc.Stats().KeyN)
+
+		if specifiedForwardBuc == nil {
+			sum = 0
+		} else {
+			index := 0
+			specifiedForwardBuc.ForEach(func(k, v []byte) error {
+				id := decode64Bit(k)
+				if id != 0 {
+					tf := decode32Bit(v)
+					sum += int64(tf * tf)
+					pairSlice[index].tf = tf
+					pairSlice[index].id = id
+				}
+				index++
+				return nil
+			})
+		}
+		return nil
+	})
+
+	sort.Slice(pairSlice, func(i, j int) bool {
+		//In descending order
+		return pairSlice[i].tf > pairSlice[j].tf
+	})
+
+	if len(pairSlice) > 5 {
+		top5Pair = pairSlice[:5]
+	} else {
+		top5Pair = pairSlice
+	}
+
+	rsSum = math.Sqrt(float64(sum))
+	return
 }

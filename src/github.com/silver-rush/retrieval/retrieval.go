@@ -6,6 +6,7 @@ import (
 
 	"fmt"
 
+	"../../reiver/go-porterstemmer"
 	"../../silver-rush/database"
 )
 
@@ -41,14 +42,18 @@ func RetrieveRankedDocID(query string) []int64 {
 		tfIdf float64
 	}
 
-	tfIdfChannel := make(chan tfIdfStruct)
+	origTfIdfChannel := make(chan tfIdfStruct)
+	stemTfIdfChannel := make(chan tfIdfStruct)
 	doneChannel := make(chan bool)
+	totalSearches := 0
 	for _, group := range queryTerms {
 		//Group is a slice. Contains more than one value only in phrase searches
 		fmt.Printf("Group: %v Len: %d\n", group, len(group))
 		if len(group) == 1 {
 			//Single word
-			go func(s string) {
+			totalSearches += 2 //Stemmed and unstemmed
+
+			go func(s string) { //This one search in the unstemmed list
 				//Compute idf first
 				fmt.Printf("Term: %s\n", s)
 				termID, exist := database.GetIDWithWordDoNotCreate(s)
@@ -61,13 +66,35 @@ func RetrieveRankedDocID(query string) []int64 {
 
 					for i := 0; i < int(documentFreq); i++ {
 						//This result is not divided by max tf yet. Will do afterwards.
-						tfIdfChannel <- tfIdfStruct{docIDCollection[i], float64(postingCollection[i].TermFreq) * inverseDocFreq}
+						origTfIdfChannel <- tfIdfStruct{docIDCollection[i], float64(postingCollection[i].TermFreq) * inverseDocFreq}
 					}
 				}
 				doneChannel <- true
 			}(group[0])
+
+			go func(s string) { //This one search in the stemmed list
+				//Compute idf first
+				s = porterstemmer.StemString(s)
+				fmt.Printf("Term: %s\n", s)
+				termID, exist := database.GetIDWithWordDoNotCreate(s)
+				if !exist {
+					fmt.Printf("Do not exist.\n")
+					//Zero term weight
+				} else {
+					docIDCollection, tfCollection, documentFreq := database.GetDocOfStemTerm(termID)
+					inverseDocFreq := math.Log2(float64(totalDoc) / float64(documentFreq))
+
+					for i := 0; i < int(documentFreq); i++ {
+						//This result is not divided by max tf yet. Will do afterwards.
+						stemTfIdfChannel <- tfIdfStruct{docIDCollection[i], float64(tfCollection[i]) * inverseDocFreq}
+					}
+				}
+				doneChannel <- true
+			}(group[0])
+
 		} else {
 			//Phrase search.
+			totalSearches++ //Unstemmed only
 			go func(group []string) {
 				termIDSlice := make([]int64, len(group))
 				allExist := true
@@ -157,7 +184,7 @@ func RetrieveRankedDocID(query string) []int64 {
 					//After everything is computed, get tfidf (as we can only get DF after all searches)
 					inverseDocFreq := math.Log2(float64(totalDoc) / float64(dfOfPhrase))
 					for k, v := range tfMap {
-						tfIdfChannel <- tfIdfStruct{k, float64(v) * inverseDocFreq}
+						origTfIdfChannel <- tfIdfStruct{k, float64(v) * inverseDocFreq}
 					}
 				}
 				doneChannel <- true
@@ -165,15 +192,40 @@ func RetrieveRankedDocID(query string) []int64 {
 		}
 	}
 
-	totalTfIdfMap := make(map[int64]float64)
-	for c := 0; c < len(queryTerms); {
+	origTotalTfIdfMap := make(map[int64]float64)
+	stemTotalTfIdfMap := make(map[int64]float64)
+	for c := 0; c < totalSearches; {
 		//Collect result here
 		select {
-		case r := <-tfIdfChannel:
-			totalTfIdfMap[r.docID] += r.tfIdf
+		case r := <-origTfIdfChannel:
+			origTotalTfIdfMap[r.docID] += r.tfIdf
+		case r := <-stemTfIdfChannel:
+			stemTotalTfIdfMap[r.docID] += r.tfIdf
 		case <-doneChannel:
 			c++
 
+		}
+	}
+
+	totalSimilarityMap := make(map[int64]float64)
+	top5StemmedMap := make(map[int64][]database.TfIDPair)
+	queryLength := len(queryTerms)
+
+	for docID, tfIdf := range stemTotalTfIdfMap {
+		var docLength float64
+		docLength, top5StemmedMap[docID] = database.GetRSStemTFOfDocAndTop5(docID)
+		maxTF := database.GetMaxTFOfDocStem(docID)
+		totalSimilarityMap[docID] = tfIdf / docLength / float64(queryLength) / float64(maxTF)
+	}
+
+	for docID, tfIdf := range origTotalTfIdfMap {
+		docLength := database.GetRootSquaredTermFreqOfDoc(docID)
+		maxTF := database.GetMaxTFOfDoc(docID)
+		totalSimilarityMap[docID] = tfIdf / docLength / float64(queryLength) / float64(maxTF)
+
+		if top5StemmedMap[docID] == nil {
+			//If top 5 have not been obtained, obtain them now!
+			_, top5StemmedMap[docID] = database.GetRSStemTFOfDocAndTop5(docID)
 		}
 	}
 
@@ -183,7 +235,6 @@ func RetrieveRankedDocID(query string) []int64 {
 	}
 	similaritySlice := make([]similarityStruct, len(totalTfIdfMap))
 	i := 0
-	queryLength := len(queryTerms)
 	for k, v := range totalTfIdfMap {
 		//Obtain cosine similarity
 		docLength := database.GetRootSquaredTermFreqOfDoc(k)
@@ -195,7 +246,8 @@ func RetrieveRankedDocID(query string) []int64 {
 
 	//Sort it so that the array is in the order of similarity
 	sort.Slice(similaritySlice, func(i, j int) bool {
-		return similaritySlice[i].similarity < similaritySlice[j].similarity
+		//In descending order
+		return similaritySlice[i].similarity > similaritySlice[j].similarity
 	})
 
 	rankedResult := make([]int64, len(similaritySlice))

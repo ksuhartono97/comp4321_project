@@ -6,6 +6,8 @@ import (
 )
 
 func analyzeQuery(query string) [][]string {
+	query = strings.ToLower(query)
+
 	doubleQuoteRegex := regexp.MustCompile("\"(.*?)\"")
 	doubleQuoteText := doubleQuoteRegex.FindAllString(query, -1)
 	var result [][]string
