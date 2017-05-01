@@ -70,11 +70,16 @@ func resultHandler(w http.ResponseWriter, r *http.Request) {
 	})
 }
 
+func rootHandler(w http.ResponseWriter, r *http.Request) {
+	http.Redirect(w, r, "/query", http.StatusSeeOther)
+}
+
 func StartWebServer() {
 	expectedQueryResult = append(expectedQueryResult, resultString)
 	expectedQueryResult = append(expectedQueryResult, resultString2)
 	http.Handle("/resources/", http.StripPrefix("/resources/", http.FileServer(http.Dir("resources"))))
 	http.HandleFunc("/query", queryHandler)
 	http.HandleFunc("/result", resultHandler)
+	http.HandleFunc("/", rootHandler)
 	http.ListenAndServe(":8080", nil)
 }
