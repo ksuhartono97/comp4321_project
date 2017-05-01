@@ -20,12 +20,14 @@ func analyzeQuery(query string) [][]string {
 		}
 	}
 
-	restOfTheQuery := strings.Split(query, " ")
-	for _, s := range restOfTheQuery {
-		//Each single word term will be a slice of 1 element
-		v := make([]string, 1)
-		v[0] = s
-		result = append(result, v)
+	if len(query) > 0 {
+		restOfTheQuery := strings.Split(query, " ")
+		for _, s := range restOfTheQuery {
+			//Each single word term will be a slice of 1 element
+			v := make([]string, 1)
+			v[0] = s
+			result = append(result, v)
+		}
 	}
 
 	return result

@@ -21,31 +21,38 @@ type Result struct {
 func RetrieveRankedStringResult(query string) []string {
 	docIDSlice := RetrieveRankedDocID(query)
 	fmt.Printf("Retrieval size: %d\n", len(docIDSlice))
+	if len(docIDSlice) > 50 {
+		fmt.Printf("Truncated.\n")
+		docIDSlice = docIDSlice[:50]
+	}
 	allResult := make([]string, len(docIDSlice))
 	for i, id := range docIDSlice {
 		docInfo := database.GetDocInfo(id.docID)
 		url := database.GetURLWithID(id.docID)
-		pageResult := fmt.Sprintf("<h3>(Score:%f)%s</h3>\n <b>URL</b>: <a href=\"%s\">%s</a> \nSize: %d \nTime: %d\n",
+		pageResult := fmt.Sprintf("(Score:%f)\t<h3><a href=\"%s\">%s</a></h3>\n <b>URL</b>: <a href=\"%s\">%s</a> \nSize: %d \nTime: %d\n",
 			id.score,
+			url,
 			docInfo.Title,
 			url,
 			url,
 			docInfo.Size,
 			docInfo.Time)
-		// pageResult += "Top 5 Keywords: "
-		// for _, keyword := range id.top5 {
-		// 	pageResult += fmt.Sprintf("%s ", keyword)
-		// }
-		// pageResult += "\n"
+		pageResult += "<b>Top 5 Keywords: </b>\n"
+
+		for _, tfIDPair := range id.top5 {
+			term := database.GetWordWithID(tfIDPair.Id)
+			pageResult += fmt.Sprintf("Term: %s Frequency: %d\n", term, tfIDPair.Tf)
+		}
+		pageResult += "\n"
 		pageResult += "Parent:\n"
-		for _, id := range docInfo.Parent {
-			parentUrl:=database.GetURLWithID(id)
-			pageResult += fmt.Sprintf("<a href=\"%s\">%s</a>\n", parentUrl, parentUrl)
+		for _, urlID := range docInfo.Parent {
+			parentURL := database.GetURLWithID(urlID)
+			pageResult += fmt.Sprintf("<a href=\"%s\">%s</a>\n", parentURL, parentURL)
 		}
 		pageResult += "Child:\n"
-		for _, id := range docInfo.Child {
-			childUrl:=database.GetURLWithID(id)
-			pageResult += fmt.Sprintf("<a href=\"%s\">%s</a>\n", childUrl, childUrl)
+		for _, urlID := range docInfo.Child {
+			childURL := database.GetURLWithID(urlID)
+			pageResult += fmt.Sprintf("<a href=\"%s\">%s</a>\n", childURL, childURL)
 		}
 		pageResult += "\n"
 		allResult[i] = pageResult
