@@ -18,6 +18,12 @@
   height:6vh;
 }
 
+h4 {
+    display: block;
+    margin-bottom: 0;
+    font-weight: bold;
+}
+
 body {
     background-color: #222;;
 }

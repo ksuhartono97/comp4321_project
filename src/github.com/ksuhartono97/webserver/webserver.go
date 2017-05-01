@@ -4,6 +4,8 @@ import (
 	"html/template"
 	"net/http"
 	"strings"
+	"fmt"
+	"time"
 
 	"../../silver-rush/retrieval"
 )
@@ -54,8 +56,11 @@ func queryHandler(w http.ResponseWriter, r *http.Request) {
 		r.ParseForm()
 		temp := strings.Join(r.Form["searchInput"], ",")
 
+		start := time.Now()
 		//Submitting query to the search engine
 		expectedQueryResult = retrieval.RetrieveRankedStringResult(temp)
+		elapsed := time.Since(start)
+		fmt.Println("Query took ", elapsed)
 
 		http.Redirect(w, r, "/result", http.StatusSeeOther)
 	}
