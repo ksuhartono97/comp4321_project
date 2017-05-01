@@ -91,7 +91,7 @@ func getLastModifiedTime(href string) (int64, error) {
 }
 
 // Extract all required info from a given webpage
-func crawl(src string, srcID int64, ch chan UrlData, chFinished chan bool) {
+func crawl(src string, srcID int64, parentID int64, ch chan UrlData, chFinished chan bool) {
 	//Retrieve the webpage
 	resp, err := http.Get(src)
 
@@ -146,7 +146,7 @@ func crawl(src string, srcID int64, ch chan UrlData, chFinished chan bool) {
 		case tt == html.ErrorToken:
 			// End of the document, we're done, increment explored pages and return result
 			ch <- urlResult
-			feedToIndexer(src, srcID, &urlResult)
+			feedToIndexer(src, srcID, &urlResult, parentID)
 			exploredPages++
 			return
 		case tt == html.StartTagToken:
@@ -189,27 +189,12 @@ func crawl(src string, srcID int64, ch chan UrlData, chFinished chan bool) {
 	}
 }
 
-func feedToIndexer(thisURL string, thisID int64, urlData *UrlData) {
+//Feed result of crawl to the indexer to be indexed and saved to DB
+func feedToIndexer(thisURL string, thisID int64, urlData *UrlData, parentID int64) {
 	//Feeding to the indexer
 	var wg sync.WaitGroup
 	wg.Add(len(urlData.foundUrl))
-	var parentID int64
 	var childID []int64
-
-	//TODO: Actually put parent id here
-	//Parent ID should be passed from the parent, no more database access here
-
-	// go func() {
-	// 	defer wg.Done()
-	// 	parentID, _ = database.GetURLID(urlData.sourceUrl)
-	// }()
-
-	// go func() {
-	// 	defer wg.Done()
-	// 	thisID, _ = database.GetURLID(url)
-	// }()
-
-	parentID = thisID
 
 	for _, u := range urlData.foundUrl {
 		go func(url string) {
@@ -224,7 +209,7 @@ func feedToIndexer(thisURL string, thisID int64, urlData *UrlData) {
 	fmt.Printf("\nTime: %v\nSize: %v\nParent: %v\nChild: %v\nTitle: %v\n", urlData.lastModified, urlData.pageSize, parentID, childID, urlData.pageTitle)
 }
 
-//Main search function
+//Main search function call this to crawl all the links, this is the base link, pass in -1 as parentID
 func CrawlLinks( parentID int64, links ...string) {
 	foundUrls := make(map[string]UrlData)
 	seedUrls := []CrawlObject{}
@@ -253,7 +238,7 @@ func CrawlLinks( parentID int64, links ...string) {
 		// urlID, _ := database.GetURLID(url)
 		size := database.GetTermsInDoc(obj.id)
 		if len(size) == 0 {
-			go crawl(obj.url, obj.id, chUrls, chFinished)
+			go crawl(obj.url, obj.id, parentID, chUrls, chFinished)
 		} else {
 			skipped++
 		}
@@ -272,16 +257,6 @@ func CrawlLinks( parentID int64, links ...string) {
 	fmt.Println("\nTotal explored ", exploredPages)
 
 	for _, url := range foundUrls {
-
-		//Printing the results
-		//fmt.Println("\nFound", len(url.foundUrl), "non unique urls:\n")
-		// for i := 0; i < len(url.foundUrl); i++ {
-		// 	fmt.Println(" > " + url.foundUrl[i])
-		// }
-		//fmt.Println("Page Title: " + url.pageTitle)
-		//fmt.Println("Page Size: ", url.pageSize)
-		//fmt.Println("Last Modified: " + url.lastModified)
-
 		// Calculate remaining URLs needed
 		diff := 300 - exploredPages
 		remaining := diff - len(url.foundUrl)
@@ -301,7 +276,7 @@ func CrawlLinks( parentID int64, links ...string) {
 	close(chFinished)
 }
 
-//To be called before each initial search
+//To be called before each initial search, initializes the crawler
 func CrawlerInit() {
 	exploredPages = 0
 }

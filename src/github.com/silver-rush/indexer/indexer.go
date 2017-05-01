@@ -7,13 +7,16 @@ import (
 	"strings"
 
 	"../../../golang.org/x/net/html"
+	"../../ksuhartono97/stopword_rmv"
+	"../../reiver/go-porterstemmer"
 	"../../silver-rush/database"
 )
 
 //Feed a page to the indexer
 func Feed(docID int64, raw string, lastModify int64, size int32, parent int64, child []int64, title string) {
 	//Map of words and term frequency.
-	wordMap := make(map[int64]database.Posting)
+	origMap := make(map[int64]*database.Posting)
+	stemMap := make(map[int64]int32)
 
 	doc, err := html.Parse(strings.NewReader(raw))
 	if err != nil {
@@ -24,18 +27,24 @@ func Feed(docID int64, raw string, lastModify int64, size int32, parent int64, c
 	bodyNode := findBodyNode(doc)
 	if bodyNode != nil {
 		//Map is pass by reference, so we're cool.
-		iterateNode(doc, wordMap, 0)
+		iterateNode(doc, origMap, stemMap, 0)
 	} else {
 		fmt.Println("Body not found.")
 	}
 
 	var wg sync.WaitGroup
-	wg.Add(2)
+	wg.Add(3)
 	//Start goroutines to add words to the posting list
-	go func(records map[int64]database.Posting) {
+	go func(records map[int64]*database.Posting) {
 		defer wg.Done()
 		database.BatchInsertIntoPostingList(docID, records)
-	}(wordMap)
+	}(origMap)
+
+	//Start goroutines to add words to the stemmed posting list
+	go func(records map[int64]int32) {
+		defer wg.Done()
+		database.BatchInsertIntoStemmedList(docID, records)
+	}(stemMap)
 
 	go func() {
 		defer wg.Done()
@@ -56,21 +65,27 @@ func Feed(docID int64, raw string, lastModify int64, size int32, parent int64, c
 
 		d.Size = size
 		d.Time = lastModify
-		d.ParentNum = 1
-		d.Parent = make([]int64, 1)
-		d.Parent[0] = parent
+		if parent > 0 {
+			d.ParentNum = 1
+			d.Parent = make([]int64, 1)
+			d.Parent[0] = parent
+		} else {
+			d.ParentNum = 0
+			d.Parent = make([]int64, 0)
+		}
+
 		d.Title = title
 		database.InsertDocInfo(docID, &d)
 	}()
 
 	wg.Wait()
-	fmt.Println("Indexed: ", docID, ". ")
+	fmt.Printf("Indexed: %d with parent: %d", docID, parent)
 }
 
 //JustAddParentIDToURL does not re-index the page. It simply add one entry to the parentID of the current page.
 func JustAddParentIDToURL(parentID, pageID int64) {
 	d := database.GetDocInfo(pageID)
-	if d != nil {
+	if d != nil && parentID != pageID {
 		for _, id := range d.Parent {
 			if id == parentID {
 				//If id already exist, go home.
@@ -97,12 +112,11 @@ func findBodyNode(node *html.Node) *html.Node {
 	return nil
 }
 
-func tokenize(text string) []string {
+func tokenize(text string) (original, stemmed []string) {
 	text = html.UnescapeString(text)
-	var tokens []string
+	text = strings.ToLower(text)
 	head := 0
 
-	//If I obtain the i for range, some indexes are skipped. No idea why.
 	i := 0
 	for ; i < len(text); i++ {
 		//Index english alphahets only
@@ -111,7 +125,10 @@ func tokenize(text string) []string {
 				head++
 			} else {
 				//Append a slice
-				tokens = append(tokens, text[head:i])
+				original = append(original, text[head:i])
+				if !stopword_rmv.CheckForStopword(text[head:i]) {
+					stemmed = append(stemmed, porterstemmer.StemString(text[head:i]))
+				}
 				head = i + 1
 			}
 		}
@@ -119,31 +136,61 @@ func tokenize(text string) []string {
 
 	//Deal with the last word
 	if head != i {
-		tokens = append(tokens, text[head:i])
+		original = append(original, text[head:i])
+		if !stopword_rmv.CheckForStopword(text[head:i]) {
+			stemmed = append(stemmed, porterstemmer.StemString(text[head:i]))
+		}
 	}
 
-	return tokens
+	return original, stemmed
 }
 
-func iterateNode(node *html.Node, wordMap map[int64]database.Posting, pos int32) {
+func iterateNode(node *html.Node, origMap map[int64]*database.Posting, stemMap map[int64]int32, pos int32) {
 	if node.Type == html.TextNode && node.Parent.Data != "script" && node.Parent.Data != "style" {
-		wordList := tokenize(html.UnescapeString(node.Data))
-		if len(wordList) != 0 {
-			//Collect word id using the word
-			idList, _ := database.BatchGetIDWithWord(wordList)
-			//fmt.Printf("%v\n", idList)
-			for _, id := range idList {
-				p := wordMap[id]
-				p.TermFreq++
-				p.Positions = append(p.Positions, pos)
-				wordMap[id] = p
+		original, stemmed := tokenize(html.UnescapeString(node.Data))
 
-				pos++
+		var wg sync.WaitGroup
+		wg.Add(2)
+
+		go func() {
+			defer wg.Done()
+			//For the original queue
+			if len(original) != 0 {
+				//Collect word id using the word
+				idList, _ := database.BatchGetIDWithWord(original)
+				//fmt.Printf("%v\n", idList)
+				for _, id := range idList {
+					p := origMap[id]
+					if p == nil {
+						var posting database.Posting
+						p = &posting
+					}
+					p.TermFreq++
+					p.Positions = append(p.Positions, pos)
+					origMap[id] = p
+
+					pos++
+				}
 			}
-		}
+		}()
+
+		go func() {
+			defer wg.Done()
+			//For the stemmed queue
+			if len(stemmed) != 0 {
+				//Collect word id using the word
+				idList, _ := database.BatchGetIDWithWord(stemmed)
+				for _, id := range idList {
+					stemMap[id]++
+				}
+			}
+		}()
+
+		wg.Wait()
+
 	}
 	for child := node.FirstChild; child != nil; child = child.NextSibling {
 		//Recursively iterate through all nodes
-		iterateNode(child, wordMap, pos+10)
+		iterateNode(child, origMap, stemMap, pos+10)
 	}
 }

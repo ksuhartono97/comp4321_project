@@ -4,6 +4,8 @@ import (
 	"html/template"
 	"net/http"
 	"strings"
+	"fmt"
+	"time"
 
 	"../../silver-rush/retrieval"
 )
@@ -54,8 +56,11 @@ func queryHandler(w http.ResponseWriter, r *http.Request) {
 		r.ParseForm()
 		temp := strings.Join(r.Form["searchInput"], ",")
 
+		start := time.Now()
 		//Submitting query to the search engine
 		expectedQueryResult = retrieval.RetrieveRankedStringResult(temp)
+		elapsed := time.Since(start)
+		fmt.Println("Query took ", elapsed)
 
 		http.Redirect(w, r, "/result", http.StatusSeeOther)
 	}
@@ -70,11 +75,18 @@ func resultHandler(w http.ResponseWriter, r *http.Request) {
 	})
 }
 
+//Handler for /
+func rootHandler(w http.ResponseWriter, r *http.Request) {
+	http.Redirect(w, r, "/query", http.StatusSeeOther)
+}
+
+//Run and host the webserver so that it will be accessible through "localhost:8080"
 func StartWebServer() {
 	expectedQueryResult = append(expectedQueryResult, resultString)
 	expectedQueryResult = append(expectedQueryResult, resultString2)
 	http.Handle("/resources/", http.StripPrefix("/resources/", http.FileServer(http.Dir("resources"))))
 	http.HandleFunc("/query", queryHandler)
 	http.HandleFunc("/result", resultHandler)
+	http.HandleFunc("/", rootHandler)
 	http.ListenAndServe(":8080", nil)
 }
