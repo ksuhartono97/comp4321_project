@@ -17,12 +17,23 @@ func RetrieveRankedStringResult(query string) []string {
 	for i, id := range docIDSlice {
 		docInfo := database.GetDocInfo(id)
 		url := database.GetURLWithID(id)
-		pageResult := fmt.Sprintf("<h4>%s</h4>\n <b>URL</b>: <a href=\"%s\">%s</a> \nSize: %d \nTime: %d\n\n",
+		pageResult := fmt.Sprintf("<h3>%s</h3>\n <b>URL</b>: <a href=\"%s\">%s</a> \nSize: %d \nTime: %d\n",
 			docInfo.Title,
 			url,
 			url,
 			docInfo.Size,
 			docInfo.Time)
+		pageResult += "Parent:\n"
+		for _, id := range docInfo.Parent {
+			parentUrl:=database.GetURLWithID(id)
+			pageResult += fmt.Sprintf("<a href=\"%s\">%s</a>\n", parentUrl, parentUrl)
+		}
+		pageResult += "Child:\n"
+		for _, id := range docInfo.Child {
+			childUrl:=database.GetURLWithID(id)
+			pageResult += fmt.Sprintf("<a href=\"%s\">%s</a>\n", childUrl, childUrl)
+		}
+		pageResult += "\n"
 		allResult[i] = pageResult
 	}
 	return allResult

@@ -18,8 +18,9 @@
   height:6vh;
 }
 
-h4 {
+h3 {
     display: block;
+    margin-top:0;
     margin-bottom: 0;
     font-weight: bold;
 }
