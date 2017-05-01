@@ -17,8 +17,9 @@ func RetrieveRankedStringResult(query string) []string {
 	for i, id := range docIDSlice {
 		docInfo := database.GetDocInfo(id)
 		url := database.GetURLWithID(id)
-		pageResult := fmt.Sprintf("%s\n <b>URL</b>: %s \nSize: %d \nTime: %d\n\n",
+		pageResult := fmt.Sprintf("%s\n <b>URL</b>: <a href=\"%s\">%s</a> \nSize: %d \nTime: %d\n\n",
 			docInfo.Title,
+			url,
 			url,
 			docInfo.Size,
 			docInfo.Time)
