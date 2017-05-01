@@ -7,6 +7,7 @@ import (
 	"strings"
 
 	"../../../golang.org/x/net/html"
+	"../../ksuhartono97/stopword_rmv"
 	"../../reiver/go-porterstemmer"
 	"../../silver-rush/database"
 )
@@ -120,7 +121,9 @@ func tokenize(text string) (original, stemmed []string) {
 				//Append a slice
 				lowercase := strings.ToLower(text[head:i])
 				original = append(original, lowercase)
-				stemmed = append(stemmed, porterstemmer.StemString(lowercase))
+				if !stopword_rmv.CheckForStopword(lowercase) {
+					stemmed = append(stemmed, porterstemmer.StemString(lowercase))
+				}
 				head = i + 1
 			}
 		}
@@ -130,7 +133,9 @@ func tokenize(text string) (original, stemmed []string) {
 	if head != i {
 		lowercase := strings.ToLower(text[head:i])
 		original = append(original, lowercase)
-		stemmed = append(stemmed, porterstemmer.StemString(lowercase))
+		if !stopword_rmv.CheckForStopword(lowercase) {
+			stemmed = append(stemmed, porterstemmer.StemString(lowercase))
+		}
 	}
 
 	return original, stemmed
