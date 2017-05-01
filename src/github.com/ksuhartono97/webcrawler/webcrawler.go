@@ -225,7 +225,7 @@ func feedToIndexer(thisURL string, thisID int64, urlData *UrlData) {
 }
 
 //Main search function
-func CrawlLinks(links ...string) {
+func CrawlLinks( parentID int64, links ...string) {
 	foundUrls := make(map[string]UrlData)
 	seedUrls := []CrawlObject{}
 
@@ -235,6 +235,11 @@ func CrawlLinks(links ...string) {
 		_id, crawlCheck := indexer.CheckURL(url, lastMod)
 		if crawlCheck {
 			seedUrls = append(seedUrls, CrawlObject{url: url, id: _id})
+		} else {
+			if parentID != -1 {
+				indexer.JustAddParentIDToURL(parentID, _id)
+				fmt.Println("Added parentID ", parentID, "to ", _id)
+			}
 		}
 	}
 
@@ -289,7 +294,7 @@ func CrawlLinks(links ...string) {
 		urlArray := url.foundUrl[:toBeCalled]
 
 		if toBeCalled > 0 {
-			CrawlLinks(urlArray...)
+			CrawlLinks(url.sourceID,urlArray...)
 		}
 	}
 	close(chUrls)
