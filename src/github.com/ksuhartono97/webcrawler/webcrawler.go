@@ -91,7 +91,7 @@ func getLastModifiedTime(href string) (int64, error) {
 }
 
 // Extract all required info from a given webpage
-func crawl(src string, srcID int64, ch chan UrlData, chFinished chan bool) {
+func crawl(src string, srcID int64, parentID int64, ch chan UrlData, chFinished chan bool) {
 	//Retrieve the webpage
 	resp, err := http.Get(src)
 
@@ -146,7 +146,7 @@ func crawl(src string, srcID int64, ch chan UrlData, chFinished chan bool) {
 		case tt == html.ErrorToken:
 			// End of the document, we're done, increment explored pages and return result
 			ch <- urlResult
-			feedToIndexer(src, srcID, &urlResult)
+			feedToIndexer(src, srcID, &urlResult, parentID)
 			exploredPages++
 			return
 		case tt == html.StartTagToken:
@@ -190,14 +190,11 @@ func crawl(src string, srcID int64, ch chan UrlData, chFinished chan bool) {
 }
 
 //Feed result of crawl to the indexer to be indexed and saved to DB
-func feedToIndexer(thisURL string, thisID int64, urlData *UrlData) {
+func feedToIndexer(thisURL string, thisID int64, urlData *UrlData, parentID int64) {
 	//Feeding to the indexer
 	var wg sync.WaitGroup
 	wg.Add(len(urlData.foundUrl))
-	var parentID int64
 	var childID []int64
-
-	parentID = thisID
 
 	for _, u := range urlData.foundUrl {
 		go func(url string) {
@@ -241,7 +238,7 @@ func CrawlLinks(parentID int64, links ...string) {
 		// urlID, _ := database.GetURLID(url)
 		size := database.GetTermsInDoc(obj.id)
 		if len(size) == 0 {
-			go crawl(obj.url, obj.id, chUrls, chFinished)
+			go crawl(obj.url, obj.id, parentID, chUrls, chFinished)
 		} else {
 			skipped++
 		}
