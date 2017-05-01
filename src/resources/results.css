@@ -7,6 +7,17 @@
   color:white;
 }
 
+.searchBar {
+  height: 6%;
+  height: 6vh;
+  width: 750px;
+}
+
+.searchButton {
+  height:6%;
+  height:6vh;
+}
+
 body {
     background-color: #222;;
 }
