@@ -23,14 +23,20 @@ func RetrieveRankedStringResult(query string) []string {
 	fmt.Printf("Retrieval size: %d\n", len(docIDSlice))
 	allResult := make([]string, len(docIDSlice))
 	for i, id := range docIDSlice {
-		docInfo := database.GetDocInfo(id)
-		url := database.GetURLWithID(id)
-		pageResult := fmt.Sprintf("<h3>%s</h3>\n <b>URL</b>: <a href=\"%s\">%s</a> \nSize: %d \nTime: %d\n",
+		docInfo := database.GetDocInfo(id.docID)
+		url := database.GetURLWithID(id.docID)
+		pageResult := fmt.Sprintf("<h3>(Score:%f)%s</h3>\n <b>URL</b>: <a href=\"%s\">%s</a> \nSize: %d \nTime: %d\n",
+			id.score,
 			docInfo.Title,
 			url,
 			url,
 			docInfo.Size,
 			docInfo.Time)
+		// pageResult += "Top 5 Keywords: "
+		// for _, keyword := range id.top5 {
+		// 	pageResult += fmt.Sprintf("%s ", keyword)
+		// }
+		// pageResult += "\n"
 		pageResult += "Parent:\n"
 		for _, id := range docInfo.Parent {
 			parentUrl:=database.GetURLWithID(id)
