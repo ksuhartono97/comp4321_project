@@ -85,7 +85,7 @@ func decodePosting(b []byte) *Posting {
 }
 
 //BatchInsertIntoPostingList insert records in batch
-func BatchInsertIntoPostingList(docID int64, records map[int64]Posting) {
+func BatchInsertIntoPostingList(docID int64, records map[int64]*Posting) {
 	err := postingDB.Batch(func(tx *bolt.Tx) error {
 		allPostingBucket := tx.Bucket([]byte("posting"))
 
@@ -123,7 +123,7 @@ func BatchInsertIntoPostingList(docID int64, records map[int64]Posting) {
 				}
 			}
 
-			err = postingBucket.Put(encode64Bit(docID), encodePosting(&posting))
+			err = postingBucket.Put(encode64Bit(docID), encodePosting(posting))
 			if err != nil {
 				return err
 			}
@@ -442,8 +442,8 @@ func GetRootSquaredTermFreqOfDoc(docID int64) float64 {
 
 //TfIDPair is a pair of data
 type TfIDPair struct {
-	tf int32
-	id int64
+	Tf int32
+	Id int64
 }
 
 //GetRSStemTFOfDocAndTop5 returns the length of document in the cosine similarity sense AND the top 5 stemmed words, used in stemmed list
@@ -466,8 +466,8 @@ func GetRSStemTFOfDocAndTop5(docID int64) (rsSum float64, top5Pair []TfIDPair) {
 				if id != 0 {
 					tf := decode32Bit(v)
 					sum += int64(tf * tf)
-					pairSlice[index].tf = tf
-					pairSlice[index].id = id
+					pairSlice[index].Tf = tf
+					pairSlice[index].Id = id
 				}
 				index++
 				return nil
@@ -478,7 +478,7 @@ func GetRSStemTFOfDocAndTop5(docID int64) (rsSum float64, top5Pair []TfIDPair) {
 
 	sort.Slice(pairSlice, func(i, j int) bool {
 		//In descending order
-		return pairSlice[i].tf > pairSlice[j].tf
+		return pairSlice[i].Tf > pairSlice[j].Tf
 	})
 
 	if len(pairSlice) > 5 {

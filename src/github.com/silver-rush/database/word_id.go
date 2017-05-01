@@ -153,7 +153,7 @@ func BatchGetIDWithWord(word []string) (id []int64, created []bool) {
 //GetWordWithID returns the id given the word, returns empty string if not found
 func GetWordWithID(id int64) (s string) {
 	var returnByte []byte
-	wordDB.Batch(func(tx *bolt.Tx) error {
+	wordDB.View(func(tx *bolt.Tx) error {
 		bucket := tx.Bucket([]byte("id_to_word"))
 		returnByte = bucket.Get(encode64Bit(id))
 		return nil

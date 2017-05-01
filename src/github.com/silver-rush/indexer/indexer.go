@@ -15,7 +15,7 @@ import (
 //Feed a page to the indexer
 func Feed(docID int64, raw string, lastModify int64, size int32, parent int64, child []int64, title string) {
 	//Map of words and term frequency.
-	origMap := make(map[int64]database.Posting)
+	origMap := make(map[int64]*database.Posting)
 	stemMap := make(map[int64]int32)
 
 	doc, err := html.Parse(strings.NewReader(raw))
@@ -35,7 +35,7 @@ func Feed(docID int64, raw string, lastModify int64, size int32, parent int64, c
 	var wg sync.WaitGroup
 	wg.Add(3)
 	//Start goroutines to add words to the posting list
-	go func(records map[int64]database.Posting) {
+	go func(records map[int64]*database.Posting) {
 		defer wg.Done()
 		database.BatchInsertIntoPostingList(docID, records)
 	}(origMap)
@@ -65,9 +65,15 @@ func Feed(docID int64, raw string, lastModify int64, size int32, parent int64, c
 
 		d.Size = size
 		d.Time = lastModify
-		d.ParentNum = 1
-		d.Parent = make([]int64, 1)
-		d.Parent[0] = parent
+		if parent > 0 {
+			d.ParentNum = 1
+			d.Parent = make([]int64, 1)
+			d.Parent[0] = parent
+		} else {
+			d.ParentNum = 0
+			d.Parent = make([]int64, 0)
+		}
+
 		d.Title = title
 		database.InsertDocInfo(docID, &d)
 	}()
@@ -108,9 +114,9 @@ func findBodyNode(node *html.Node) *html.Node {
 
 func tokenize(text string) (original, stemmed []string) {
 	text = html.UnescapeString(text)
+	text = strings.ToLower(text)
 	head := 0
 
-	//If I obtain the i for range, some indexes are skipped. No idea why.
 	i := 0
 	for ; i < len(text); i++ {
 		//Index english alphahets only
@@ -119,10 +125,9 @@ func tokenize(text string) (original, stemmed []string) {
 				head++
 			} else {
 				//Append a slice
-				lowercase := strings.ToLower(text[head:i])
-				original = append(original, lowercase)
-				if !stopword_rmv.CheckForStopword(lowercase) {
-					stemmed = append(stemmed, porterstemmer.StemString(lowercase))
+				original = append(original, text[head:i])
+				if !stopword_rmv.CheckForStopword(text[head:i]) {
+					stemmed = append(stemmed, porterstemmer.StemString(text[head:i]))
 				}
 				head = i + 1
 			}
@@ -131,43 +136,58 @@ func tokenize(text string) (original, stemmed []string) {
 
 	//Deal with the last word
 	if head != i {
-		lowercase := strings.ToLower(text[head:i])
-		original = append(original, lowercase)
-		if !stopword_rmv.CheckForStopword(lowercase) {
-			stemmed = append(stemmed, porterstemmer.StemString(lowercase))
+		original = append(original, text[head:i])
+		if !stopword_rmv.CheckForStopword(text[head:i]) {
+			stemmed = append(stemmed, porterstemmer.StemString(text[head:i]))
 		}
 	}
 
 	return original, stemmed
 }
 
-func iterateNode(node *html.Node, origMap map[int64]database.Posting, stemMap map[int64]int32, pos int32) {
+func iterateNode(node *html.Node, origMap map[int64]*database.Posting, stemMap map[int64]int32, pos int32) {
 	if node.Type == html.TextNode && node.Parent.Data != "script" && node.Parent.Data != "style" {
 		original, stemmed := tokenize(html.UnescapeString(node.Data))
 
-		//For the original queue
-		if len(original) != 0 {
-			//Collect word id using the word
-			idList, _ := database.BatchGetIDWithWord(original)
-			//fmt.Printf("%v\n", idList)
-			for _, id := range idList {
-				p := origMap[id]
-				p.TermFreq++
-				p.Positions = append(p.Positions, pos)
-				origMap[id] = p
+		var wg sync.WaitGroup
+		wg.Add(2)
 
-				pos++
-			}
-		}
+		go func() {
+			defer wg.Done()
+			//For the original queue
+			if len(original) != 0 {
+				//Collect word id using the word
+				idList, _ := database.BatchGetIDWithWord(original)
+				//fmt.Printf("%v\n", idList)
+				for _, id := range idList {
+					p := origMap[id]
+					if p == nil {
+						var posting database.Posting
+						p = &posting
+					}
+					p.TermFreq++
+					p.Positions = append(p.Positions, pos)
+					origMap[id] = p
 
-		//For the stemmed queue
-		if len(stemmed) != 0 {
-			//Collect word id using the word
-			idList, _ := database.BatchGetIDWithWord(stemmed)
-			for _, id := range idList {
-				stemMap[id]++
+					pos++
+				}
 			}
-		}
+		}()
+
+		go func() {
+			defer wg.Done()
+			//For the stemmed queue
+			if len(stemmed) != 0 {
+				//Collect word id using the word
+				idList, _ := database.BatchGetIDWithWord(stemmed)
+				for _, id := range idList {
+					stemMap[id]++
+				}
+			}
+		}()
+
+		wg.Wait()
+
 	}
 	for child := node.FirstChild; child != nil; child = child.NextSibling {
 		//Recursively iterate through all nodes
