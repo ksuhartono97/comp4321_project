@@ -71,6 +71,12 @@ func Feed(docID int64, raw string, lastModify int64, size int32, parent int64, c
 func JustAddParentIDToURL(parentID, pageID int64) {
 	d := database.GetDocInfo(pageID)
 	if d != nil {
+		for _, id := range d.Parent {
+			if id == parentID {
+				//If id already exist, go home.
+				return
+			}
+		}
 		d.ParentNum++
 		d.Parent = append(d.Parent, parentID)
 		database.InsertDocInfo(pageID, d)
