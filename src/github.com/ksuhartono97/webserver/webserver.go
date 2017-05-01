@@ -1,10 +1,11 @@
 package webserver
 
 import (
-	"fmt"
 	"html/template"
 	"net/http"
 	"strings"
+
+	"../../silver-rush/retrieval"
 )
 
 type UrlData struct {
@@ -18,64 +19,60 @@ type UrlData struct {
 }
 
 //var queryResult [1]UrlData = {UrlData{sourceUrl: "google.com", sourceID: "213", pageTitle:"Choco", pageSize:123, rawHtml:"lul", lastModified:"Yesterday"}}
-var resultString = "Here is a string\n Thomas \n Dong \n Doo \n Dah\n"
+var resultString = "Here is a string\n Dong \n Doo \n Dah\n"
 var resultString2 = "Ding ding\n Dong\n \n Dudu"
+
 type Page struct {
-	Body  []byte
-	StringArr []string
+	Body      []byte
+	Data			string
 }
 
 var expectedQueryResult []string
 
 //Load up the result to the html page
-func loadResult() (*Page) {
+func loadResult() *Page {
 	//Construct an array for the result
-	strRes := []string{}
 	body := []byte(resultString)
-	fmt.Println(body);
 
+	var tempString string = ""
 	//Decompose all the strings that are in the result
 	for _, str := range expectedQueryResult {
-		q := strings.Split(str, "\n")
-		strRes = append(strRes, q...)
+		replacedBR := strings.Replace(str,"\n","<br>",-1)
+		tempString += replacedBR
 	}
-	return &Page{Body: body, StringArr:strRes}
+	return &Page{Body: body, Data: tempString}
 }
 
 //Handler for the query page
 func queryHandler(w http.ResponseWriter, r *http.Request) {
-	// fmt.Println("method:", r.Method) //get request method
 	if r.Method == "GET" {
 		t, _ := template.ParseFiles("./github.com/ksuhartono97/webserver/html/query.html")
 		t.Execute(w, nil)
 	} else {
-    //Instead of Println will export to something else here.
+
+		//Parsing contents of the form
 		r.ParseForm()
-		// fmt.Println("Query:", r.Form["searchInput"])
 		temp := strings.Join(r.Form["searchInput"], ",")
-		//Do something to actually submit query here, do not redirect to result page
-		//before we actually have the result!!
-		UpdateResultString(temp)
-    http.Redirect(w, r, "/result", http.StatusSeeOther)
+
+		//Submitting query to the search engine
+		expectedQueryResult = retrieval.RetrieveRankedStringResult(temp)
+
+		http.Redirect(w, r, "/result", http.StatusSeeOther)
 	}
 }
 
 //Handler for the result page
 func resultHandler(w http.ResponseWriter, r *http.Request) {
-	// fmt.Println("method:", r.Method) //get request method
 	t, _ := template.ParseFiles("./github.com/ksuhartono97/webserver/html/results.html")
-	p := loadResult()
-	t.Execute(w, p)
-}
-
-//May be deprecated soon, will update later
-func UpdateResultString (newString string) {
-	resultString = newString
+	html := template.HTML(loadResult().Data)
+	t.Execute(w, map[string]interface{}{
+   "Body": html,
+	})
 }
 
 func StartWebServer() {
-	expectedQueryResult= append(expectedQueryResult,resultString)
-	expectedQueryResult= append(expectedQueryResult,resultString2)
+	expectedQueryResult = append(expectedQueryResult, resultString)
+	expectedQueryResult = append(expectedQueryResult, resultString2)
 	http.Handle("/resources/", http.StripPrefix("/resources/", http.FileServer(http.Dir("resources"))))
 	http.HandleFunc("/query", queryHandler)
 	http.HandleFunc("/result", resultHandler)

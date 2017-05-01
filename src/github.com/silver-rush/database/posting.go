@@ -5,6 +5,8 @@ import (
 	"fmt"
 	"os"
 
+	"math"
+
 	"../../../github.com/boltdb/bolt"
 )
 
@@ -31,6 +33,15 @@ func OpenPostingDB() {
 
 		return nil
 	})
+}
+
+//OpenPostingDBReadOnly opens the posting list database in read-only mode
+func OpenPostingDBReadOnly() {
+	var err error
+	postingDB, err = bolt.Open("db"+string(os.PathSeparator)+"posting_list.db", 0700, &bolt.Options{ReadOnly: true})
+	if err != nil {
+		panic(fmt.Errorf("Open Posting List Database error: %s", err))
+	}
 }
 
 //ClosePostingDB will close the posting list database
@@ -74,6 +85,8 @@ func BatchInsertIntoPostingList(docID int64, records map[int64]Posting) {
 			return err
 		}
 
+		var maxTF int32
+		maxTF = 0
 		for wordID, posting := range records {
 			postingBucket, err := allPostingBucket.CreateBucketIfNotExists(encode64Bit(wordID))
 			if err != nil {
@@ -108,19 +121,15 @@ func BatchInsertIntoPostingList(docID int64, records map[int64]Posting) {
 			if termAlreadyExist == nil {
 				//Increase totalTerms by 1 if the term was not indexed for this document before
 				totalTermsByte := forwardBucket.Get(encode64Bit(0))
-				//fmt.Printf("%v\n", totalTermsByte)
 				var totalTerms int32
 				if totalTermsByte != nil {
-					//fmt.Printf("Added \n")
 					//totalTF stores the current total number of terms in the document
 					totalTerms = decode32Bit(totalTermsByte)
 				} else {
-					//fmt.Printf("Zero \n")
 					totalTerms = 0
 				}
 
 				//Insert the total DF back
-				//fmt.Printf("Put %v \n", encode32Bit(totalTerms+1))
 				err = forwardBucket.Put(encode64Bit(0), encode32Bit(totalTerms+1))
 
 				if err != nil {
@@ -128,11 +137,20 @@ func BatchInsertIntoPostingList(docID int64, records map[int64]Posting) {
 				}
 			}
 
-			//fmt.Printf("Word Put %v \n", encode64Bit(wordID))
-			err = forwardBucket.Put(encode64Bit(wordID), []byte{0})
+			if posting.TermFreq > maxTF {
+				maxTF = posting.TermFreq
+			}
+
+			err = forwardBucket.Put(encode64Bit(wordID), encode32Bit(posting.TermFreq))
 			if err != nil {
 				return err
 			}
+		}
+
+		//ID 0 stores the precomputed max TF
+		err = forwardBucket.Put(encode64Bit(0), encode32Bit(maxTF))
+		if err != nil {
+			return err
 		}
 
 		return nil
@@ -188,4 +206,91 @@ func GetTermsInDoc(docID int64) []int64 {
 	})
 
 	return list
+}
+
+//GetDFOfTerm returns the document frequency of the term
+func GetDFOfTerm(termID int64) int32 {
+	var result int32
+	postingDB.View(func(tx *bolt.Tx) error {
+		allPostingBuc := tx.Bucket([]byte("posting"))
+		specifiedPostingBuc := allPostingBuc.Bucket(encode64Bit(termID))
+		if specifiedPostingBuc == nil {
+			result = 0
+		} else {
+			returnByte := specifiedPostingBuc.Get(encode64Bit(0))
+			result = decode32Bit(returnByte)
+		}
+		return nil
+	})
+	return result
+}
+
+//GetMaxTFOfDoc returns the maximum TF in the document
+func GetMaxTFOfDoc(docID int64) int32 {
+	var result int32
+	postingDB.View(func(tx *bolt.Tx) error {
+		allForwardBuc := tx.Bucket([]byte("forward"))
+		specifiedForwardBuc := allForwardBuc.Bucket(encode64Bit(docID))
+		if specifiedForwardBuc == nil {
+			result = 0
+		} else {
+			returnByte := specifiedForwardBuc.Get(encode64Bit(0))
+			result = decode32Bit(returnByte)
+		}
+		return nil
+	})
+	return result
+}
+
+//GetDocOfTerm returns a collection of documents containing the termID, together with their term frequency
+func GetDocOfTerm(termID int64) (docIDCollection []int64, postingCollection []*Posting, total int32) {
+	postingDB.View(func(tx *bolt.Tx) error {
+		allPostingBuc := tx.Bucket([]byte("posting"))
+		specifiedPostingBuc := allPostingBuc.Bucket(encode64Bit(termID))
+
+		//Get the total document count in advance to save reallocation
+		total = decode32Bit(specifiedPostingBuc.Get(encode64Bit(0)))
+		docIDCollection = make([]int64, total)
+		postingCollection = make([]*Posting, total)
+		docCount := 0
+
+		//Iterate through all the postings
+		specifiedPostingBuc.ForEach(func(k, v []byte) error {
+			id := decode64Bit(k)
+			if id != 0 {
+				docIDCollection[docCount] = id
+				posting := decodePosting(v)
+				postingCollection[docCount] = posting
+				docCount++
+			}
+			return nil
+		})
+		return nil
+	})
+	return
+}
+
+//GetRootSquaredTermFreqOfDoc returns the length of document in the cosine similarity sense
+func GetRootSquaredTermFreqOfDoc(docID int64) float64 {
+	var sum int64
+	sum = 0
+	postingDB.View(func(tx *bolt.Tx) error {
+		allForwardBuc := tx.Bucket([]byte("forward"))
+		specifiedForwardBuc := allForwardBuc.Bucket(encode64Bit(docID))
+		if specifiedForwardBuc == nil {
+			sum = 0
+		} else {
+			specifiedForwardBuc.ForEach(func(k, v []byte) error {
+				id := decode64Bit(k)
+				if id != 0 {
+					tf := decode32Bit(v)
+					sum += int64(tf * tf)
+				}
+				return nil
+			})
+		}
+		return nil
+	})
+
+	return math.Sqrt(float64(sum))
 }

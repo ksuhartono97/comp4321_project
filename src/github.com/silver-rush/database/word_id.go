@@ -35,6 +35,15 @@ func OpenWordDB() {
 	})
 }
 
+//OpenWordDBReadOnly opens the word-id database in read-only mode
+func OpenWordDBReadOnly() {
+	var err error
+	wordDB, err = bolt.Open("db"+string(os.PathSeparator)+"word_id.db", 0700, &bolt.Options{ReadOnly: true})
+	if err != nil {
+		panic(fmt.Errorf("Open word ID error: %s", err))
+	}
+}
+
 //CloseWordDB close the word-id database
 func CloseWordDB() {
 	wordDB.Close()
@@ -76,12 +85,35 @@ func GetIDWithWord(word string) (id int64, created bool) {
 	return
 }
 
+//GetIDWithWordDoNotCreate returns the id for the word. It will not create new word.
+func GetIDWithWordDoNotCreate(word string) (id int64, exist bool) {
+	err := wordDB.View(func(tx *bolt.Tx) error {
+		wordToIDBuc := tx.Bucket([]byte("word_to_id"))
+		returnByte := wordToIDBuc.Get([]byte(word))
+		if returnByte == nil {
+			id = 0
+			exist = false
+		} else {
+			id = decode64Bit(returnByte)
+			exist = true
+		}
+
+		return nil
+	})
+
+	if err != nil {
+		fmt.Println(err)
+		panic(err)
+	}
+	return
+}
+
 //BatchGetIDWithWord returns a slice of unique ids for each word. If the record does not exist, it will create one.
 func BatchGetIDWithWord(word []string) (id []int64, created []bool) {
 	id = make([]int64, len(word))
 	created = make([]bool, len(word))
 
-	err := wordDB.Update(func(tx *bolt.Tx) error {
+	err := wordDB.Batch(func(tx *bolt.Tx) error {
 
 		for i, s := range word {
 			wordToIDBuc := tx.Bucket([]byte("word_to_id"))

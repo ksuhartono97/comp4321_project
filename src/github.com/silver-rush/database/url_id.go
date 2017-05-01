@@ -38,6 +38,15 @@ func OpenURLDB() {
 	})
 }
 
+//OpenURLDBReadOnly opens the url-id database in read-only mode
+func OpenURLDBReadOnly() {
+	var err error
+	urlDB, err = bolt.Open("db"+string(os.PathSeparator)+"url_id.db", 0700, &bolt.Options{ReadOnly: true})
+	if err != nil {
+		panic(fmt.Errorf("Open URL ID error: %s", err))
+	}
+}
+
 //CloseURLDB close the url-id database
 func CloseURLDB() {
 	urlDB.Close()
@@ -102,4 +111,21 @@ func GetURLWithID(id int64) (s string) {
 	}
 
 	return string(returnByte)
+}
+
+//GetTotalNumberOfDocument returns the total number of documents in the database
+func GetTotalNumberOfDocument() int32 {
+	var returnByte []byte
+	urlDB.View(func(tx *bolt.Tx) error {
+		bucket := tx.Bucket([]byte("id_to_url"))
+		returnByte = bucket.Get(encode64Bit(0))
+		return nil
+	})
+
+	if returnByte == nil {
+		return 0
+	}
+
+	return decode32Bit(returnByte)
+
 }
