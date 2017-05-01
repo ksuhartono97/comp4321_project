@@ -44,26 +44,35 @@ func CloseDocInfoDB() {
 
 //DocInfo is a struct containing all the document information
 type DocInfo struct {
-	Size     int32
-	Time     int64
-	ParentID int64
-	ChildNum int32
-	Child    []int64
-	Title    string
+	Size      int32
+	Time      int64
+	ParentNum int32
+	Parent    []int64
+	ChildNum  int32
+	Child     []int64
+	Title     string
 }
 
 func encodeDocInfo(d *DocInfo) []byte {
 	titleByte := []byte(d.Title)
-	b := make([]byte, 4+8+8+4+8*int(d.ChildNum)+len(titleByte))
+	b := make([]byte, 4+8+4+8*int(d.ParentNum)+4+8*int(d.ChildNum)+len(titleByte))
 
 	binary.LittleEndian.PutUint32(b[0:4], uint32(d.Size))
 	binary.LittleEndian.PutUint64(b[4:12], uint64(d.Time))
-	binary.LittleEndian.PutUint64(b[12:20], uint64(d.ParentID))
-	binary.LittleEndian.PutUint32(b[20:24], uint32(d.ChildNum))
-	for i, id := range d.Child {
-		binary.LittleEndian.PutUint64(b[24+i*8:24+(i+1)*8], uint64(id))
+	binary.LittleEndian.PutUint32(b[12:16], uint32(d.ParentNum))
+
+	for i, id := range d.Parent {
+		binary.LittleEndian.PutUint64(b[16+i*8:16+(i+1)*8], uint64(id))
 	}
-	copy(b[24+d.ChildNum*8:], titleByte)
+	end := 16 + (len(d.Parent))*8
+
+	binary.LittleEndian.PutUint32(b[end:end+4], uint32(d.ChildNum))
+	for i, id := range d.Child {
+		binary.LittleEndian.PutUint64(b[end+4+i*8:end+4+(i+1)*8], uint64(id))
+	}
+	end = end + 4 + (len(d.Child))*8
+
+	copy(b[end:], titleByte)
 	return b
 }
 
@@ -72,13 +81,19 @@ func decodeDocInfo(b []byte) *DocInfo {
 
 	d.Size = int32(binary.LittleEndian.Uint32(b[0:4]))
 	d.Time = int64(binary.LittleEndian.Uint64(b[4:12]))
-	d.ParentID = int64(binary.LittleEndian.Uint64(b[12:20]))
-	d.ChildNum = int32(binary.LittleEndian.Uint32(b[20:24]))
-
-	for i := 0; i < int(d.ChildNum); i++ {
-		d.Child = append(d.Child, int64(binary.LittleEndian.Uint64(b[24+i*8:24+(i+1)*8])))
+	d.ParentNum = int32(binary.LittleEndian.Uint32(b[12:16]))
+	for i := 0; i < int(d.ParentNum); i++ {
+		d.Parent = append(d.Parent, int64(binary.LittleEndian.Uint64(b[16+i*8:16+(i+1)*8])))
 	}
-	d.Title = string(b[24+d.ChildNum*8:])
+	end := 16 + int(d.ParentNum)*8
+
+	d.ChildNum = int32(binary.LittleEndian.Uint32(b[end : end+4]))
+	for i := 0; i < int(d.ChildNum); i++ {
+		d.Child = append(d.Child, int64(binary.LittleEndian.Uint64(b[end+4+i*8:end+4+(i+1)*8])))
+	}
+
+	end = end + 4 + int(d.ChildNum)*8
+	d.Title = string(b[end:])
 	return &d
 }
 

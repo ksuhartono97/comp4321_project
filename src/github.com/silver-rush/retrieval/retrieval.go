@@ -122,7 +122,6 @@ func RetrieveRankedDocID(query string) []int64 {
 									if mapOfIDAndPosition[j][docID] != nil {
 										//Look into the position if docID matches
 										for _, tarPos := range mapOfIDAndPosition[j][docID].Positions {
-											fmt.Printf("Found term: %v Pos: %d\n", group[j], tarPos)
 											if int(tarPos) == int(startPos)+positionOffset[j] {
 												positionPossible = true
 												break

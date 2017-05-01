@@ -56,13 +56,25 @@ func Feed(docID int64, raw string, lastModify int64, size int32, parent int64, c
 
 		d.Size = size
 		d.Time = lastModify
-		d.ParentID = parent
+		d.ParentNum = 1
+		d.Parent = make([]int64, 1)
+		d.Parent[0] = parent
 		d.Title = title
 		database.InsertDocInfo(docID, &d)
 	}()
 
 	wg.Wait()
 	fmt.Println("Indexed: ", docID, ". ")
+}
+
+//JustAddParentIDToURL does not re-index the page. It simply add one entry to the parentID of the current page.
+func JustAddParentIDToURL(parentID, pageID int64) {
+	d := database.GetDocInfo(pageID)
+	if d != nil {
+		d.ParentNum++
+		d.Parent = append(d.Parent, parentID)
+		database.InsertDocInfo(pageID, d)
+	}
 }
 
 func findBodyNode(node *html.Node) *html.Node {
