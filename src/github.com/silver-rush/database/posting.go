@@ -32,6 +32,11 @@ func OpenPostingDB() {
 			panic(fmt.Errorf("Create forward list bucket error: %s", err))
 		}
 
+		_, err = tx.CreateBucketIfNotExists([]byte("title"))
+		if err != nil {
+			panic(fmt.Errorf("Create title bucket error: %s", err))
+		}
+
 		_, err = tx.CreateBucketIfNotExists([]byte("stem_posting"))
 		if err != nil {
 			panic(fmt.Errorf("Create stemmed posting list bucket error: %s", err))
@@ -169,6 +174,19 @@ func BatchInsertIntoPostingList(docID int64, records map[int64]*Posting) {
 
 	if err != nil {
 		fmt.Println(err)
+		panic(err)
+	}
+}
+
+//InsertTitleForDoc inserts the title for the document into the database
+func InsertTitleForDoc(docID int64, title string) {
+	err := postingDB.Batch(func(tx *bolt.Tx) error {
+		titleBucket := tx.Bucket([]byte("title"))
+		titleBucket.Put(encode64Bit(docID), []byte(title))
+		return nil
+	})
+
+	if err != nil {
 		panic(err)
 	}
 }

@@ -208,12 +208,12 @@ func feedToIndexer(thisURL string, thisID int64, urlData *UrlData) {
 	}
 
 	wg.Wait()
-	indexer.Feed(thisID, urlData.rawHTML, urlData.lastModified, int32(urlData.pageSize), parentID, childID, urlData.pageTitle)
+	go indexer.Feed(thisID, urlData.rawHTML, urlData.lastModified, int32(urlData.pageSize), parentID, childID, urlData.pageTitle)
 	fmt.Printf("\nTime: %v\nSize: %v\nParent: %v\nChild: %v\nTitle: %v\n", urlData.lastModified, urlData.pageSize, parentID, childID, urlData.pageTitle)
 }
 
 //Main search function call this to crawl all the links, this is the base link, pass in -1 as parentID
-func CrawlLinks( parentID int64, links ...string) {
+func CrawlLinks(parentID int64, links ...string) {
 	foundUrls := make(map[string]UrlData)
 	seedUrls := []CrawlObject{}
 
@@ -272,7 +272,7 @@ func CrawlLinks( parentID int64, links ...string) {
 		urlArray := url.foundUrl[:toBeCalled]
 
 		if toBeCalled > 0 {
-			CrawlLinks(url.sourceID,urlArray...)
+			CrawlLinks(url.sourceID, urlArray...)
 		}
 	}
 	close(chUrls)

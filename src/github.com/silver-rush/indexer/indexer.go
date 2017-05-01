@@ -24,16 +24,19 @@ func Feed(docID int64, raw string, lastModify int64, size int32, parent int64, c
 		panic(err)
 	}
 
+	//Put the title inside an inverted file
+	database.InsertTitleForDoc(docID, title)
+
 	bodyNode := findBodyNode(doc)
 	if bodyNode != nil {
 		//Map is pass by reference, so we're cool.
-		iterateNode(doc, origMap, stemMap, 0)
+		iterateNode(doc, origMap, stemMap, 50)
 	} else {
 		fmt.Println("Body not found.")
 	}
 
 	var wg sync.WaitGroup
-	wg.Add(3)
+	wg.Add(4)
 	//Start goroutines to add words to the posting list
 	go func(records map[int64]*database.Posting) {
 		defer wg.Done()
@@ -45,6 +48,45 @@ func Feed(docID int64, raw string, lastModify int64, size int32, parent int64, c
 		defer wg.Done()
 		database.BatchInsertIntoStemmedList(docID, records)
 	}(stemMap)
+
+	//Also put the title into normal posting list
+	go func() {
+		defer wg.Done()
+		title = strings.ToLower(title)
+		titleTerms := strings.Split(title, " ")
+		var stemmed []string
+		for _, term := range titleTerms {
+			if !stopword_rmv.CheckForStopword(term) {
+				stemmed = append(stemmed, porterstemmer.StemString(term))
+			}
+		}
+
+		normalIDs, _ := database.BatchGetIDWithWord(titleTerms)
+		stemmedIDs, _ := database.BatchGetIDWithWord(stemmed)
+
+		postings := make(map[int64]*database.Posting)
+		for i, termID := range normalIDs {
+			if postings[termID] != nil {
+				postings[termID].TermFreq += 3
+				postings[termID].Positions = append(postings[termID].Positions, int32(i))
+			} else {
+				var p database.Posting
+				p.TermFreq = 5
+				pos := make([]int32, 1)
+				pos[0] = int32(i)
+				p.Positions = pos
+				postings[termID] = &p
+			}
+		}
+
+		stemedRecord := make(map[int64]int32)
+		for _, termID := range stemmedIDs {
+			stemedRecord[termID] += 4
+		}
+
+		database.BatchInsertIntoPostingList(docID, postings)
+		database.BatchInsertIntoStemmedList(docID, stemedRecord)
+	}()
 
 	go func() {
 		defer wg.Done()
@@ -147,6 +189,21 @@ func tokenize(text string) (original, stemmed []string) {
 
 func iterateNode(node *html.Node, origMap map[int64]*database.Posting, stemMap map[int64]int32, pos int32) {
 	if node.Type == html.TextNode && node.Parent.Data != "script" && node.Parent.Data != "style" {
+
+		//Giving extra attention to tagged terms
+		emphasisPower := 1
+		if node.Parent.Data == "h1" || node.Parent.Data == "h2" || node.Parent.Data == "h3" {
+			emphasisPower = 3
+		}
+
+		if node.Parent.Data == "h4" || node.Parent.Data == "h5" || node.Parent.Data == "h6" {
+			emphasisPower = 2
+		}
+
+		if node.Parent.Data == "b" || node.Parent.Data == "i" || node.Parent.Data == "u" {
+			emphasisPower = 2
+		}
+
 		original, stemmed := tokenize(html.UnescapeString(node.Data))
 
 		var wg sync.WaitGroup
@@ -165,7 +222,7 @@ func iterateNode(node *html.Node, origMap map[int64]*database.Posting, stemMap m
 						var posting database.Posting
 						p = &posting
 					}
-					p.TermFreq++
+					p.TermFreq += int32(emphasisPower)
 					p.Positions = append(p.Positions, pos)
 					origMap[id] = p
 
@@ -181,7 +238,7 @@ func iterateNode(node *html.Node, origMap map[int64]*database.Posting, stemMap m
 				//Collect word id using the word
 				idList, _ := database.BatchGetIDWithWord(stemmed)
 				for _, id := range idList {
-					stemMap[id]++
+					stemMap[id] += int32(emphasisPower)
 				}
 			}
 		}()
