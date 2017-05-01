@@ -3,6 +3,7 @@ package retrieval
 import (
 	"math"
 	"sort"
+	"time"
 
 	"fmt"
 
@@ -29,14 +30,17 @@ func RetrieveRankedStringResult(query string) []string {
 	for i, id := range docIDSlice {
 		docInfo := database.GetDocInfo(id.docID)
 		url := database.GetURLWithID(id.docID)
-		pageResult := fmt.Sprintf("(Score:%f)\t<h3><a href=\"%s\">%s</a></h3>\n <b>URL</b>: <a href=\"%s\">%s</a> \nSize: %d \nTime: %d\n",
+
+		timeString := time.Unix(docInfo.Time, 0).Format("Mon, 02 Jan 2006 15:04:05 GMT")
+
+		pageResult := fmt.Sprintf("(Score:%f)\t<h3><a href=\"%s\">%s</a></h3>\n <b>URL</b>: <a href=\"%s\">%s</a> \nSize: %d \nTime: %s\n",
 			id.score,
 			url,
 			docInfo.Title,
 			url,
 			url,
 			docInfo.Size,
-			docInfo.Time)
+			timeString)
 		pageResult += "<b>Top 5 Keywords: </b>\n"
 
 		for _, tfIDPair := range id.top5 {
