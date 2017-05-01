@@ -95,11 +95,19 @@ func RetrieveRankedDocID(query string) []int64 {
 				fmt.Printf("IDs: %v Len: %d\n", termIDSlice, len(group))
 				//This specifies the amount of offset the term should have in the phrase
 				positionOffset := make([]int, len(group))
+				mapOfIDAndPosition := make([]map[int64]*database.Posting, len(group))
 				for i := range group {
 					positionOffset[i] = i - indexWithMinDF
+					if i != indexWithMinDF {
+						mapOfIDAndPosition[i] = make(map[int64]*database.Posting)
+						for j, docID := range allDocIDCollection[i] {
+							mapOfIDAndPosition[i][docID] = allPostingCollection[i][j]
+						}
+					} else {
+						mapOfIDAndPosition[i] = nil
+					}
 				}
 
-				progressPointers := make([]int, len(group))
 				if allExist {
 					dfOfPhrase := 0
 					tfMap := make(map[int64]int)
@@ -110,14 +118,11 @@ func RetrieveRankedDocID(query string) []int64 {
 							for j := range group {
 								positionPossible := false
 								if j != indexWithMinDF {
-									for (len(allDocIDCollection[j]) < progressPointers[j]) && (allDocIDCollection[j][progressPointers[j]] < docID) {
-										//Skip until the end or overshoot
-										progressPointers[j]++
-									}
 
-									if len(allDocIDCollection[j]) < progressPointers[j] && (allDocIDCollection[j][progressPointers[j]] == docID) {
+									if mapOfIDAndPosition[j][docID] != nil {
 										//Look into the position if docID matches
-										for _, tarPos := range allPostingCollection[progressPointers[j]][i].Positions {
+										for _, tarPos := range mapOfIDAndPosition[j][docID].Positions {
+											fmt.Printf("Found term: %v Pos: %d\n", group[j], tarPos)
 											if int(tarPos) == int(startPos)+positionOffset[j] {
 												positionPossible = true
 												break
