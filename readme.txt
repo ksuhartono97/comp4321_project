@@ -15,6 +15,4 @@ The database file are located in /src/db/
 The spider_result.txt is in /src/
 
 SPECIAL NOTE: if during runtime you encounter errors saying socket: too many open files
-that causes the crawler to crash, PLEASE TYPE IN THIS COMMAND:
-
-ulimit -n 2000
+that causes the crawler to crash, PLEASE TYPE IN THIS COMMAND: ulimit -n 2000

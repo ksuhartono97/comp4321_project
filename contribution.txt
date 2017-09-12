@@ -1,3 +1,0 @@
-CHENG Ho Kei: Database design and indexer, 50%
-
-SUHARTONO, Kristian: Program structure and database design, crawler, 50%
